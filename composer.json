@@ -1,0 +1,31 @@
+{
+    "name": "mikemilano/xrphp",
+    "description": "A PHP library for communication with the XRP Ledger.",
+    "keywords": ["library", "composer", "package"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mike Milano",
+            "email": "coder1@gmail.com"
+        }
+    ],
+    "type": "project",
+    "require": {
+		"php": ">=7.1",
+        "guzzlehttp/guzzle": "^6.3"
+
+    },
+	"require-dev": {
+        "phpunit/phpunit": "^7.1"
+    },
+	"autoload": {
+        "psr-4": {
+            "XRPhp\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "XRPhp\\Tests\\": "tests/"
+        }
+    }
+}
