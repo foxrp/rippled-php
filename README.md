@@ -19,7 +19,7 @@ $con = new Connection('https://s1.ripple.com:51234');
 
 Create a `Connection` objecct from a config array:
 ```
-$con = new Connection([
+$con = new \XRPhp\Connection([
     'scheme' => 'https',
     'host' => 's1.ripple.com',
     'port' => 51234
