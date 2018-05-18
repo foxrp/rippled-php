@@ -98,7 +98,7 @@ class Connection
         }
     }
 
-    public function send(string $method, array $params = [])
+    public function send(string $method, array $params = null)
     {
         $json = $this->prepareRequest($method, $params);
         $response = $this->client->post($this->endpoint,
@@ -108,8 +108,11 @@ class Connection
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function prepareRequest(string $method, array $params = []): string
+    public function prepareRequest(string $method, array $params = null): string
     {
+        if ($params === null) {
+            $params = new \stdClass();
+        }
         $request = ['method' => $method, 'params' => []];
         $request['params'][] = $params;
         return json_encode($request);
