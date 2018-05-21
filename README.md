@@ -28,6 +28,10 @@ $con = new \XRPhp\Connection([
 
 ## Sending Commands
 
+This example calls the `account_info` command. You can see a full
+list of commands available in the [rippled api](https://developers.ripple.com/rippled-api.html)
+documentation.
+
 ```
 $resp = $con->send('account_info', [
     'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
