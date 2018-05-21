@@ -1,7 +1,13 @@
 XRPhp - XRP Ledger Library
 ==========================
 
-This is a PHP library for communication with the XRP Ledger.
+This is a PHP 7.1+ library for communication with the XRP Ledger.
+
+The intention is to provide PHP developers with an easy way to interact/explore
+with the [rippled API](https://developers.ripple.com/rippled-api.html).
+
+The [Ripple Developer Portal](https://developers.ripple.com/) is a great resource
+to use along side this project to study basic and advanced concepts of the XRP ledger.
 
 Installation
 ------------
