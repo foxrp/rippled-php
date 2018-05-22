@@ -21,12 +21,12 @@ composer require mikemilano/xrphp
 
 ## Instantiating With Connection Data
 
-Create a Connection object from a url string:
+Create a `Connection` object from a url string:
 ```
 $con = new Connection('https://s1.ripple.com:51234');
 ```
 
-Create a `Connection` objecct from a config array:
+Create a `Connection` object from a config array:
 ```
 $con = new \XRPhp\Connection([
     'scheme' => 'https',
@@ -50,7 +50,7 @@ $resp = $con->send('account_info', [
 ]);
 ```
 
-Response data is the result of `json_decode($json, true)`, so any
+Response data is the result of `json_decode($json, true)`, so all
 objects have been converted to associative arrays.
 
 Output of `print_r($resp)`:
