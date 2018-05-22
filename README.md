@@ -9,6 +9,9 @@ with the [rippled API](https://developers.ripple.com/rippled-api.html).
 The [Ripple Developer Portal](https://developers.ripple.com/) is a great resource
 to use along side this project to study basic and advanced concepts of the XRP ledger.
 
+As I learn the API better myself, I'll work on making the library more than just
+the wrapper.
+
 Installation
 ------------
 
