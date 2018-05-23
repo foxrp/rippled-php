@@ -17,7 +17,8 @@ on top of [PSR-7](https://www.php-fig.org/psr/psr-7/) so the developer can selec
 [HTTP Client](http://docs.php-http.org/en/latest/clients.html) best suited for their
 architecture.
 
-If you do not have a preference, simply install run the command below and proceed to installation.
+If you do not have a preference, simply run the command below and proceed to the
+installation section.
 
 ```
 composer require php-http/guzzle6-adapter php-http/message
