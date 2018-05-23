@@ -1,6 +1,6 @@
 <?php
 
-namespace XRPhp;
+namespace XRPHP;
 
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;

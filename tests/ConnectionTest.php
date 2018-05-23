@@ -1,8 +1,8 @@
 <?php
 
-namespace XRPhp\Tests;
+namespace XRPHP\Tests;
 
-use XRPhp\Connection;
+use XRPHP\Connection;
 use PHPUnit\Framework\TestCase;
 
 /**

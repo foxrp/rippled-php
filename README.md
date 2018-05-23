@@ -1,4 +1,4 @@
-XRPhp - XRP Ledger Library
+XRPHP - XRP Ledger Library
 ==========================
 
 This is a PHP 7.1+ wrapper for communication with the rippled (XRP Ledger) API.
@@ -34,12 +34,12 @@ composer require mikemilano/xrphp
 
 Create a `Connection` object from a url string:
 ```
-$con = new Connection('https://s1.ripple.com:51234');
+$con = new \XRPHP\Connection('https://s1.ripple.com:51234');
 ```
 
 Create a `Connection` object from a config array:
 ```
-$con = new \XRPhp\Connection([
+$con = new \XRPHP\Connection([
     'scheme' => 'https',
     'host' => 's1.ripple.com',
     'port' => 51234

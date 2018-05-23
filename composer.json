@@ -28,12 +28,12 @@
     },
 	"autoload": {
         "psr-4": {
-            "XRPhp\\": "src/"
+            "XRPHP\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "XRPhp\\Tests\\": "tests/"
+            "XRPHP\\Tests\\": "tests/"
         }
     }
 }
