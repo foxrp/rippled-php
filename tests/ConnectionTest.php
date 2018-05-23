@@ -79,12 +79,12 @@ class ConnectionTest extends TestCase
     /**
      * Check constructor created a Guzzle client
      */
-    public function testConstructorCreateGuzzleClient(): void
+    public function testConstructorHttpGuzzleClient(): void
     {
         $con = new Connection(['endpoint' => 'https://example.com']);
         $client = $con->getClient();
         $this->assertNotNull($client);
-        $this->assertEquals(\GuzzleHttp\Client::class, get_class($client));
+        $this->assertEquals(\Http\Adapter\Guzzle6\Client::class, get_class($client));
         unset($con);
     }
 

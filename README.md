@@ -1,7 +1,7 @@
 XRPhp - XRP Ledger Library
 ==========================
 
-This is a PHP 7.1+ library for communication with the XRP Ledger.
+This is a PHP 7.1+ wrapper for communication with the rippled (XRP Ledger) API.
 
 The intention is to provide PHP developers with an easy way to interact/explore
 with the [rippled API](https://developers.ripple.com/rippled-api.html).
@@ -9,8 +9,19 @@ with the [rippled API](https://developers.ripple.com/rippled-api.html).
 The [Ripple Developer Portal](https://developers.ripple.com/) is a great resource
 to use along side this project to study basic and advanced concepts of the XRP ledger.
 
-As I learn the API better myself, I'll work on making the library more than just
-the wrapper.
+Dependencies
+------------
+
+This project uses [HTTPLUG](http://docs.php-http.org/en/latest/index.html) which builds
+on top of [PSR-7](https://www.php-fig.org/psr/psr-7/) so the developer can select the
+[HTTP Client](http://docs.php-http.org/en/latest/clients.html) best suited for their
+architecture.
+
+If you do not have a preference, simply install run the command below and proceed to installation.
+
+```
+composer require php-http/guzzle6-adapter php-http/message
+```
 
 Installation
 ------------

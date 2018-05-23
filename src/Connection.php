@@ -2,7 +2,10 @@
 
 namespace XRPhp;
 
-use GuzzleHttp\Client;
+use Http\Client\HttpClient;
+use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Message\MessageFactory;
 
 /**
  *  A rippled http/https connection class
@@ -11,7 +14,7 @@ use GuzzleHttp\Client;
  */
 class Connection
 {
-    /** @var Client */
+    /** @var HttpClient */
     private $client;
 
     /** @var string */
@@ -19,6 +22,9 @@ class Connection
 
     /** @var string Hostname or IP of the endpoint */
     private $host;
+
+    /** @var MessageFactory */
+    protected $messageFactory;
 
     /** @var int Port of the endpoint */
     private $port;
@@ -28,11 +34,10 @@ class Connection
 
     /**
      * Connection constructor.
-     *
-     * @param mixed $config
-     * @throws \OutOfBoundsException
+     * @param $config
+     * @param HttpClient|null $httpClient
      */
-    public function __construct($config)
+    public function __construct($config, HttpClient $httpClient = null, MessageFactory $messageFactory = null)
     {
         $type = gettype($config);
 
@@ -89,8 +94,9 @@ class Connection
 
         $this->port = $port;
 
-        // Setup Guzzle client
-        $this->client = new Client(['headers' => ['Content-Type' => 'application/json']]);
+        // Setup HttpClient & messageFactory
+        $this->client = $httpClient ?: HttpClientDiscovery::find();
+        $this->messageFactory = $messageFactory ?: MessageFactoryDiscovery::find();
 
         // Build endpoint
         if (empty($this->endpoint)) {
@@ -101,11 +107,19 @@ class Connection
     public function send(string $method, array $params = null)
     {
         $json = $this->prepareRequest($method, $params);
-        $response = $this->client->post($this->endpoint,
-            ['body' => $json]
+
+        $request = $this->messageFactory->createRequest(
+            'POST',
+            $this->endpoint,
+            ['Content-Type' => 'application/json'],
+            $json
         );
 
-        return json_decode($response->getBody()->getContents(), true);
+        $response = $this->client->sendRequest($request);
+
+        $content = $response->getBody()->getContents();
+
+        return json_decode($content, true);
     }
 
     public function prepareRequest(string $method, array $params = null): string
@@ -118,12 +132,12 @@ class Connection
         return json_encode($request);
     }
 
-    public function getClient(): Client
+    public function getClient(): HttpClient
     {
         return $this->client;
     }
 
-    public function setClient(Client $client): void
+    public function setClient(HttpClient $client): void
     {
         $this->client = $client;
     }
