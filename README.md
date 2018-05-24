@@ -95,3 +95,56 @@ Output of `print_r($resp)`:
         )
 )
 ```
+
+## Client API Usage Pattern
+
+The API methods are organized in sections. Each section is a method of the `$client`
+so the classes can be dynamically loaded when called upon.
+
+Example: `$client->section()->method()`
+
+Below is a list of all sections and methods:
+
+- account
+  - channels
+  - currencies
+  - info
+  - lines
+  - objects
+  - offers
+  - tx
+  - gatewayBalances
+  - norippleCheck
+- ledger
+  - ledger
+  - closed
+  - current
+  - data
+  - entry
+- transaction
+  - sign
+  - signFor
+  - submit
+  - submitMultisigned
+  - entry
+  - tx
+  - txHistory
+- path
+  - find
+  - rippleFind
+- book
+  - offers
+- channel
+  - authorize
+  - verify
+- subscription
+  - subscribe
+  - unsubscribe
+- server
+  - fee
+  - info
+  - state
+- util
+  - json
+  - ping
+  - random
