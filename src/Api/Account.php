@@ -5,6 +5,8 @@ namespace XRPHP\Api;
 class Account extends AbstractApi
 {
     /**
+     * @command="account_channels"
+     *
      * @param string $account                   The account id.
      * @param string|null $destination_account  The unique identifier of an account, typically the account's Address. If provided, filter results to payment channels whose destination is this account.
      * @param string|null $ledger_hash          A 20-byte hex string for the ledger version to use.
@@ -34,6 +36,8 @@ class Account extends AbstractApi
     }
 
     /**
+     * @command="account_currencies"
+     *
      * @param string        $account        The account id.
      * @param bool|null     $strict         If true, only accept an address or public key for the account parameter. Defaults to false.
      * @param string|null   $ledger_hash    A 20-byte hex string for the ledger version to use.
@@ -57,6 +61,8 @@ class Account extends AbstractApi
     }
 
     /**
+     * @command="account_info"
+     *
      * @param string        $account        The account id.
      * @param bool|null     $strict         If set true, then account field only accepts a public key or XRP Ledger address.
      * @param string|null   $ledger_hash    A 20-byte hex string for the ledger version to use.
@@ -87,6 +93,8 @@ class Account extends AbstractApi
     }
 
     /**
+     * @command="account_lines"
+     *
      * @param string $account           The account id.
      * @param string|null $ledger_hash  A 20-byte hex string for the ledger version to use.
      * @param string|null $ledger_index The sequence number of the ledger to use, or a shortcut string to choose a ledger automatically.
@@ -116,6 +124,8 @@ class Account extends AbstractApi
     }
 
     /**
+     * @command="account_objects"
+     *
      * @param string $account           The account id.
      * @param string|null $ledger_hash  A 20-byte hex string for the ledger version to use.
      * @param string|null $ledger_index The sequence number of the ledger to use, or a shortcut string to choose a ledger automatically.
@@ -142,6 +152,8 @@ class Account extends AbstractApi
     }
 
     /**
+     * @command="account_offers"
+     *
      * @param string $account           The account id.
      * @param string|null $ledger_hash  A 20-byte hex string for the ledger version to use.
      * @param string|null $ledger_index The sequence number of the ledger to use, or a shortcut string to choose a ledger automatically.
@@ -168,6 +180,8 @@ class Account extends AbstractApi
     }
 
     /**
+     * @command="account_tx"
+     *
      * @param string $account           The account id.
      * @param int|null $ledger_min      Use to specify the earliest ledger to include transactions from. A value of -1 instructs the server to use the earliest validated ledger version available.
      * @param int|null $ledger_max      Use to specify the most recent ledger to include transactions from. A value of -1 instructs the server to use the most recent validated ledger version available.
@@ -206,6 +220,8 @@ class Account extends AbstractApi
     }
 
     /**
+     * @command="gateway_balances"
+     *
      * @param string $account               The account id.
      * @param bool|null $strict             If set true, then account field only accepts a public key or XRP Ledger address.
      * @param string|array|null $hotwallet  An operational address to exclude from the balances issued, or an array of such addresses.
@@ -232,6 +248,8 @@ class Account extends AbstractApi
     }
 
     /**
+     * @command="noripple_check"
+     *
      * @param string $account               The account id.
      * @param string $role                  Whether the address refers to a gateway or user.
      * @param bool|null $transactions       If true, include an array of suggested transactions, as JSON objects, that you can sign and submit to fix the problems. Defaults to false.
