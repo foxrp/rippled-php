@@ -6,9 +6,8 @@ use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
-use InvalidArgumentException;
 use XRPHP\Api\Account;
-use XRPhp\Api\ApiInterface;
+use XRPHP\Api\Method;
 
 /**
  *  A rippled client.
@@ -32,9 +31,6 @@ class Client
 
     /** @var string http or https */
     private $scheme;
-
-    /** @var Account */
-    private $_account;
 
     /**
      * Connection constructor.
@@ -108,34 +104,14 @@ class Client
         }
     }
 
-    public function account(): Account
+    public function method(string $method, array $params = null): Method
     {
-        if ($this->_account === null) {
-            $this->_account = new Account($this);
-        }
-        return $this->_account;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return ApiInterface
-     */
-    public function api($name)
-    {
-        switch ($name) {
-            case 'account':
-                $api = new Api\Account($this);
+        switch ($method) {
+            case 'account_info':
+                return new Account\AccountInfoMethod($this, $method, $params);
                 break;
-
-            default:
-                throw new InvalidArgumentException(sprintf('Undefined api instance called: "%s"', $name));
-
         }
 
-        return $api;
     }
 
     public function post(string $method, array $params = null)
