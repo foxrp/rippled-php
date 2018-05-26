@@ -1,5 +1,4 @@
-XRPHP - XRP Ledger Library
-==========================
+# XRPHP - XRP Ledger Library
 
 This is a PHP 7.1+ wrapper for communication with the rippled (XRP Ledger) API.
 
@@ -9,8 +8,7 @@ with the [rippled API](https://developers.ripple.com/rippled-api.html).
 The [Ripple Developer Portal](https://developers.ripple.com/) is a great resource
 to use along side this project to study basic and advanced concepts of the XRP ledger.
 
-Dependencies
-------------
+## Dependencies
 
 This project uses [HTTPLUG](http://docs.php-http.org/en/latest/index.html) which builds
 on top of [PSR-7](https://www.php-fig.org/psr/psr-7/) so the developer can select the
@@ -24,8 +22,7 @@ installation section.
 composer require php-http/guzzle6-adapter php-http/message
 ```
 
-Installation
-------------
+## Installation
 
 ```
 composer require mikemilano/xrphp
@@ -33,14 +30,16 @@ composer require mikemilano/xrphp
 
 ## Instantiating With Connection Data
 
-Create a `Connection` object from a url string:
+You can either instantiate the client with a string, or an array.
+
+Create a `Client` object with a uri:
 ```
-$con = new \XRPHP\Connection('https://s1.ripple.com:51234');
+$client = new \XRPHP\Connection('https://s1.ripple.com:51234');
 ```
 
-Create a `Connection` object from a config array:
+Create a `Client` object with an array:
 ```
-$con = new \XRPHP\Connection([
+$client = new \XRPHP\Connection([
     'scheme' => 'https',
     'host' => 's1.ripple.com',
     'port' => 51234
@@ -49,23 +48,26 @@ $con = new \XRPHP\Connection([
 
 ## Sending Commands
 
-This example calls the `account_info` command. You can see a full
+These example calls the `account_info` command. You can see a full
 list of commands available in the [rippled api](https://developers.ripple.com/rippled-api.html)
 documentation.
 
+### Simple API Communication
+
+A convenient way to test the API is to use the `post()` method of a `Client` object.
+
 ```
-$resp = $con->send('account_info', [
-    'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
-    'strict' => true,
-    'ledger_index' => 'current',
-    'queue' => true
-]);
+// Instantiate the client.
+$client = new \XRPHP\Client('https://s1.ripple.com:51234');
+
+// Retrieve the info.
+$res = $client->post('account_info', ['account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn']);
 ```
 
-Response data is the result of `json_decode($json, true)`, so all
-objects have been converted to associative arrays.
+Response data is the result of `json_decode($json, true)`, so the entire structure
+has been converted to an associative array.
 
-Output of `print_r($resp)`:
+Output of `print_r($res)`:
 ```
 (
     [result] => Array
@@ -96,55 +98,66 @@ Output of `print_r($resp)`:
 )
 ```
 
-## Client API Usage Pattern
+## Development Plan
 
-The API methods are organized in sections. Each section is a method of the `$client`
-so the classes can be dynamically loaded when called upon.
+Phases 1 through 3 apply to the public API only.
 
-Example: `$client->section()->method()`
+- [x] Phase 1: Provide an API wrapper which returns the raw data. (`$client->post('method', $params)`)
+- [ ] Phase 2: Provide classes for each section with methods which take arguments, instead of a `$params` array.
+- [ ] Phase 3: Model data objects, such as accounts and transactions, and integrate them into the method arguments and returned data.
+- [ ] Phase 4: Provide support for the Administrative API.
 
-Below is a list of all sections and methods:
+## Phase 2 Development Status
+
+Note: This just applies to Phase 2 architecture. You can call any method with 
+`$client->post('method_name', $params)`.
 
 - account
-  - channels
-  - currencies
-  - info
-  - lines
-  - objects
-  - offers
-  - tx
-  - gatewayBalances
-  - norippleCheck
+  - [x] channels
+  - [x] currencies
+  - [x] info
+  - [x] lines
+  - [x] objects
+  - [x] offers
+  - [x] tx
+  - [x] gatewayBalances
+  - [x] norippleCheck
 - ledger
-  - ledger
-  - closed
-  - current
-  - data
-  - entry
+  - [ ] ledger
+  - [ ] closed
+  - [ ] current
+  - [ ] data
+  - [ ] entry
 - transaction
-  - sign
-  - signFor
-  - submit
-  - submitMultisigned
-  - entry
-  - tx
-  - txHistory
+  - [ ] sign
+  - [ ] signFor
+  - [ ] submit
+  - [ ] submitMultisigned
+  - [ ] entry
+  - [ ] tx
+  - [ ] txHistory
 - path
-  - find
-  - rippleFind
+  - [ ] find
+  - [ ] rippleFind
 - book
-  - offers
+  - [ ] offers
 - channel
-  - authorize
-  - verify
+  - [ ] authorize
+  - [ ] verify
 - subscription
-  - subscribe
-  - unsubscribe
+  - [ ] subscribe
+  - [ ] unsubscribe
 - server
-  - fee
-  - info
-  - state
+  - [ ] fee
+  - [ ] info
+  - [ ] state
 - util
-  - json
-  - ping
-  - random
+  - [ ] json
+  - [ ] ping
+  - [ ] random
+
+## Contribute
+
+PRs, New Issues, and Tips are all welcome!
+
+XRP address: `rwSZu5vAgPEdoDpYx9qZtqtHRDcFwCooqw`
