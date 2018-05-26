@@ -52,9 +52,17 @@ These example calls the `account_info` command. You can see a full
 list of commands available in the [rippled api](https://developers.ripple.com/rippled-api.html)
 documentation.
 
-### Simple API Communication
+```
+// Instantiate the client.
+$client = new \XRPHP\Client('https://s1.ripple.com:51234');
 
-A convenient way to test the API is to use the `post()` method of a `Client` object.
+$res = $client->method('account_info', ['account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn']);
+```
+
+### Simple API Wrapper
+
+While `$client->method()` offers parameter validation and response data organization, you can
+bypass all that if you prefer a simple API wrapper. Just use the `$client->post()` method instead.
 
 ```
 // Instantiate the client.
