@@ -19,7 +19,10 @@ class AccountInfoMethod extends Method
     }
 
     /**
+     * Validates parameters.
+     *
      * @param array|null $params
+     * @throws \BadMethodCallException
      */
     public function validateParameters(array $params = null): void
     {
@@ -27,5 +30,4 @@ class AccountInfoMethod extends Method
             throw new \BadMethodCallException('Missing parameter: account');
         }
     }
-
 }

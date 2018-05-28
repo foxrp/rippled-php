@@ -4,6 +4,7 @@ namespace XRPHP\Tests\Api;
 
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
+use XRPHP\Api\Method;
 use XRPHP\Client;
 
 class MethodTestCase extends TestCase
@@ -26,7 +27,6 @@ class MethodTestCase extends TestCase
     /** @var string */
     protected static $ACCOUNT_ID = 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn';
 
-
     protected function setUp()
     {
         $this->httpMockClient = new \Http\Mock\Client ();
@@ -41,6 +41,25 @@ class MethodTestCase extends TestCase
         $this->httpMockClient->setDefaultResponse($response);
     }
 
+    public function testGetValidParameters()
+    {
+        /** @var Method $obj */
+        $obj = $this->getMockForAbstractClass(
+            Method::class,
+            [$this->client, 'account_info', ['account' => '12345']]
+        );
+
+        $result = $obj->getValidParameters();
+        $this->assertNull($result);
+    }
+
+    /**
+     * Helper method to set the next response for the http client.
+     *
+     * @param string $body
+     * @param int $status
+     * @param array $headers
+     */
     protected function setResponse(string $body, $status = 200, $headers = ['Content-Type' => 'application/json']): void
     {
         $response = new Response(
@@ -51,6 +70,12 @@ class MethodTestCase extends TestCase
         $this->httpMockClient->addResponse($response);
     }
 
+    /**
+     * Helper method to retrieve json from file.
+     *
+     * @param string $file
+     * @return bool|string
+     */
     protected function getJsonFromFile(string $file)
     {
         return file_get_contents(__dir__.'../../json/'.$file.'.json');

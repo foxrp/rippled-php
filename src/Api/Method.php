@@ -17,9 +17,9 @@ abstract class Method
 
     public function __construct(Client $client, string $method, array $params = null)
     {
-        $this->client = $client;
-        $this->method = $method;
-        $this->params = $params;
+        $this->setClient($client);
+        $this->setMethod($method);
+        $this->setParams($params);
 
         // Check that only valid parameters have been passed in
         $validParams = $this->getValidParameters();
@@ -31,23 +31,31 @@ abstract class Method
                     throw new \BadMethodCallException(sprintf('Unknown parameters: %s', implode(', ', $diff)));
                 }
             }
-
-            // Validate parameters
-            $this->validateParameters($this->params);
-
-        } elseif ($params !== null) {
-            throw new \BadMethodCallException('Unknown parameters: %s', implode(array_keys($this->params)));
         }
+
+        // Validate parameters.
+        $this->validateParameters($this->getParams());
     }
 
     /**
-     * Override this method is extending class.
+     * Returns an array of supported parameters. Used by
+     * an override method in the extending class.
      *
      * @return array Valid parameter keys
      */
     public function getValidParameters(): ?array
     {
         return null;
+    }
+
+    /**
+     * Validates parameters and throws exception. Used by
+     * an override method in the extending class.
+     *
+     * @param array|null $params
+     */
+    public function validateParameters(array $params = null): void
+    {
     }
 
     /**
@@ -58,7 +66,7 @@ abstract class Method
      */
     public function execute(): MethodResponse
     {
-        return new MethodResponse($this->client->post($this->method, $this->params));
+        return new MethodResponse($this->getClient()->post($this->method, $this->params));
     }
 
     /**
@@ -96,7 +104,7 @@ abstract class Method
     /**
      * @return array
      */
-    public function getParams(): array
+    public function getParams(): ?array
     {
         return $this->params;
     }
@@ -104,7 +112,7 @@ abstract class Method
     /**
      * @param array $params
      */
-    public function setParams(array $params): void
+    public function setParams(array $params = null): void
     {
         $this->params = $params;
     }
