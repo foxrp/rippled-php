@@ -1,12 +1,17 @@
 # XRPHP - XRP Ledger Library
 
-This is a PHP 7.1+ wrapper for communication with the rippled (XRP Ledger) API.
+This is a PHP 7.1+ wrapper for communication with the XRP Ledger.
 
-The intention is to provide PHP developers with an easy way to interact/explore
-with the [rippled API](https://developers.ripple.com/rippled-api.html).
+It is recommended to use this library in conjuction with the 
+[API Documentation](https://developers.ripple.com/rippled-api.html)
+in the [Ripple Developer Portal](https://developers.ripple.com/).
 
-The [Ripple Developer Portal](https://developers.ripple.com/) is a great resource
-to use along side this project to study basic and advanced concepts of the XRP ledger.
+Websocket support may come later, but until then, it should be
+assumed you're using the `JSON-RPC` [request formatting](https://developers.ripple.com/request-formatting.html)
+unless otherwise stated.
+
+Note: When `The API` is mentioned in this documentation, it refers to
+the [rippled/XRP Ledger API](https://developers.ripple.com/rippled-api.html).
 
 ## Dependencies
 
@@ -46,18 +51,49 @@ $client = new \XRPHP\Connection([
 ]);
 ```
 
-## Sending Commands
+## Sending a Request
 
-These example calls the `account_info` command. You can see a full
-list of commands available in the [rippled api](https://developers.ripple.com/rippled-api.html)
-documentation.
+The [API documentation]([rippled api](https://developers.ripple.com/rippled-api.html))
+clearly defines `method` and `params` for each method, along with `JSON-RPC` examples 
+and an explanation for each parameter.
+
+Simply pass the `method`, followed by an associative array of 
+`params` into the client.
 
 ```
-// Instantiate the client.
-$client = new \XRPHP\Client('https://s1.ripple.com:51234');
-
-$res = $client->method('account_info', ['account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn']);
+$res = $client->method('account_info', [
+    'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
+])->execute();
 ```
+
+Exceptions will be thrown when calling a method with invalid, or missing
+parameters are included in a request, at the time the method
+is instantiated.
+
+## Response Object
+
+The API provides responses in a JSON format. The `result` property
+of the of the JSON object contains the data you are looking for.
+
+XRPHP takes care of the mundane by validating the response received
+ from the API, decoding the JSON, and arranging the data in a friendlier
+ format.
+ 
+It does this with the `MethodResponse` object, which is returned
+when you call `->execute()` on a client method.
+
+### $res->getResult(): 
+
+The `result` property of a response contains the data returned
+in in the `result` property of the JSON.
+
+### $res->isSuccess():
+
+The API provides a `status` property which indicates a successful
+call when the value is `success`. While it is accessible in
+`$res->result['status']`, XRPHP makes this available as a property.
+
+You can check if the response was successful with: `$res->isSuccess()`.
 
 ### Simple API Wrapper
 
