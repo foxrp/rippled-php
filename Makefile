@@ -2,7 +2,7 @@
 test:
 	vendor/bin/phpunit
 
-testcov:
+cov:
 	./vendor/bin/phpunit --coverage-html coverage
 
 fix:
