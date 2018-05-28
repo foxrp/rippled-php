@@ -64,7 +64,6 @@ class Client
             $this->scheme = $parts['scheme'];
             $this->setHost($parts['host']);
             $this->setPort($parts['port'] ?? null);
-
         } else {
             $this->setScheme($config['scheme'] ?? null);
             $this->setHost($config['host'] ?? null);
