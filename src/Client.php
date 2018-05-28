@@ -43,11 +43,11 @@ class Client
 
         switch ($type) {
             case 'string':
-                $this->endpoint = $config;
+                $this->setEndpoint($config);
                 break;
 
             case 'array':
-                $this->endpoint = $config['endpoint'] ?? null;
+                $this->setEndpoint($config['endpoint'] ?? null);
                 break;
 
             default:
@@ -57,18 +57,18 @@ class Client
 
         if ($this->endpoint !== null) {
             $parts = parse_url($this->endpoint);
-            if ($parts === false) {
+            if ($parts === false || !isset($parts['scheme'], $parts['host'])) {
                 throw new \InvalidArgumentException('Invalid endpoint format');
             }
 
             $this->scheme = $parts['scheme'];
-            $this->host = $parts['host'];
-            $this->port = $parts['port'] ?? null;
+            $this->setHost($parts['host']);
+            $this->setPort($parts['port'] ?? null);
 
         } else {
-            $this->scheme = $config['scheme'] ?? null;
-            $this->host = $config['host'] ?? null;
-            $this->port = $config['port'] ?? null;
+            $this->setScheme($config['scheme'] ?? null);
+            $this->setHost($config['host'] ?? null);
+            $this->setPort($config['port'] ?? null);
         }
 
         if (empty($this->scheme)) {
@@ -85,7 +85,7 @@ class Client
         }
 
         // Auto set port based on protocol if it has not been passed in
-        $port = $config['port'] ?? ($this->scheme === 'https' ? 443 : 80);
+        $port = $config['port'] ?? ($this->getScheme() === 'https' ? 443 : 80);
 
         // Validate port
         if ($port < 1 || $port >= 65535) {
@@ -95,37 +95,25 @@ class Client
         $this->port = $port;
 
         // Setup HttpClient & messageFactory
-        $this->httpClient = $httpClient ?: HttpClientDiscovery::find();
-        $this->messageFactory = $messageFactory ?: MessageFactoryDiscovery::find();
+        $this->setHttpClient($httpClient ?: HttpClientDiscovery::find());
+        $this->setMessageFactory($messageFactory ?: MessageFactoryDiscovery::find());
 
         // Build endpoint
         if (empty($this->endpoint)) {
-            $this->endpoint = $this->scheme . '://' . $this->host . ':' . $this->port;
+            $this->setEndpoint($this->getScheme() . '://' . $this->getHost() . ':' . $this->getPort());
         }
     }
 
-    public function method(string $method, array $params = null): Method
+    public function method(string $method, array $params = null): ?Method
     {
         switch ($method) {
             case 'account_info':
                 return new Account\AccountInfoMethod($this, $method, $params);
                 break;
+            default:
+                throw new \BadMethodCallException(sprintf('Invalid method: %s', $method));
+                break;
         }
-
-    }
-
-    public function post(string $method, array $params = null)
-    {
-        $json = $this->prepareJson($method, $params);
-
-        $request = $this->messageFactory->createRequest(
-            'POST',
-            $this->endpoint,
-            ['Content-Type' => 'application/json'],
-            $json
-        );
-
-        return $this->httpClient->sendRequest($request);
     }
 
     public function prepareJson(string $method, array $params = null): string
@@ -138,6 +126,20 @@ class Client
         return json_encode($request);
     }
 
+    public function post(string $method, array $params = null)
+    {
+        $json = $this->prepareJson($method, $params);
+
+        $request = $this->getMessageFactory()->createRequest(
+            'POST',
+            $this->endpoint,
+            ['Content-Type' => 'application/json'],
+            $json
+        );
+
+        return $this->httpClient->sendRequest($request);
+    }
+
     public function getHttpClient(): HttpClient
     {
         return $this->httpClient;
@@ -148,42 +150,52 @@ class Client
         $this->httpClient = $httpClient;
     }
 
-    public function getEndpoint(): string
+    public function getMessageFactory(): MessageFactory
+    {
+        return $this->messageFactory;
+    }
+
+    public function setMessageFactory(MessageFactory $messageFactory): void
+    {
+        $this->messageFactory = $messageFactory;
+    }
+
+    public function getEndpoint(): ?string
     {
         return $this->endpoint;
     }
 
-    public function setEndpoint(string $endpoint): void
+    public function setEndpoint(string $endpoint = null): void
     {
         $this->endpoint = $endpoint;
     }
 
-    public function getHost(): string
+    public function getHost(): ?string
     {
         return $this->host;
     }
 
-    public function setHost(string $host): void
+    public function setHost(string $host = null): void
     {
         $this->host = $host;
     }
 
-    public function getPort(): int
+    public function getPort(): ?int
     {
         return $this->port;
     }
 
-    public function setPort(int $port): void
+    public function setPort(int $port = null): void
     {
         $this->port = $port;
     }
 
-    public function getScheme(): string
+    public function getScheme(): ?string
     {
         return $this->scheme;
     }
 
-    public function setScheme(string $scheme): void
+    public function setScheme(string $scheme = null): void
     {
         $this->scheme = $scheme;
     }

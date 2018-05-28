@@ -2,6 +2,8 @@
 
 namespace XRPHP\Tests;
 
+use GuzzleHttp\Exception\BadResponseException;
+use XRPHP\Api\Account\AccountInfoMethod;
 use XRPHP\Client;
 use PHPUnit\Framework\TestCase;
 
@@ -15,9 +17,25 @@ class ClientTest extends TestCase
     */
     public function testIsThereAnySyntaxError(): void
     {
-        $con = new Client('https://example.com');
-        $this->assertTrue(is_object($con));
-        unset($con);
+        $client = new Client('https://example.com');
+        $this->assertTrue(is_object($client));
+        unset($client);
+    }
+
+    public function testInvalidConstructorType(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $client = new Client(new \stdClass());
+        unset($client);
+    }
+
+    public function testInvalidUriFormat(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $client = new Client('asdf');
+        unset($client);
     }
 
     /**
@@ -25,11 +43,11 @@ class ClientTest extends TestCase
     */
     public function testConstructorString(): void
     {
-        $con = new Client('https://example.com');
-        $this->assertEquals('example.com', $con->getHost());
-        $this->assertEquals('https', $con->getScheme());
-        $this->assertEquals(443, $con->getPort());
-        unset($con);
+        $client = new Client('https://example.com');
+        $this->assertEquals('example.com', $client->getHost());
+        $this->assertEquals('https', $client->getScheme());
+        $this->assertEquals(443, $client->getPort());
+        unset($client);
     }
 
     /**
@@ -37,23 +55,34 @@ class ClientTest extends TestCase
      */
     public function testConstructorConfigDefaultHttpsPort(): void
     {
-        $con = new Client(['scheme' => 'https', 'host' => 'example.com']);
-        $this->assertEquals('example.com', $con->getHost());
-        $this->assertEquals('https', $con->getScheme());
-        $this->assertEquals(443, $con->getPort());
-        unset($con);
+        $client = new Client(['scheme' => 'https', 'host' => 'example.com']);
+        $this->assertEquals('example.com', $client->getHost());
+        $this->assertEquals('https', $client->getScheme());
+        $this->assertEquals(443, $client->getPort());
+        unset($client);
     }
 
-    /**
-     * Check constructor with all custom args
-     */
     public function testConstructorCustomArgs(): void
     {
-        $con = new Client(['scheme' => 'http', 'host' => 'example.com', 'port' => 5006]);
-        $this->assertEquals('example.com', $con->getHost());
-        $this->assertEquals('http', $con->getScheme());
-        $this->assertEquals(5006, $con->getPort());
-        unset($con);
+        $client = new Client(['scheme' => 'http', 'host' => 'example.com', 'port' => 5006]);
+        $this->assertEquals('example.com', $client->getHost());
+        $this->assertEquals('http', $client->getScheme());
+        $this->assertEquals(5006, $client->getPort());
+        unset($client);
+    }
+
+    public function testConstructorMissingScheme(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $client = new Client(['host' => 'example.com']);
+        unset($client);
+    }
+
+    public function testConstructorMissingHost(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $client = new Client(['scheme' => 'https']);
+        unset($client);
     }
 
     /**
@@ -62,8 +91,8 @@ class ClientTest extends TestCase
     public function testConstructorInvalidProtocol(): void
     {
         $this->expectException(\OutOfBoundsException::class);
-        $con = new Client(['scheme' => 'ssh', 'host' => 'example.com']);
-        unset($con);
+        $client = new Client(['scheme' => 'ssh', 'host' => 'example.com']);
+        unset($client);
     }
 
     /**
@@ -72,8 +101,8 @@ class ClientTest extends TestCase
     public function testConstructorInvalidPort(): void
     {
         $this->expectException(\OutOfBoundsException::class);
-        $con = new Client(['scheme' => 'https', 'host' => 'example.com', 'port' => 65599]);
-        unset($con);
+        $client = new Client(['scheme' => 'https', 'host' => 'example.com', 'port' => 65599]);
+        unset($client);
     }
 
     /**
@@ -81,11 +110,11 @@ class ClientTest extends TestCase
      */
     public function testConstructorHttpGuzzleClient(): void
     {
-        $con = new Client(['endpoint' => 'https://example.com']);
-        $httpClient = $con->getHttpClient();
+        $client = new Client(['endpoint' => 'https://example.com']);
+        $httpClient = $client->getHttpClient();
         $this->assertNotNull($httpClient);
         $this->assertEquals(\Http\Adapter\Guzzle6\Client::class, get_class($httpClient));
-        unset($con);
+        unset($client);
     }
 
     /**
@@ -93,8 +122,52 @@ class ClientTest extends TestCase
      */
     public function testConstructorEndpoint(): void
     {
-        $con = new Client(['scheme' => 'https', 'host' => 'example.com']);
-        $this->assertEquals('https://example.com:443', $con->getEndpoint());
-        unset($con);
+        $client = new Client(['scheme' => 'https', 'host' => 'example.com']);
+        $this->assertEquals('https://example.com:443', $client->getEndpoint());
+        unset($client);
+    }
+
+    public function testMethodSuccess()
+    {
+        $client = new Client('https://example.com');
+        $method = $client->method('account_info', ['account' => '123']);
+
+        $this->assertEquals(AccountInfoMethod::class, \get_class($method));
+    }
+
+    public function testMethodInvalidMethod()
+    {
+        $this->expectException(\BadMethodCallException::class);
+
+        $client = new Client('https://example.com');
+        $client->method('invalid_method', ['account' => '123']);
+    }
+
+    public function testPrepareJsonWithParams()
+    {
+        $expected = json_encode([
+            'method' => 'account_info',
+            'params' => [[
+                'account' => '12345'
+            ]]
+        ]);
+
+        $client = new Client('https://example.com');
+        $json = $client->prepareJson('account_info', ['account' => '12345']);
+
+        $this->assertSame($expected, $json);
+    }
+
+    public function testPrepareJsonWithoutParams()
+    {
+        $expected = json_encode([
+            'method' => 'account_info',
+            'params' => [new \stdClass()]
+        ]);
+
+        $client = new Client('https://example.com');
+        $json = $client->prepareJson('account_info');
+
+        $this->assertSame($expected, $json);
     }
 }
