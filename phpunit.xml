@@ -4,9 +4,17 @@
 			convertNoticesToExceptions="true"
 			convertWarningsToExceptions="true"
 			stopOnFailure="true">
-			<testsuites>
-				<testsuite name="Unit Tests">
-					<directory>tests</directory>
-				</testsuite>
-			</testsuites>
+	<testsuites>
+		<testsuite name="Unit Tests">
+			<directory>tests</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist>
+			<directory>./src/</directory>
+			<exclude>
+				<file>src/Model</file>
+			</exclude>
+		</whitelist>
+	</filter>
 </phpunit>
