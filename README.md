@@ -51,54 +51,11 @@ $client = new \XRPHP\Connection([
 ]);
 ```
 
-## Sending a Request
+## Usage
 
-The [API documentation]([rippled api](https://developers.ripple.com/rippled-api.html))
-clearly defines `method` and `params` for each method, along with `JSON-RPC` examples 
-and an explanation for each parameter.
-
-Simply pass the `method`, followed by an associative array of 
-`params` into the client.
-
-```
-$res = $client->method('account_info', [
-    'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
-])->execute();
-```
-
-Exceptions will be thrown when calling a method with invalid, or missing
-parameters are included in a request, at the time the method
-is instantiated.
-
-## Response Object
-
-The API provides responses in a JSON format. The `result` property
-of the of the JSON object contains the data you are looking for.
-
-XRPHP takes care of the mundane by validating the response received
- from the API, decoding the JSON, and arranging the data in a friendlier
- format.
- 
-It does this with the `MethodResponse` object, which is returned
-when you call `->execute()` on a client method.
-
-### $res->getResult(): 
-
-The `result` property of a response contains the data returned
-in in the `result` property of the JSON.
-
-### $res->isSuccess():
-
-The API provides a `status` property which indicates a successful
-call when the value is `success`. While it is accessible in
-`$res->result['status']`, XRPHP makes this available as a property.
-
-You can check if the response was successful with: `$res->isSuccess()`.
-
-### Simple API Wrapper
-
-While `$client->method()` offers parameter validation and response data organization, you can
-bypass all that if you prefer a simple API wrapper. Just use the `$client->post()` method instead.
+This project as it is intended to function is incomplete, however you can use the 
+following method to access the API. It simply wraps the API without providing
+any validation or data normalization that is to come.
 
 ```
 // Instantiate the client.
@@ -142,30 +99,74 @@ Output of `print_r($res)`:
 )
 ```
 
+## Sending a Request (Incomplete)
+
+The [API documentation]([rippled api](https://developers.ripple.com/rippled-api.html))
+clearly defines `method` and `params` for each method, along with `JSON-RPC` examples 
+and an explanation for each parameter.
+
+Simply pass the `method`, followed by an associative array of 
+`params` into the client.
+
+```
+$res = $client->method('account_info', [
+    'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
+])->execute();
+```
+
+Exceptions will be thrown when calling a method with invalid, or missing
+parameters are included in a request, at the time the method
+is instantiated.
+
+## Response Object
+
+The API provides responses in a JSON format. The `result` property
+of the of the JSON object contains the data you are looking for.
+
+XRPHP takes care of the mundane by validating the response received
+ from the API, decoding the JSON, and arranging the data in a friendlier
+ format.
+ 
+It does this with the `MethodResponse` object, which is returned
+when you call `->execute()` on a client method.
+
+### $res->getResult(): 
+
+The `result` property of a response contains the data returned
+in in the `result` property of the JSON.
+
+### $res->isSuccess():
+
+The API provides a `status` property which indicates a successful
+call when the value is `success`. While it is accessible in
+`$res->result['status']`, XRPHP makes this available as a property.
+
+You can check if the response was successful with: `$res->isSuccess()`.
+
 ## Development Plan
 
 Phases 1 through 3 apply to the public API only.
 
 - [x] Phase 1: Provide an API wrapper which returns the raw data. (`$client->post('method', $params)`)
-- [ ] Phase 2: Provide classes for each section with methods which take arguments, instead of a `$params` array.
+- [ ] Phase 2: Extend `Method` for each class, providing validation and normalization of output.
 - [ ] Phase 3: Model data objects, such as accounts and transactions, and integrate them into the method arguments and returned data.
 - [ ] Phase 4: Provide support for the Administrative API.
 
 ## Phase 2 Development Status
 
 Note: This just applies to Phase 2 architecture. You can call any method with 
-`$client->post('method_name', $params)`.
+`$res = $client->method('method_name', $params)->execute()`.
 
 - account
-  - [x] channels
-  - [x] currencies
-  - [x] info
-  - [x] lines
-  - [x] objects
-  - [x] offers
-  - [x] tx
-  - [x] gatewayBalances
-  - [x] norippleCheck
+  - [ ] channels
+  - [ ] currencies
+  - [x] account_info
+  - [ ] lines
+  - [ ] objects
+  - [ ] offers
+  - [ ] tx
+  - [ ] gatewayBalances
+  - [ ] norippleCheck
 - ledger
   - [ ] ledger
   - [ ] closed
