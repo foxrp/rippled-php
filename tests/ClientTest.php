@@ -2,7 +2,6 @@
 
 namespace XRPHP\Tests;
 
-use GuzzleHttp\Exception\BadResponseException;
 use XRPHP\Api\Account\AccountInfoMethod;
 use XRPHP\Client;
 use PHPUnit\Framework\TestCase;
