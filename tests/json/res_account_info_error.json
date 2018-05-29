@@ -1,0 +1,14 @@
+{
+  "result": {
+    "account": "r12345",
+    "error": "actNotFound",
+    "error_code": 19,
+    "error_message": "Account not found.",
+    "request": {
+      "account": "r12345",
+      "command": "account_info"
+    },
+    "status": "error",
+    "validated": false
+  }
+}
