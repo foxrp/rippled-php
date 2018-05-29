@@ -18,6 +18,15 @@ class MethodResponse
     /** @var bool Validated flag from the result block */
     private $validated;
 
+    /** @var bool */
+    private $error = false;
+
+    /** @var int */
+    private $errorCode;
+
+    /** @var string */
+    private $errorMessage;
+
     /**
      * MethodResponse constructor.
      *
@@ -35,12 +44,12 @@ class MethodResponse
      * @param ResponseInterface $response
      * @throws \Exception
      */
-    private function processResponse(ResponseInterface $response): void
+    public function processResponse(ResponseInterface $response): void
     {
         $data = null;
-        $this->raw = $response->getBody()->__toString();
-        
-        if (!strpos($response->getHeaderLine('Content-Type'), 'application/json') === 0) {
+        $this->setRaw($response->getBody()->__toString());
+
+        if ($response->getHeaderLine('Content-Type') !== 'application/json') {
             throw new \Exception('API response missing header: Content-Type: application/json');
         }
         
@@ -53,10 +62,17 @@ class MethodResponse
             throw new \Exception('API response missing result data');
         }
 
-        $this->result = $data['result'];
+        $this->setResult($data['result']);
 
-        $this->success = $this->result['status'] === 'success';
-        $this->validated = $this->result['validated'] ?? null;
+        $this->setSuccess($data['result']['status'] === 'success');
+        $this->setValidated($data['result']['validated'] ?? null);
+
+        // Set error data.
+        if ($data['result']['status'] === 'error') {
+            $this->setError(true);
+            $this->setErrorCode($data['result']['error_code']);
+            $this->setErrorMessage($data['result']['error_message']);
+        }
     }
 
     /**
@@ -121,5 +137,53 @@ class MethodResponse
     public function setValidated(bool $validated): void
     {
         $this->validated = $validated;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasError(): bool
+    {
+        return $this->error;
+    }
+
+    /**
+     * @param bool $error
+     */
+    public function setError(bool $error): void
+    {
+        $this->error = $error;
+    }
+
+    /**
+     * @return int
+     */
+    public function getErrorCode(): ?int
+    {
+        return $this->errorCode;
+    }
+
+    /**
+     * @param int $errorCode
+     */
+    public function setErrorCode(int $errorCode = null): void
+    {
+        $this->errorCode = $errorCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getErrorMessage(): ?string
+    {
+        return $this->errorMessage;
+    }
+
+    /**
+     * @param string $errorMessage
+     */
+    public function setErrorMessage(string $errorMessage = null): void
+    {
+        $this->errorMessage = $errorMessage;
     }
 }
