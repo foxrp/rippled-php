@@ -4,6 +4,13 @@ namespace XRPHP\Api\Account;
 
 use XRPHP\Api\Method;
 
+/**
+ * The account_info command retrieves information about an account, its activity, and its XRP balance.
+ * All information retrieved is relative to a particular version of the ledger.
+ *
+ * @link https://developers.ripple.com/account_info.html Documentation of account_info.
+ * @package XRPHP\Api\Account
+ */
 class AccountInfoMethod extends Method
 {
     public function getValidParameters(): array
