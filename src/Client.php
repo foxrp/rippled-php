@@ -217,7 +217,8 @@ class Client
         return [
             'account_channels' => Account\AccountChannelsMethod::class,
             'account_currencies' => Account\AccountCurrenciesMethod::class,
-            'account_info' => Account\AccountInfoMethod::class
+            'account_info' => Account\AccountInfoMethod::class,
+            'account_lines' => Account\AccountLinesMethod::class
         ];
     }
 }
