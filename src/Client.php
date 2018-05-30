@@ -103,18 +103,26 @@ class Client
         }
     }
 
+    /**
+     * @param string $method The API method string.
+     * @param array|null $params Associative array of method parameters.
+     * @return null|Method
+     * @throws \BadMethodCallException
+     */
     public function method(string $method, array $params = null): ?Method
     {
-        switch ($method) {
-            case 'account_info':
-                return new Account\AccountInfoMethod($this, $method, $params);
-                break;
-            default:
-                throw new \BadMethodCallException(sprintf('Invalid method: %s', $method));
-                break;
+        $methodMap = $this->getMethodClassMap();
+        if (isset($methodMap[$method])) {
+            return new $methodMap[$method]($this, $method, $params);
         }
+        throw new \BadMethodCallException(sprintf('Invalid method: %s', $method));
     }
 
+    /**
+     * @param string $method The API method string.
+     * @param array|null $params Associative array of method parameters.
+     * @return string Raw JSON formatted to send in the API body.
+     */
     public function prepareJson(string $method, array $params = null): string
     {
         if ($params === null) {
@@ -197,5 +205,19 @@ class Client
     public function setScheme(string $scheme = null): void
     {
         $this->scheme = $scheme;
+    }
+
+    /**
+     * Maps API method names to their related class names in this package.
+     *
+     * @return array Associative array of method classes keyed by API method names.
+     */
+    private function getMethodClassMap()
+    {
+        return [
+            'account_channels' => Account\AccountChannelsMethod::class,
+            'account_currencies' => Account\AccountCurrenciesMethod::class,
+            'account_info' => Account\AccountInfoMethod::class
+        ];
     }
 }
