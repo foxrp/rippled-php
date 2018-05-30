@@ -218,7 +218,12 @@ class Client
             'account_channels' => Account\AccountChannelsMethod::class,
             'account_currencies' => Account\AccountCurrenciesMethod::class,
             'account_info' => Account\AccountInfoMethod::class,
-            'account_lines' => Account\AccountLinesMethod::class
+            'account_lines' => Account\AccountLinesMethod::class,
+            'account_objects' => Account\AccountObjectsMethod::class,
+            'account_offers' => Account\AccountOffersMethod::class,
+            'account_tx' => Account\AccountTxMethod::class,
+            'gateway_balances' => Account\GatewayBalancesMethod::class,
+            'noripple_check' => Account\NorippleCheckMethod::class
         ];
     }
 }
