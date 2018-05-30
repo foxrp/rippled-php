@@ -134,7 +134,7 @@ class MethodResponse
     /**
      * @param bool $validated
      */
-    public function setValidated(bool $validated): void
+    public function setValidated(bool $validated = null): void
     {
         $this->validated = $validated;
     }
