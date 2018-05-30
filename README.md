@@ -158,8 +158,8 @@ Note: This just applies to Phase 2 architecture. You can call any method with
 `$res = $client->method('method_name', $params)->execute()`.
 
 - account
-  - [ ] channels
-  - [ ] currencies
+  - [x] channels
+  - [x] currencies
   - [x] account_info
   - [ ] lines
   - [ ] objects
@@ -200,6 +200,22 @@ Note: This just applies to Phase 2 architecture. You can call any method with
   - [ ] json
   - [ ] ping
   - [ ] random
+
+## Testing
+
+As of now, only unit tests exists which mock the API so requests are not actually made.
+
+Run the test suite:
+```
+make test
+```
+
+Run test coverage:
+```
+make cov
+```
+
+Once you run the coverage command, open `coverage/index.html` to view the report.
 
 ## Contribute
 
