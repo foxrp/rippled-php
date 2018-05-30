@@ -1,0 +1,20 @@
+{
+  "result": {
+    "account": "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH",
+    "channels": [{
+      "account": "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH",
+      "amount": "100000000",
+      "balance": "0",
+      "channel_id": "5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3",
+      "destination_account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+      "destination_tag": 20170428,
+      "public_key": "aB44YfzW24VDEJQ2UuLPV2PvqcPCSoLnL7y5M1EzhdW4LnK5xMS3",
+      "public_key_hex": "023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6",
+      "settle_delay": 86400
+    }],
+    "ledger_hash": "B9D3D80EDF4083A06B2D51202E0BFB63C46FC0985E015D06767C21A62853BF6D",
+    "ledger_index": 37230600,
+    "status": "success",
+    "validated": true
+  }
+}
