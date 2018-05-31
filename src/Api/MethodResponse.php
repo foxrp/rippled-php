@@ -52,8 +52,8 @@ class MethodResponse
         if ($response->getHeaderLine('Content-Type') !== 'application/json') {
             throw new \Exception('API response missing header: Content-Type: application/json');
         }
-        
-        $data = json_decode($this->raw, true);
+
+        $data = json_decode($this->getRaw(), true);
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new \Exception('Unable to parse JSON in API response');
         }
