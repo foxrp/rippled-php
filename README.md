@@ -51,55 +51,10 @@ $client = new \XRPHP\Connection([
 ]);
 ```
 
-## Usage
-
-This project as it is intended to function is incomplete, however you can use the 
-following method to access the API. It simply wraps the API without providing
-any validation or data normalization that is to come.
-
-```
-// Instantiate the client.
-$client = new \XRPHP\Client('https://s1.ripple.com:51234');
-
-// Retrieve the info.
-$res = $client->post('account_info', ['account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn']);
-```
-
-Response data is the result of `json_decode($json, true)`, so the entire structure
-has been converted to an associative array.
-
-Output of `print_r($res)`:
-```
-(
-    [result] => Array
-        (
-            [account_data] => Array
-                (
-                    [Account] => rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn
-                    [Balance] => 6
-                    [Flags] => 65536
-                    [LedgerEntryType] => AccountRoot
-                    [OwnerCount] => 0
-                    [PreviousTxnID] => E9A2BAA7B310BA3C52FDFBDEC404D1339E7547E8CD769D6CD40AD0EFABF337F8
-                    [PreviousTxnLgrSeq] => 36405347
-                    [RegularKey] => rU4DpLWAzs3ECf8SVkeJGeLt9KBRGhxpQg
-                    [Sequence] => 192218
-                    [index] => 92FA6A9FC8EA6018D5D16532D7795C91BFB0831355BDFDA177E86C8BF997985F
-                )
-
-            [ledger_current_index] => 38726789
-            [queue_data] => Array
-                (
-                    [txn_count] => 0
-                )
-
-            [status] => success
-            [validated] => 
-        )
-)
-```
-
 ## Sending a Request (Incomplete)
+
+Note: Only the Account methods are complete. For now, you can call any method
+by following the `Direct Posting to the API` documentation later in this file. 
 
 The [API documentation]([rippled api](https://developers.ripple.com/rippled-api.html))
 clearly defines `method` and `params` for each method, along with `JSON-RPC` examples 
@@ -143,14 +98,58 @@ call when the value is `success`. While it is accessible in
 
 You can check if the response was successful with: `$res->isSuccess()`.
 
+## Direct Posting to the API
+
+You can use the following method to access the API. It simply wraps the API without validating
+parameters or normalizing the response.
+
+```
+// Instantiate the client.
+$client = new \XRPHP\Client('https://s1.ripple.com:51234');
+
+// Retrieve the info.
+$res = $client->post('account_info', ['account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn']);
+```
+
+Response data is the result of `json_decode($json, true)`, so the entire structure
+has been converted to an associative array.
+
+Output of `print_r($res)`:
+```
+(
+    [result] => Array
+        (
+            [account_data] => Array
+                (
+                    [Account] => rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn
+                    [Balance] => 6
+                    [Flags] => 65536
+                    [LedgerEntryType] => AccountRoot
+                    [OwnerCount] => 0
+                    [PreviousTxnID] => E9A2BAA7B310BA3C52FDFBDEC404D1339E7547E8CD769D6CD40AD0EFABF337F8
+                    [PreviousTxnLgrSeq] => 36405347
+                    [RegularKey] => rU4DpLWAzs3ECf8SVkeJGeLt9KBRGhxpQg
+                    [Sequence] => 192218
+                    [index] => 92FA6A9FC8EA6018D5D16532D7795C91BFB0831355BDFDA177E86C8BF997985F
+                )
+
+            [ledger_current_index] => 38726789
+            [queue_data] => Array
+                (
+                    [txn_count] => 0
+                )
+
+            [status] => success
+            [validated] => 
+        )
+)
+```
+
 ## Development Plan
 
-Phases 1 through 3 apply to the public API only.
-
 - [x] Phase 1: Provide an API wrapper which returns the raw data. (`$client->post('method', $params)`)
-- [ ] Phase 2: Extend `Method` for each class, providing validation and normalization of output.
-- [ ] Phase 3: Model data objects, such as accounts and transactions, and integrate them into the method arguments and returned data.
-- [ ] Phase 4: Provide support for the Administrative API.
+- [ ] Phase 2: Extend `Method` for each public API method, providing validation, normalization of output, and tests.
+- [ ] Phase 3: Repeat phase 2 for the admin API.
 
 ## Phase 2 Development Status
 
@@ -158,21 +157,21 @@ Note: This just applies to Phase 2 architecture. You can call any method with
 `$res = $client->method('method_name', $params)->execute()`.
 
 - account
-  - [x] channels
-  - [x] currencies
-  - [x] account_info
-  - [ ] lines
-  - [ ] objects
-  - [ ] offers
-  - [ ] tx
-  - [ ] gatewayBalances
-  - [ ] norippleCheck
+  - [x] account_channels
+  - [x] account_currencies
+  - [x] account_account_info
+  - [x] account_lines
+  - [x] account_objects
+  - [x] account_offers
+  - [x] account_tx
+  - [x] gateway_balances
+  - [x] noripple_check
 - ledger
   - [ ] ledger
-  - [ ] closed
-  - [ ] current
-  - [ ] data
-  - [ ] entry
+  - [ ] ledger_closed
+  - [ ] ledger_current
+  - [ ] ledger_data
+  - [ ] ledger_entry
 - transaction
   - [ ] sign
   - [ ] signFor
