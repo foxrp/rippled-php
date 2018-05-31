@@ -39,7 +39,11 @@ class AccountTxMethod extends Method
             throw new \BadMethodCallException('Missing parameter: account');
         }
 
-        if (!isset($params['ledger_index_min'], $params['ledger_index_max'], $params['ledger_hash'], $params['ledger_index'])) {
+        if (!isset($params['ledger_index_min'])
+            && !isset($params['ledger_index_max'])
+            && !isset($params['ledger_hash'])
+            && !isset($params['ledger_index'])
+        ) {
             throw new \BadMethodCallException('At least one of the following parameters must be used: ledger_index, ledger_hash, ledger_index_min, ledger_index_max');
         }
     }
