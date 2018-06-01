@@ -1,26 +1,27 @@
 <?php
 
-namespace XRPHP\Api\Account;
+namespace XRPHP\Api\Anon\Account;
 
 use XRPHP\Api\Method;
 
 /**
- * The account_currencies command retrieves a list of currencies that an account
- * can send or receive, based on its trust lines. (This is not a thoroughly
- * confirmed list, but it can be used to populate user interfaces.)
+ * The account_lines method returns information about an account's trust lines, including balances in all
+ * non-XRP currencies and assets. All information retrieved is relative to a particular version of the ledger.
  *
- * @link https://developers.ripple.com/account_currencies.html Documentation of account_currencies.
+ * @link https://developers.ripple.com/account_lines.html#request-format Documentation of account_lines.
  * @package XRPHP\Api\Account
  */
-class AccountCurrenciesMethod extends Method
+class AccountLinesMethod extends Method
 {
     public function getValidParameters(): array
     {
         return [
             'account',
-            'strict',
             'ledger_hash',
-            'ledger_index'
+            'ledger_index',
+            'peer',
+            'limit',
+            'marker'
         ];
     }
 

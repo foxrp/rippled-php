@@ -1,27 +1,26 @@
 <?php
 
-namespace XRPHP\Api\Account;
+namespace XRPHP\Api\Anon\Account;
 
 use XRPHP\Api\Method;
 
 /**
- * The noripple_check command provides a quick way to check the status of the DefaultRipple field for an account and
- * the NoRipple flag of its trust lines, compared with the recommended settings.
+ * The account_currencies command retrieves a list of currencies that an account
+ * can send or receive, based on its trust lines. (This is not a thoroughly
+ * confirmed list, but it can be used to populate user interfaces.)
  *
- * @link https://developers.ripple.com/noripple_check.html Documentation of noripple_check.
+ * @link https://developers.ripple.com/account_currencies.html Documentation of account_currencies.
  * @package XRPHP\Api\Account
  */
-class NorippleCheckMethod extends Method
+class AccountCurrenciesMethod extends Method
 {
     public function getValidParameters(): array
     {
         return [
             'account',
-            'role',
+            'strict',
             'ledger_hash',
-            'ledger_index',
-            'limit',
-            'transactions'
+            'ledger_index'
         ];
     }
 

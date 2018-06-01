@@ -1,27 +1,27 @@
 <?php
 
-namespace XRPHP\Api\Account;
+namespace XRPHP\Api\Anon\Account;
 
 use XRPHP\Api\Method;
 
 /**
- * The account_lines method returns information about an account's trust lines, including balances in all
- * non-XRP currencies and assets. All information retrieved is relative to a particular version of the ledger.
+ * The noripple_check command provides a quick way to check the status of the DefaultRipple field for an account and
+ * the NoRipple flag of its trust lines, compared with the recommended settings.
  *
- * @link https://developers.ripple.com/account_lines.html#request-format Documentation of account_lines.
+ * @link https://developers.ripple.com/noripple_check.html Documentation of noripple_check.
  * @package XRPHP\Api\Account
  */
-class AccountLinesMethod extends Method
+class NorippleCheckMethod extends Method
 {
     public function getValidParameters(): array
     {
         return [
             'account',
+            'role',
             'ledger_hash',
             'ledger_index',
-            'peer',
             'limit',
-            'marker'
+            'transactions'
         ];
     }
 

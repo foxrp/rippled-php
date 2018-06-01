@@ -1,44 +1,44 @@
 <?php
 
-namespace XRPHP\Tests\Api\Account;
+namespace XRPHP\Tests\Api\Anon\Account;
 
 use XRPHP\Tests\Api\MethodTestCase;
 
-class AccountInfoMethodTest extends MethodTestCase
+class GatewayBalancesMethodTest extends MethodTestCase
 {
     public function testSuccessMinParameters(): void
     {
         // Setup a successful response.
-        $this->setResponse($this->getJsonFromFile('account_info_success'));
+        $this->setResponse($this->getJsonFromFile('gateway_balances_success'));
 
         $params = ['account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'];
-        $method = $this->client->method('account_info', $params);
+        $method = $this->client->method('gateway_balances', $params);
 
-        $this->assertEquals('account_info', $method->getMethod());
+        $this->assertEquals('gateway_balances', $method->getMethod());
         $this->assertSame($params, $method->getParams());
 
         $res = $method->execute();
 
         $this->assertTrue($res->isSuccess(), 'isSuccess is not true');
-        $this->assertFalse($res->isValidated(), 'isValidated is not null');
+        $this->assertTrue($res->isValidated(), 'isValidated is not null');
     }
 
     public function testMissingAccountWithEmptyArrayThrowsException()
     {
         $this->expectException(\BadMethodCallException::class);
-        $this->client->method('account_info', []);
+        $this->client->method('gateway_balances', []);
     }
 
     public function testMissingAccountWithNullThrowsException()
     {
         $this->expectException(\BadMethodCallException::class);
-        $this->client->method('account_info', null);
+        $this->client->method('gateway_balances', null);
     }
 
     public function testInvalidParamsThrowsException()
     {
         $this->expectException(\BadMethodCallException::class);
-        $this->client->method('account_info', [
+        $this->client->method('gateway_balances', [
             'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
             'not_a_param' => 'should cause an exception'
         ]);

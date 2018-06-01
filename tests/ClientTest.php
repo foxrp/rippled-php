@@ -2,7 +2,7 @@
 
 namespace XRPHP\Tests;
 
-use XRPHP\Api\Account\AccountInfoMethod;
+use XRPHP\Api\Anon\Account\AccountInfoMethod;
 use XRPHP\Client;
 use PHPUnit\Framework\TestCase;
 

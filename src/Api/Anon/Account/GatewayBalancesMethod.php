@@ -1,26 +1,26 @@
 <?php
 
-namespace XRPHP\Api\Account;
+namespace XRPHP\Api\Anon\Account;
 
 use XRPHP\Api\Method;
 
 /**
- * The account_offers method retrieves a list of offers made by a given account that are outstanding as of a particular
- * ledger version.
+ * The gateway_balances command calculates the total balances issued by a given account, optionally excluding amounts
+ * held by operational addresses.
  *
- * @link https://developers.ripple.com/account_offers.html Documentation of account_offers.
+ * @link https://developers.ripple.com/gateway_balances.html Documentation of gateway_balances.
  * @package XRPHP\Api\Account
  */
-class AccountOffersMethod extends Method
+class GatewayBalancesMethod extends Method
 {
     public function getValidParameters(): array
     {
         return [
             'account',
+            'strict',
+            'hotwallet',
             'ledger_hash',
-            'ledger_index',
-            'limit',
-            'marker'
+            'ledger_index'
         ];
     }
 

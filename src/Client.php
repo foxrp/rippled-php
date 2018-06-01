@@ -6,7 +6,6 @@ use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
-use XRPHP\Api\Account;
 use XRPHP\Api\Method;
 
 /**
@@ -31,6 +30,26 @@ class Client
 
     /** @var string http or https */
     private $scheme;
+
+    /**
+     * Maps API method names to their related class names in this package.
+     *
+     * @return array Associative array of method classes keyed by API method names.
+     */
+    private function getMethodClassMap()
+    {
+        return [
+            'account_channels' => \XRPHP\Api\Anon\Account\AccountChannelsMethod::class,
+            'account_currencies' => \XRPHP\Api\Anon\Account\AccountCurrenciesMethod::class,
+            'account_info' => \XRPHP\Api\Anon\Account\AccountInfoMethod::class,
+            'account_lines' => \XRPHP\Api\Anon\Account\AccountLinesMethod::class,
+            'account_objects' => \XRPHP\Api\Anon\Account\AccountObjectsMethod::class,
+            'account_offers' => \XRPHP\Api\Anon\Account\AccountOffersMethod::class,
+            'account_tx' => \XRPHP\Api\Anon\Account\AccountTxMethod::class,
+            'gateway_balances' => \XRPHP\Api\Anon\Account\GatewayBalancesMethod::class,
+            'noripple_check' => \XRPHP\Api\Anon\Account\NorippleCheckMethod::class
+        ];
+    }
 
     /**
      * Connection constructor.
@@ -205,25 +224,5 @@ class Client
     public function setScheme(string $scheme = null): void
     {
         $this->scheme = $scheme;
-    }
-
-    /**
-     * Maps API method names to their related class names in this package.
-     *
-     * @return array Associative array of method classes keyed by API method names.
-     */
-    private function getMethodClassMap()
-    {
-        return [
-            'account_channels' => Account\AccountChannelsMethod::class,
-            'account_currencies' => Account\AccountCurrenciesMethod::class,
-            'account_info' => Account\AccountInfoMethod::class,
-            'account_lines' => Account\AccountLinesMethod::class,
-            'account_objects' => Account\AccountObjectsMethod::class,
-            'account_offers' => Account\AccountOffersMethod::class,
-            'account_tx' => Account\AccountTxMethod::class,
-            'gateway_balances' => Account\GatewayBalancesMethod::class,
-            'noripple_check' => Account\NorippleCheckMethod::class
-        ];
     }
 }

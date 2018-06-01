@@ -1,6 +1,6 @@
 <?php
 
-namespace XRPHP\Api\Account;
+namespace XRPHP\Api\Anon\Account;
 
 use XRPHP\Api\Method;
 

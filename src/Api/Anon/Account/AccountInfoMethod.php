@@ -1,29 +1,27 @@
 <?php
 
-namespace XRPHP\Api\Account;
+namespace XRPHP\Api\Anon\Account;
 
 use XRPHP\Api\Method;
 
 /**
- * The account_channels method returns information about an account's Payment Channels.
- * This includes only channels where the specified account is the channel's source, not the
- * destination. (A channel's "source" and "owner" are the same.) All information retrieved is
- * relative to a particular version of the ledger.
+ * The account_info command retrieves information about an account, its activity, and its XRP balance.
+ * All information retrieved is relative to a particular version of the ledger.
  *
- * @link https://developers.ripple.com/account_channels.html Documentation of account_channels.
+ * @link https://developers.ripple.com/account_info.html Documentation of account_info.
  * @package XRPHP\Api\Account
  */
-class AccountChannelsMethod extends Method
+class AccountInfoMethod extends Method
 {
     public function getValidParameters(): array
     {
         return [
             'account',
-            'destination_account',
+            'strict',
             'ledger_hash',
             'ledger_index',
-            'limit',
-            'marker'
+            'queue',
+            'signer_lists'
         ];
     }
 
