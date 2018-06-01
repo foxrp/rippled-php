@@ -179,11 +179,11 @@ Note: This just applies to Phase 2 architecture. You can call any method with
   - [x] gateway_balances
   - [x] noripple_check
 - ledger
-  - [ ] ledger
-  - [ ] ledger_closed
-  - [ ] ledger_current
-  - [ ] ledger_data
-  - [ ] ledger_entry
+  - [x] ledger
+  - [x] ledger_closed
+  - [x] ledger_current
+  - [x] ledger_data
+  - [x] ledger_entry
 - transaction
   - [ ] sign
   - [ ] signFor
