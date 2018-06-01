@@ -3,15 +3,11 @@
 > Note: This is under heavy development. It is usable, but read the docs closely if you
 are calling APIs that are not yet complete.
 
-This is a PHP 7.1+ wrapper for communication with the XRP Ledger.
+This is a PHP 7.1+ wrapper for communication with the XRP Ledger via JSON-RPC.
 
 It is recommended to use this library in conjuction with the 
 [API Documentation](https://developers.ripple.com/rippled-api.html)
 in the [Ripple Developer Portal](https://developers.ripple.com/).
-
-Websocket support may come later, but until then, it should be
-assumed you're using the `JSON-RPC` [request formatting](https://developers.ripple.com/request-formatting.html)
-unless otherwise stated.
 
 Note: When `The API` is mentioned in this documentation, it refers to
 the [rippled/XRP Ledger API](https://developers.ripple.com/rippled-api.html).
