@@ -47,7 +47,12 @@ class Client
             'account_offers' => \XRPHP\Api\Anon\Account\AccountOffersMethod::class,
             'account_tx' => \XRPHP\Api\Anon\Account\AccountTxMethod::class,
             'gateway_balances' => \XRPHP\Api\Anon\Account\GatewayBalancesMethod::class,
-            'noripple_check' => \XRPHP\Api\Anon\Account\NorippleCheckMethod::class
+            'noripple_check' => \XRPHP\Api\Anon\Account\NorippleCheckMethod::class,
+            'ledger' => \XRPHP\Api\Anon\Ledger\LedgerMethod::class,
+            'ledger_closed' => \XRPHP\Api\Anon\Ledger\LedgerClosedMethod::class,
+            'ledger_current' => \XRPHP\Api\Anon\Account\NorippleCheckMethod::class,
+            'ledger_data' => \XRPHP\Api\Anon\Account\NorippleCheckMethod::class,
+            'ledger_entry' => \XRPHP\Api\Anon\Account\NorippleCheckMethod::class,
         ];
     }
 
