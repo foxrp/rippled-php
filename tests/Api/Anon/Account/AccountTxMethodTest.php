@@ -44,4 +44,12 @@ class AccountTxMethodTest extends MethodTestCase
             'not_a_param' => 'should cause an exception'
         ]);
     }
+
+    public function testMissingLedgerParamThrowsException()
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $this->client->method('account_tx', [
+            'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
+        ]);
+    }
 }
