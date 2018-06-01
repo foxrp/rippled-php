@@ -72,6 +72,19 @@ $res = $client->method('account_info', [
 ])->execute();
 ```
 
+Catch `InvalidParameterException` for messages specific to missing or invalid parameters.
+```
+use XRPHP\Exception\InvalidParameterException;
+...
+try {
+    $res = $client->method('account_info', [
+        'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
+    ])->execute();
+} catch (InvalidParameterException $e) {
+    $param_error = $e->getMessage();
+}
+```
+
 Exceptions will be thrown when calling a method with invalid, or missing
 parameters are included in a request, at the time the method
 is instantiated.
