@@ -3,6 +3,7 @@
 namespace XRPHP\Api;
 
 use XRPHP\Client;
+use XRPHP\Exception\InvalidParameterException;
 
 abstract class Method
 {
@@ -15,6 +16,14 @@ abstract class Method
     /** @var array */
     private $params;
 
+    /**
+     * Method constructor.
+     *
+     * @param Client $client XRPHP Client.
+     * @param string $method API method.
+     * @param array|null $params Associative array of method parameters.
+     * @throws InvalidParameterException
+     */
     public function __construct(Client $client, string $method, array $params = null)
     {
         $this->setClient($client);
@@ -28,7 +37,7 @@ abstract class Method
                 $diff = array_diff(array_keys($params), $validParams);
 
                 if (\count($diff) > 0) {
-                    throw new \BadMethodCallException(sprintf('Unknown parameters: %s', implode(', ', $diff)));
+                    throw new InvalidParameterException(sprintf('Unknown parameters: %s', implode(', ', $diff)));
                 }
             }
         }

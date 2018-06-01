@@ -2,6 +2,7 @@
 
 namespace XRPHP\Tests\Api\Anon\Account;
 
+use XRPHP\Exception\InvalidParameterException;
 use XRPHP\Tests\Api\MethodTestCase;
 
 class AccountInfoMethodTest extends MethodTestCase
@@ -25,22 +26,7 @@ class AccountInfoMethodTest extends MethodTestCase
 
     public function testMissingAccountWithEmptyArrayThrowsException()
     {
-        $this->expectException(\BadMethodCallException::class);
+        $this->expectException(InvalidParameterException::class);
         $this->client->method('account_info', []);
-    }
-
-    public function testMissingAccountWithNullThrowsException()
-    {
-        $this->expectException(\BadMethodCallException::class);
-        $this->client->method('account_info', null);
-    }
-
-    public function testInvalidParamsThrowsException()
-    {
-        $this->expectException(\BadMethodCallException::class);
-        $this->client->method('account_info', [
-            'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
-            'not_a_param' => 'should cause an exception'
-        ]);
     }
 }

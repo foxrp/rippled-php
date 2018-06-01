@@ -2,7 +2,6 @@
 
 namespace XRPHP\Tests\Api\Anon\Account;
 
-use XRPHP\Exception\InvalidParameterException;
 use XRPHP\Tests\Api\MethodTestCase;
 
 class LedgerEntryMethodTest extends MethodTestCase
@@ -22,12 +21,4 @@ class LedgerEntryMethodTest extends MethodTestCase
 
         $this->assertTrue($res->isSuccess(), 'isSuccess is not true');
     }
-
-//    public function testInvalidParamsThrowsException()
-//    {
-//        $this->expectException(InvalidParameterException::class);
-//        $this->client->method('ledger_entry', [
-//            'not_a_param' => 'should cause an exception'
-//        ]);
-//    }
 }

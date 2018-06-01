@@ -22,12 +22,4 @@ class LedgerMethodTest extends MethodTestCase
         $this->assertTrue($res->isSuccess(), 'isSuccess is not true');
         $this->assertTrue($res->isValidated(), 'isValidated is not null');
     }
-
-    public function testInvalidParamsThrowsException()
-    {
-        $this->expectException(\BadMethodCallException::class);
-        $this->client->method('ledger', [
-            'not_a_param' => 'should cause an exception'
-        ]);
-    }
 }

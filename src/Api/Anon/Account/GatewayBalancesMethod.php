@@ -3,6 +3,7 @@
 namespace XRPHP\Api\Anon\Account;
 
 use XRPHP\Api\Method;
+use XRPHP\Exception\InvalidParameterException;
 
 /**
  * The gateway_balances command calculates the total balances issued by a given account, optionally excluding amounts
@@ -28,12 +29,12 @@ class GatewayBalancesMethod extends Method
      * Validates parameters.
      *
      * @param array|null $params
-     * @throws \BadMethodCallException
+     * @throws InvalidParameterException
      */
     public function validateParameters(array $params = null): void
     {
         if (!isset($params['account'])) {
-            throw new \BadMethodCallException('Missing parameter: account');
+            throw new InvalidParameterException('Missing parameter: account');
         }
     }
 }

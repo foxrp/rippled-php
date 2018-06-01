@@ -3,6 +3,7 @@
 namespace XRPHP\Api\Anon\Account;
 
 use XRPHP\Api\Method;
+use XRPHP\Exception\InvalidParameterException;
 
 /**
  * The account_tx method retrieves a list of transactions that involved the specified account.
@@ -31,12 +32,12 @@ class AccountTxMethod extends Method
      * Validates parameters.
      *
      * @param array|null $params
-     * @throws \BadMethodCallException
+     * @throws InvalidParameterException
      */
     public function validateParameters(array $params = null): void
     {
         if (!isset($params['account'])) {
-            throw new \BadMethodCallException('Missing parameter: account');
+            throw new InvalidParameterException('Missing parameter: account');
         }
 
         if (!isset($params['ledger_index_min'])
@@ -44,7 +45,7 @@ class AccountTxMethod extends Method
             && !isset($params['ledger_hash'])
             && !isset($params['ledger_index'])
         ) {
-            throw new \BadMethodCallException('At least one of the following parameters must be used: ledger_index, ledger_hash, ledger_index_min, ledger_index_max');
+            throw new InvalidParameterException('At least one of the following parameters must be used: ledger_index, ledger_hash, ledger_index_min, ledger_index_max');
         }
     }
 }

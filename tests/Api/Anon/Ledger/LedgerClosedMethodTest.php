@@ -21,12 +21,4 @@ class LedgerClosedMethodTest extends MethodTestCase
 
         $this->assertTrue($res->isSuccess(), 'isSuccess is not true');
     }
-
-    public function testInvalidParamsThrowsException()
-    {
-        $this->expectException(\BadMethodCallException::class);
-        $this->client->method('ledger_closed', [
-            'not_a_param' => 'should cause an exception'
-        ]);
-    }
 }
