@@ -52,7 +52,7 @@ class Client
             'ledger_closed' => \XRPHP\Api\Anon\Ledger\LedgerClosedMethod::class,
             'ledger_current' => \XRPHP\Api\Anon\Ledger\LedgerCurrentMethod::class,
             'ledger_data' => \XRPHP\Api\Anon\Ledger\LedgerDataMethod::class,
-            'ledger_entry' => \XRPHP\Api\Anon\Account\NorippleCheckMethod::class,
+            'ledger_entry' => \XRPHP\Api\Anon\Ledger\LedgerEntryMethod::class
         ];
     }
 

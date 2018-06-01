@@ -1,0 +1,19 @@
+{
+  "result": {
+    "index": "4F83A2CF7E70F77F79A307E6A472BFC2585B806A70833CCD1C26105BAE0D6E05",
+    "ledger_index": 8696234,
+    "node": {
+      "Account": "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+      "Balance": "13176802787",
+      "Flags": 0,
+      "LedgerEntryType": "AccountRoot",
+      "OwnerCount": 17,
+      "PreviousTxnID": "E5D0235A236F7CD162C1AB87A0325056AE61CFC63D92D1494AB5D826AAD0CDCA",
+      "PreviousTxnLgrSeq": 8554742,
+      "Sequence": 1406,
+      "index": "4F83A2CF7E70F77F79A307E6A472BFC2585B806A70833CCD1C26105BAE0D6E05"
+    },
+    "status": "success",
+    "validated": true
+  }
+}
