@@ -66,6 +66,11 @@ Simply pass the `method`, followed by an associative array of
 $res = $client->method('account_info', [
     'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
 ])->execute();
+
+if ($res->isSuccess()) {
+    $data = $res->getResult();
+    // do something with $data
+}
 ```
 
 Catch `InvalidParameterException` for messages specific to missing or invalid parameters.
