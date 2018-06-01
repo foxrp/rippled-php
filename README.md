@@ -55,7 +55,7 @@ $client = new \XRPHP\Connection([
 Note: Only the Account methods are complete. For now, you can call any method
 by following the `Direct Posting to the API` documentation later in this file. 
 
-The [API documentation]([rippled api](https://developers.ripple.com/rippled-api.html))
+The [API documentation](https://developers.ripple.com/rippled-api.html)
 clearly defines `method` and `params` for each method, along with `JSON-RPC` examples 
 and an explanation for each parameter.
 
