@@ -52,7 +52,13 @@ class Client
             'ledger_closed' => \XRPHP\Api\Anon\Ledger\LedgerClosedMethod::class,
             'ledger_current' => \XRPHP\Api\Anon\Ledger\LedgerCurrentMethod::class,
             'ledger_data' => \XRPHP\Api\Anon\Ledger\LedgerDataMethod::class,
-            'ledger_entry' => \XRPHP\Api\Anon\Ledger\LedgerEntryMethod::class
+            'ledger_entry' => \XRPHP\Api\Anon\Ledger\LedgerEntryMethod::class,
+            'sign' => \XRPHP\Api\Anon\Transaction\SignMethod::class,
+            'sign_for' => \XRPHP\Api\Anon\Transaction\SignForMethod::class,
+            'submit' => \XRPHP\Api\Anon\Transaction\SubmitMethod::class,
+            'submit_multisigned' => \XRPHP\Api\Anon\Transaction\SubmitMultisignedMethod::class,
+            'transaction_entry' => \XRPHP\Api\Anon\Transaction\TransactionEntryMethod::class,
+            'tx' => \XRPHP\Api\Anon\Transaction\TxMethod::class
         ];
     }
 
