@@ -1,6 +1,6 @@
 <?php
 
-namespace XRPHP\Api\Anon\Account;
+namespace XRPHP\Api\Anon\Transaction;
 
 use XRPHP\Api\Method;
 use XRPHP\Exception\InvalidParameterException;
