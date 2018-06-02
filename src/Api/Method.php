@@ -68,6 +68,75 @@ abstract class Method
     }
 
     /**
+     * Validates common parameters used among transaction signing methods.
+     *
+     * @param array $params
+     * @throws InvalidParameterException
+     */
+    public function validateSignParameters(array $params): void
+    {
+        if (!isset($params['tx_json'])) {
+            throw new InvalidParameterException('Missing parameter: tx_json');
+        }
+
+        if (isset($params['secret'])) {
+            if (isset(
+                $params['key_type'],
+                $params['seed'],
+                $params['seed_hex'],
+                $params['passphrase']
+            )) {
+                throw new InvalidParameterException('Parameters key_type cannot be used with secret');
+            }
+        }
+
+        if (isset($params['seed'])) {
+            if (!isset($params['key_type'])) {
+                throw new InvalidParameterException('key_type must be provided when using seed');
+            }
+            if (isset(
+                $params['secret'],
+                $params['seed_hex'],
+                $params['passphrase']
+            )) {
+                throw new InvalidParameterException('Parameters secret, seed_hex, or passphrase cannot be used with seed');
+            }
+        }
+
+        if (isset($params['seed_hex'])) {
+            if (!isset($params['key_type'])) {
+                throw new InvalidParameterException('key_type must be provided when using seed_hex');
+            }
+            if (isset(
+                $params['secret'],
+                $params['seed'],
+                $params['passphrase']
+            )) {
+                throw new InvalidParameterException('Parameters secret, seed, or passphrase cannot be used with seed_hex');
+            }
+        }
+
+        if (isset($params['passphrase'])) {
+            if (!isset($params['key_type'])) {
+                throw new InvalidParameterException('key_type must be provided when using passphrase');
+            }
+            if (isset(
+                $params['secret'],
+                $params['seed'],
+                $params['seed_hex']
+            )) {
+                throw new InvalidParameterException('Parameters secret, seed, or seed_hex cannot be used with passphrase');
+            }
+        }
+
+        if (isset($params['key_type'])) {
+            if (isset($params['secret'])) {
+                throw new InvalidParameterException('secret cannot be used with key_type');
+            }
+        }
+    }
+
+    /**
      * Executes the API call.
      *
      * @return MethodResponse
