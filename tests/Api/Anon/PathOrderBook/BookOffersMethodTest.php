@@ -28,6 +28,7 @@ class BookOffersMethodTest extends MethodTestCase
         $params = $this->getMinParams();
         unset($params['taker_gets']);
         $this->expectException(InvalidParameterException::class);
+        $this->expectExceptionMessageRegExp('/taker_gets/');
         $this->client->method('book_offers', $params);
     }
 
@@ -36,6 +37,7 @@ class BookOffersMethodTest extends MethodTestCase
         $params = $this->getMinParams();
         unset($params['taker_pays']);
         $this->expectException(InvalidParameterException::class);
+        $this->expectExceptionMessageRegExp('/taker_pays/');
         $this->client->method('book_offers', $params);
     }
 
