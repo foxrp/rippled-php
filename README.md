@@ -197,14 +197,13 @@ Note: This just applies to Phase 2 architecture. You can call any method with
   - [x] entry
   - [x] tx
   - [x] txHistory
-- path
+- path & order book
   - [x] find
   - [x] rippleFind
-- book
-  - [ ] offers
+  - [x] offers
 - channel
-  - [ ] authorize
-  - [ ] verify
+  - [x] authorize
+  - [x] verify
 - subscription
   - [ ] subscribe
   - [ ] unsubscribe
