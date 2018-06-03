@@ -5,7 +5,7 @@ namespace XRPHP\Tests\Api\Anon\Account;
 use XRPHP\Exception\InvalidParameterException;
 use XRPHP\Tests\Api\MethodTestCase;
 
-class PaymentChannelMethodTest extends MethodTestCase
+class ChannelAuthorizeMethodTest extends MethodTestCase
 {
     public function testSuccessMinParameters(): void
     {
