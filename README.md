@@ -190,16 +190,16 @@ Note: This just applies to Phase 2 architecture. You can call any method with
   - [x] ledger_data
   - [x] ledger_entry
 - transaction
-  - [ ] sign
-  - [ ] signFor
-  - [ ] submit
-  - [ ] submitMultisigned
-  - [ ] entry
-  - [ ] tx
-  - [ ] txHistory
+  - [x] sign
+  - [x] signFor
+  - [x] submit
+  - [x] submitMultisigned
+  - [x] entry
+  - [x] tx
+  - [x] txHistory
 - path
-  - [ ] find
-  - [ ] rippleFind
+  - [x] find
+  - [x] rippleFind
 - book
   - [ ] offers
 - channel
