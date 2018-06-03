@@ -61,7 +61,8 @@ class Client
             'tx' => \XRPHP\Api\Anon\Transaction\TxMethod::class,
             'book_offers' => \XRPHP\Api\Anon\PathOrderBook\BookOffersMethod::class,
             'ripple_path_find' => \XRPHP\Api\Anon\PathOrderBook\RipplePathFindMethod::class,
-            'channel_authorize' => \XRPHP\Api\Anon\PaymentChannel\ChannelAuthorizeMethod::class
+            'channel_authorize' => \XRPHP\Api\Anon\PaymentChannel\ChannelAuthorizeMethod::class,
+            'channel_verify' => \XRPHP\Api\Anon\PaymentChannel\ChannelVerifyMethod::class
         ];
     }
 
