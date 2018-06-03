@@ -58,7 +58,8 @@ class Client
             'submit' => \XRPHP\Api\Anon\Transaction\SubmitMethod::class,
             'submit_multisigned' => \XRPHP\Api\Anon\Transaction\SubmitMultisignedMethod::class,
             'transaction_entry' => \XRPHP\Api\Anon\Transaction\TransactionEntryMethod::class,
-            'tx' => \XRPHP\Api\Anon\Transaction\TxMethod::class
+            'tx' => \XRPHP\Api\Anon\Transaction\TxMethod::class,
+            'book_offers' => \XRPHP\Api\Anon\PathOrderBook\BookOffersMethod::class
         ];
     }
 
