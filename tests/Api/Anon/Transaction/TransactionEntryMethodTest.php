@@ -10,7 +10,7 @@ class TransactionEntryMethodTest extends MethodTestCase
     public function testSuccessMinParameters(): void
     {
         // Setup a successful response.
-        $this->setResponse($this->getJsonFromFile('transaction_entry_success'));
+        $this->setResponse($this->getJsonFromFile('generic_success'));
 
         $params = ['tx_hash' => 'test'];
         $method = $this->client->method('transaction_entry', $params);
