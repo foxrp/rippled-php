@@ -7,12 +7,16 @@ use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
 use XRPHP\Api\Method;
+use XRPHP\Transaction\TransactionManager;
 
 /**
  *  A rippled client.
  */
 class Client
 {
+    /** @var TransactionManager */
+    private $transactionManager;
+
     /** @var HttpClient */
     private $httpClient;
 
@@ -182,6 +186,19 @@ class Client
         );
 
         return $this->httpClient->sendRequest($request);
+    }
+
+    public function getTransactionManager(): TransactionManager
+    {
+        if ($this->transactionManager === null) {
+            $this->setTransactionManager(new TransactionManager($this));
+        }
+        return $this->transactionManager;
+    }
+
+    public function setTransactionManager(TransactionManager $transactionManager)
+    {
+        $this->transactionManager = $transactionManager;
     }
 
     public function getHttpClient(): HttpClient

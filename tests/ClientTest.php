@@ -169,4 +169,12 @@ class ClientTest extends TestCase
 
         $this->assertSame($expected, $json);
     }
+
+    public function testGetTransactionManager()
+    {
+        $client = new Client('https://example.com');
+        $tm = $client->getTransactionManager();
+
+        $this->assertEquals('XRPHP\Transaction\TransactionManager', get_class($tm));
+    }
 }
