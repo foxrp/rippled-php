@@ -7,12 +7,6 @@ use XRPHP\Tests\Api\MethodTestCase;
 
 class SubmitMethodTest extends MethodTestCase
 {
-    public function __construct()
-    {
-        $this->method = 'submit';
-        parent::__construct();
-    }
-
     public function testSuccessMinParameters(): void
     {
         // Setup a successful response.
