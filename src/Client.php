@@ -62,7 +62,10 @@ class Client
             'book_offers' => \XRPHP\Api\Anon\PathOrderBook\BookOffersMethod::class,
             'ripple_path_find' => \XRPHP\Api\Anon\PathOrderBook\RipplePathFindMethod::class,
             'channel_authorize' => \XRPHP\Api\Anon\PaymentChannel\ChannelAuthorizeMethod::class,
-            'channel_verify' => \XRPHP\Api\Anon\PaymentChannel\ChannelVerifyMethod::class
+            'channel_verify' => \XRPHP\Api\Anon\PaymentChannel\ChannelVerifyMethod::class,
+            'fee' => \XRPHP\Api\Anon\ServerInfo\FeeMethod::class,
+            'server_info' => \XRPHP\Api\Anon\ServerInfo\ServerInfoMethod::class,
+            'server_state' => \XRPHP\Api\Anon\ServerInfo\ServerStateMethod::class
         ];
     }
 
