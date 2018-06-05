@@ -1,0 +1,91 @@
+{
+  "result" : {
+    "state" : {
+      "build_version" : "0.30.1-rc3",
+      "complete_ledgers" : "18611104-18615037",
+      "io_latency_ms" : 1,
+      "last_close" : {
+        "converge_time" : 2001,
+        "proposers" : 5
+      },
+      "load" : {
+        "job_types" : [
+          {
+            "job_type" : "untrustedProposal",
+            "per_second" : 2
+          },
+          {
+            "in_progress" : 1,
+            "job_type" : "clientCommand"
+          },
+          {
+            "job_type" : "writeObjects",
+            "per_second" : 2
+          },
+          {
+            "avg_time" : 2,
+            "job_type" : "acceptLedger",
+            "peak_time" : 6
+          },
+          {
+            "job_type" : "trustedProposal",
+            "per_second" : 1
+          },
+          {
+            "job_type" : "peerCommand",
+            "per_second" : 80
+          },
+          {
+            "job_type" : "diskAccess",
+            "per_second" : 1
+          },
+          {
+            "job_type" : "WriteNode",
+            "per_second" : 91
+          }
+        ],
+        "threads" : 6
+      },
+      "load_base" : 256,
+      "load_factor" : 256000,
+      "peers" : 10,
+      "pubkey_node" : "n94UE1ukbq6pfZY9j54sv2A1UrEeHZXLbns3xK5CzU9NbNREytaa",
+      "pubkey_validator" : "n9KM73uq5BM3Fc6cxG3k5TruvbLc8Ffq17JZBmWC4uP4csL4rFST",
+      "server_state" : "proposing",
+      "state_accounting" : {
+        "connected" : {
+          "duration_us" : "150510079",
+          "transitions" : 1
+        },
+        "disconnected" : {
+          "duration_us" : "1827731",
+          "transitions" : 1
+        },
+        "full" : {
+          "duration_us" : "168241260112",
+          "transitions" : 1865
+        },
+        "syncing" : {
+          "duration_us" : "6294237352",
+          "transitions" : 1866
+        },
+        "tracking" : {
+          "duration_us" : "13035524",
+          "transitions" : 1866
+        }
+      },
+      "uptime" : 174693,
+      "validated_ledger" : {
+        "base_fee" : 10,
+        "close_time" : 507693592,
+        "hash" : "1C26209AE593C7EB5123363B3152D86514845FBD42CC6B05111D57F62D02B113",
+        "reserve_base" : 20000000,
+        "reserve_inc" : 5000000,
+        "seq" : 18615037
+      },
+      "validation_quorum" : 4,
+      "validator_list_expires" : 561139596
+    },
+    "status" : "success"
+  }
+}
