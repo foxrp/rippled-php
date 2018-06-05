@@ -2,6 +2,7 @@
 
 namespace XRPHP\Tests\Api\Anon\Transaction;
 
+use XRPHP\Exception\InvalidParameterException;
 use XRPHP\Tests\Api\SignMethodTestCase;
 
 class SignForMethodTest extends SignMethodTestCase
@@ -26,5 +27,11 @@ class SignForMethodTest extends SignMethodTestCase
         $res = $method->execute();
 
         $this->assertTrue($res->isSuccess(), 'isSuccess is not true');
+    }
+
+    public function testMissingAccountWithNullThrowsException()
+    {
+        $this->expectException(InvalidParameterException::class);
+        $this->client->method('sign_for', ['tx_json' => 'test']);
     }
 }
