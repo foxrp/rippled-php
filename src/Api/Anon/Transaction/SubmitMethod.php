@@ -40,8 +40,8 @@ class SubmitMethod extends Method
      */
     public function validateParameters(array $params = null): void
     {
-        if (!isset($params['tx_blob'])) {
-            throw new InvalidParameterException('Missing parameter: tx_blob');
+        if (!isset($params['tx_json']) && !isset($params['tx_blob'])) {
+            throw new InvalidParameterException('Missing parameter: tx_blob or tx_json');
         }
 
         // When using sign-and-submit mode, validate signing params.
