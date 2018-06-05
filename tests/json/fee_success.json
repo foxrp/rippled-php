@@ -1,0 +1,22 @@
+{
+  "result": {
+    "current_ledger_size": "56",
+    "current_queue_size": "11",
+    "drops": {
+      "base_fee": "10",
+      "median_fee": "10000",
+      "minimum_fee": "10",
+      "open_ledger_fee": "2653937"
+    },
+    "expected_ledger_size": "55",
+    "ledger_current_index": 26575101,
+    "levels": {
+      "median_level": "256000",
+      "minimum_level": "256",
+      "open_ledger_level": "67940792",
+      "reference_level": "256"
+    },
+    "max_queue_size": "1100",
+    "status": "success"
+  }
+}
