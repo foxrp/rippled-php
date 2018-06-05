@@ -80,13 +80,13 @@ abstract class Method
         }
 
         if (isset($params['secret'])) {
-            if (isset(
-                $params['key_type'],
-                $params['seed'],
-                $params['seed_hex'],
-                $params['passphrase']
-            )) {
-                throw new InvalidParameterException('Parameters key_type cannot be used with secret');
+            if (
+                isset($params['key_type'])
+                || isset($params['seed'])
+                || isset($params['seed_hex'])
+                || isset($params['passphrase'])
+            ) {
+                throw new InvalidParameterException('Parameters key_type, seed, seed_hex, or passphrase cannot be used with secret');
             }
         }
 
@@ -94,11 +94,11 @@ abstract class Method
             if (!isset($params['key_type'])) {
                 throw new InvalidParameterException('key_type must be provided when using seed');
             }
-            if (isset(
-                $params['secret'],
-                $params['seed_hex'],
-                $params['passphrase']
-            )) {
+            if (
+                isset($params['secret'])
+                || isset($params['seed_hex'])
+                || isset($params['passphrase'])
+            ) {
                 throw new InvalidParameterException('Parameters secret, seed_hex, or passphrase cannot be used with seed');
             }
         }
@@ -107,11 +107,11 @@ abstract class Method
             if (!isset($params['key_type'])) {
                 throw new InvalidParameterException('key_type must be provided when using seed_hex');
             }
-            if (isset(
-                $params['secret'],
-                $params['seed'],
-                $params['passphrase']
-            )) {
+            if (
+                isset($params['secret'])
+                || isset($params['seed'])
+                || isset($params['passphrase'])
+            ) {
                 throw new InvalidParameterException('Parameters secret, seed, or passphrase cannot be used with seed_hex');
             }
         }
@@ -119,19 +119,6 @@ abstract class Method
         if (isset($params['passphrase'])) {
             if (!isset($params['key_type'])) {
                 throw new InvalidParameterException('key_type must be provided when using passphrase');
-            }
-            if (isset(
-                $params['secret'],
-                $params['seed'],
-                $params['seed_hex']
-            )) {
-                throw new InvalidParameterException('Parameters secret, seed, or seed_hex cannot be used with passphrase');
-            }
-        }
-
-        if (isset($params['key_type'])) {
-            if (isset($params['secret'])) {
-                throw new InvalidParameterException('secret cannot be used with key_type');
             }
         }
     }
