@@ -7,9 +7,8 @@
 
 This is a PHP library for communicating with the XRP Ledger.
 
-It is recommended to use this library in conjuction with the 
-[API Documentation](https://developers.ripple.com/rippled-api.html)
-in the [Ripple Developer Portal](https://developers.ripple.com/).
+Refer to the [API Documentation](https://developers.ripple.com/rippled-api.html)
+in the [Ripple Developer Portal](https://developers.ripple.com/) for methods, parameters, and expected responses.
 
 ## Dependencies
 
