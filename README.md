@@ -12,8 +12,8 @@ in the [Ripple Developer Portal](https://developers.ripple.com/) for methods, pa
 
 ## Dependencies
 
-This project uses [HTTPLUG](http://docs.php-http.org/en/latest/index.html) which builds
-on top of [PSR-7](https://www.php-fig.org/psr/psr-7/) so the developer can select the
+This project implements [PSR-7](https://www.php-fig.org/psr/psr-7/) via the use of
+[HTTPLUG](http://docs.php-http.org/en/latest/index.html) so the developer can select the
 [HTTP Client](http://docs.php-http.org/en/latest/clients.html) best suited for their
 architecture.
 
