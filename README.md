@@ -4,8 +4,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/mikemilano/xrphp/badge.svg?branch=master)](https://coveralls.io/github/mikemilano/xrphp?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/matthiasnoback/badges/v/stable.png)](https://packagist.org/packages/matthiasnoback/badges)
 [![Latest Unstable Version](https://poser.pugx.org/matthiasnoback/badges/v/unstable.png)](https://packagist.org/packages/matthiasnoback/badges)
-![PHP from Travis config](https://img.shields.io/travis/php-v/symfony/symfony.svg)
-![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
+![PHP from Packagist](https://img.shields.io/packagist/php-v/symfony/symfony.svg)
+![license](https://img.shields.io/github/license/mashape/apistatus.svg)
+
 
 This is a PHP library for communicating with the XRP Ledger.
 
