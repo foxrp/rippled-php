@@ -1,6 +1,7 @@
-coverage/
-vendor/
-composer.lock
 .DS_Store
 .idea
 .php_cs.cache
+composer.lock
+tests/coverage
+tests/logs
+vendor/

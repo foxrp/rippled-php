@@ -1,1 +1,3 @@
-repo_token: 5ClAie3DNDsGWUUJXKzLTRGb8TgKPfg6h
+coverage_clover: tests/logs/clover.xml
+json_path: tests/logs/coveralls-upload.json
+service_name: travis-ci

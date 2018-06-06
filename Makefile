@@ -4,7 +4,7 @@ test:
 	vendor/bin/phpunit ${args}
 
 cov:
-	./vendor/bin/phpunit --coverage-html coverage
+	./vendor/bin/phpunit --coverage-html tests/coverage
 
 fix:
 	php-cs-fixer fix ./src/
