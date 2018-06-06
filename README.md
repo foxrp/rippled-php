@@ -160,12 +160,6 @@ Output of `print_r($res)`:
 )
 ```
 
-## Development Plan
-
-- [x] Phase 1: Provide an API wrapper which returns the raw data. (`$client->post('method', $params)`)
-- [ ] Phase 2: Extend `Method` for each public API method, providing validation, normalization of output, and tests.
-- [ ] Phase 3: Repeat phase 2 for the admin API.
-
 ## Testing
 
 As of now, only unit tests exists which mock the API so requests are not actually made.
