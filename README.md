@@ -48,10 +48,7 @@ $client = new \XRPHP\Client([
 ]);
 ```
 
-## Sending a Request (Incomplete)
-
-Note: Only the Account methods are complete. For now, you can call any method
-by following the `Direct Posting to the API` documentation later in this file. 
+## Sending a Request
 
 The [API documentation](https://developers.ripple.com/rippled-api.html)
 clearly defines `method` and `params` for each method, along with `JSON-RPC` examples 
