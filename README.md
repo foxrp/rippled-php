@@ -1,16 +1,14 @@
 # XRPHP - XRP Ledger Library
 
-> Note: This is under heavy development. It is usable, but read the docs closely if you
-are calling APIs that are not yet complete.
+[![Build Status](https://travis-ci.com/mikemilano/xrphp.svg?branch=master)](https://travis-ci.com/mikemilano/xrphp)
+![PHP from Travis config](https://img.shields.io/travis/php-v/symfony/symfony.svg)
+![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
 
-This is a PHP 7.1+ wrapper for communication with the XRP Ledger via JSON-RPC.
+This is a PHP library for communicating with the XRP Ledger.
 
 It is recommended to use this library in conjuction with the 
 [API Documentation](https://developers.ripple.com/rippled-api.html)
 in the [Ripple Developer Portal](https://developers.ripple.com/).
-
-Note: When `The API` is mentioned in this documentation, it refers to
-the [rippled/XRP Ledger API](https://developers.ripple.com/rippled-api.html).
 
 ## Dependencies
 
