@@ -10,11 +10,8 @@ matrix:
     - php: 7.1
     - php: 7.2
 
-before_install:
-- composer install --dev
-
 script:
 - ./vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
 
 after_script:
-- php vendor/bin/coveralls -v
+- ./vendor/bin/php-coveralls -v
