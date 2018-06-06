@@ -30,18 +30,18 @@ composer require php-http/guzzle6-adapter php-http/message
 composer require mikemilano/xrphp
 ```
 
-## Instantiating With Connection Data
+## Instantiating the Client
 
 You can either instantiate the client with a string, or an array.
 
 Create a `Client` object with a uri:
 ```php
-$client = new \XRPHP\Connection('https://s1.ripple.com:51234');
+$client = new \XRPHP\Client('https://s1.ripple.com:51234');
 ```
 
 Create a `Client` object with an array:
 ```php
-$client = new \XRPHP\Connection([
+$client = new \XRPHP\Client([
     'scheme' => 'https',
     'host' => 's1.ripple.com',
     'port' => 51234
@@ -118,7 +118,7 @@ You can check if the response was successful with: `$res->isSuccess()`.
 You can use the following method to access the API. It simply wraps the API without validating
 parameters or normalizing the response.
 
-```
+```php
 // Instantiate the client.
 $client = new \XRPHP\Client('https://s1.ripple.com:51234');
 
