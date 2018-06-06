@@ -69,7 +69,9 @@ class Client
             'channel_verify' => \XRPHP\Api\Anon\PaymentChannel\ChannelVerifyMethod::class,
             'fee' => \XRPHP\Api\Anon\ServerInfo\FeeMethod::class,
             'server_info' => \XRPHP\Api\Anon\ServerInfo\ServerInfoMethod::class,
-            'server_state' => \XRPHP\Api\Anon\ServerInfo\ServerStateMethod::class
+            'server_state' => \XRPHP\Api\Anon\ServerInfo\ServerStateMethod::class,
+            'ping' => \XRPHP\Api\Anon\Utility\PingMethod::class,
+            'random' => \XRPHP\Api\Anon\Utility\RandomMethod::class
         ];
     }
 
