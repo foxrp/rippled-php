@@ -35,12 +35,12 @@ composer require mikemilano/xrphp
 You can either instantiate the client with a string, or an array.
 
 Create a `Client` object with a uri:
-```
+```php
 $client = new \XRPHP\Connection('https://s1.ripple.com:51234');
 ```
 
 Create a `Client` object with an array:
-```
+```php
 $client = new \XRPHP\Connection([
     'scheme' => 'https',
     'host' => 's1.ripple.com',
@@ -60,7 +60,7 @@ and an explanation for each parameter.
 Simply pass the `method`, followed by an associative array of 
 `params` into the client.
 
-```
+```php
 $res = $client->method('account_info', [
     'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
 ])->execute();
@@ -72,7 +72,7 @@ if ($res->isSuccess()) {
 ```
 
 Catch `InvalidParameterException` for messages specific to missing or invalid parameters.
-```
+```php
 use XRPHP\Exception\InvalidParameterException;
 ...
 try {
@@ -166,69 +166,23 @@ Output of `print_r($res)`:
 - [ ] Phase 2: Extend `Method` for each public API method, providing validation, normalization of output, and tests.
 - [ ] Phase 3: Repeat phase 2 for the admin API.
 
-## Phase 2 Development Status
-
-Note: This just applies to Phase 2 architecture. You can call any method with 
-`$res = $client->method('method_name', $params)->execute()`.
-
-- account
-  - [x] account_channels
-  - [x] account_currencies
-  - [x] account_account_info
-  - [x] account_lines
-  - [x] account_objects
-  - [x] account_offers
-  - [x] account_tx
-  - [x] gateway_balances
-  - [x] noripple_check
-- ledger
-  - [x] ledger
-  - [x] ledger_closed
-  - [x] ledger_current
-  - [x] ledger_data
-  - [x] ledger_entry
-- transaction
-  - [x] sign
-  - [x] signFor
-  - [x] submit
-  - [x] submitMultisigned
-  - [x] entry
-  - [x] tx
-  - [x] txHistory
-- path & order book
-  - [x] find
-  - [x] rippleFind
-  - [x] offers
-- channel
-  - [x] authorize
-  - [x] verify
-- subscription
-  - [ ] subscribe
-  - [ ] unsubscribe
-- server
-  - [ ] fee
-  - [ ] info
-  - [ ] state
-- util
-  - [ ] json
-  - [ ] ping
-  - [ ] random
-
 ## Testing
 
 As of now, only unit tests exists which mock the API so requests are not actually made.
 
 Run the test suite:
+
 ```
 make test
 ```
 
 Run test coverage:
+
 ```
 make cov
 ```
 
-Once you run the coverage command, open `coverage/index.html` to view the report.
+Once you run the coverage command, open `tests/coverage/index.html` to view the report.
 
 ## Contribute
 
