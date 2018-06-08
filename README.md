@@ -123,7 +123,7 @@ $params = [
     'secret' => 'sxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 ];
 
-$res =$client->method('submit', $params)->execute();
+$res = $client->method('submit', $params)->execute();
 
 print_r($res->getResult());
 ```
