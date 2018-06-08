@@ -1,4 +1,4 @@
-# XRPHP - XRP Ledger Library
+# XRPHP
 
 [![Build Status](https://travis-ci.com/mikemilano/xrphp.svg?branch=master)](https://travis-ci.com/mikemilano/xrphp)
 [![Coverage Status](https://coveralls.io/repos/github/mikemilano/xrphp/badge.svg?branch=master)](https://coveralls.io/github/mikemilano/xrphp?branch=master)
@@ -6,6 +6,8 @@
 [![Latest Unstable Version](https://poser.pugx.org/matthiasnoback/badges/v/unstable.png)](https://packagist.org/packages/matthiasnoback/badges)
 
 This is a PHP library for communicating with the XRP Ledger.
+
+In addition wrapping the API, it validates method/transaction parameters normalizes the API responses.
 
 Refer to the [API Documentation](https://developers.ripple.com/rippled-api.html)
 in the [Ripple Developer Portal](https://developers.ripple.com/) for methods, parameters, and expected responses.
