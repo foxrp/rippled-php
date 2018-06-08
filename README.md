@@ -110,6 +110,47 @@ call when the value is `success`. While it is accessible in
 
 You can check if the response was successful with: `$res->isSuccess()`.
 
+## Payment Transaction Example
+
+```php
+$params = [
+    'tx_json' => [
+        'TransactionType' => 'Payment',
+        'Account' => 'rQBnNY5w5cALHbMaue2VefSzuBfxafwqp9',
+        'Destination' => 'rnQ1WgToG2RL9Fjmofif9ixYVgJTi6BLas',
+        'Amount' => '1000000'
+    ],
+    'secret' => 'sxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+];
+
+$res =$client->method('submit', $params)->execute();
+
+print_r($res->getResult());
+```
+
+Successful `result` from the code above:
+```
+(
+    [account_data] => Array
+        (
+            [Account] => rQBnNY5w5cALHbMaue2VefSzuBfxafwqp9
+            [Balance] => 9998999990
+            [Flags] => 0
+            [LedgerEntryType] => AccountRoot
+            [OwnerCount] => 0
+            [PreviousTxnID] => 5FFA62DB8A8E630741235B554A9335F938D00A309A0BB1F9714448EAFBDF843B
+            [PreviousTxnLgrSeq] => 9816994
+            [Sequence] => 2
+            [index] => 92A63B629125D5B5AE960D33A5EF7145D7D56C76690EC75ABDBA14031F44731E
+        )
+
+    [ledger_current_index] => 9817010
+    [status] => success
+    [validated] => 
+)
+```
+
+
 ## Direct Posting to the API
 
 You can use the following method to access the API. It simply wraps the API without validating
