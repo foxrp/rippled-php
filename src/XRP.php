@@ -6,18 +6,16 @@ use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
+use Psr\Http\Message\ResponseInterface;
 use XRPHP\Api\Method;
-use XRPHP\Transaction\TransactionManager;
+use XRPHP\Exception\InvalidParameterException;
 use XRPHP\TransactionType\TransactionTypeInterface;
 
 /**
  *  A rippled client.
  */
-class Client
+class XRP
 {
-    /** @var TransactionManager */
-    private $transactionManager;
-
     /** @var HttpClient */
     private $httpClient;
 
@@ -170,22 +168,32 @@ class Client
     public function getTransactionTypeClassMap(): array
     {
         return [
-            'Payment' => \XRPHP\Transaction\PaymentTransactionType::class
+            'Payment' => \XRPHP\TransactionType\PaymentTransactionType::class
         ];
     }
 
-    public function transaction(string $transactionType, array $params): ?TransactionTypeInterface
+    /**
+     * @param array $params
+     * @return null|TransactionTypeInterface
+     * @throws InvalidParameterException
+     */
+    public function getTx(array $params): string
     {
+        $transactionType = $params['TransactionType'] ?? null;
         $transactionMap = $this->getTransactionTypeClassMap();
-        if (isset($transactionMap[$transactionType])) {
-            return new $transactionMap[$transactionType]($this, $transactionType, $params);
+
+        if ($transactionType === null || !isset($transactionMap[$transactionType])) {
+            throw new InvalidParameterException(sprintf('Invalid transaction type: %s', $transactionType));
         }
-        throw new \BadMethodCallException(sprintf('Invalid transaction type: %s', $method));
+
+        /** @var TransactionTypeInterface $tt */
+        $tt = new $transactionMap[$transactionType]();
+        return $tt->getTx($params);
     }
 
     /**
      * @param string $method The API method string.
-     * @param array|null $params Associative array of method parameters.
+     * @param array|object|null $params Associative array of method parameters.
      * @return string Raw JSON formatted to send in the API body.
      */
     public function prepareJson(string $method, array $params = null): string
@@ -198,7 +206,13 @@ class Client
         return json_encode($request);
     }
 
-    public function post(string $method, array $params = null)
+    /**
+     * @param string $method
+     * @param array|null $params
+     * @return \Psr\Http\Message\ResponseInterface
+     * @throws \Http\Client\Exception
+     */
+    public function post(string $method, array $params = null): ResponseInterface
     {
         $json = $this->prepareJson($method, $params);
 
@@ -210,19 +224,6 @@ class Client
         );
 
         return $this->httpClient->sendRequest($request);
-    }
-
-    public function getTransactionManager(): TransactionManager
-    {
-        if ($this->transactionManager === null) {
-            $this->setTransactionManager(new TransactionManager($this));
-        }
-        return $this->transactionManager;
-    }
-
-    public function setTransactionManager(TransactionManager $transactionManager)
-    {
-        $this->transactionManager = $transactionManager;
     }
 
     public function getHttpClient(): HttpClient
