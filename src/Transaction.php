@@ -23,6 +23,12 @@ class Transaction
     /** @var array */
     private $tx;
 
+    /** @var string */
+    private $txBlob;
+
+    /** @var string */
+    private $txId;
+
     /**
      * Transaction constructor.
      * @param array|string $tx A transaction represented by JSON or an associative array.
@@ -49,7 +55,30 @@ class Transaction
      */
     public function sign(string $secret): void
     {
-        $cmd = sprintf("xrpsign '%s' '%s'", $secret, $this->getJson());
+        // Auto-fillable fields are required before signing.
+        $tx = $this->getTx();
+        $type = $this->getType();
+        $autofillableFields = $type->getAutofillableFields();
+
+        $missingAutofillableParams = [];
+        foreach ($autofillableFields as $key => $field) {
+            if (!isset($tx[$key])) {
+                $missingAutofillableParams[] = $key;
+            }
+        }
+
+        if (!empty($missingAutofillableParams)) {
+            throw new TransactionSignException(
+                sprintf(
+                    'Auto-fillable parameters must be set before signing: %s',
+                    implode(', ', $missingAutofillableParams)
+                )
+            );
+        }
+
+        // Build/run command.
+        $cmd = sprintf("xrpsign '%s' '%s'", $this->getJson(), $secret);
+
         $process = new Process($cmd);
 
         try {
@@ -60,7 +89,14 @@ class Transaction
             }
 
             $json = trim($process->getOutput());
-            $this->setJson($json);
+            $data = json_decode($json, true);
+            if (json_last_error()!== JSON_ERROR_NONE) {
+                throw new TransactionSignException('Unable to parse output of xrpsign command');
+            }
+
+            $this->setTx($data['tx']);
+            $this->setTxBlob($data['tx_blob']);
+            $this->setTxId($data['tx_id']);
             $this->setSigned(true);
 
         } catch(\Exception $e) {
@@ -125,9 +161,9 @@ class Transaction
     }
 
     /**
-     * @return string
+     * @return TransactionTypeInterface
      */
-    public function getType(): string
+    public function getType()
     {
         return $this->type;
     }
@@ -146,5 +182,37 @@ class Transaction
         $txType = $tx['TransactionType'];
         $class = TransactionTypeMap::FindClass($txType);
         $this->type = new $class($this, $txType, $tx);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTxBlob(): ?string
+    {
+        return $this->txBlob;
+    }
+
+    /**
+     * @param string $txBlob
+     */
+    public function setTxBlob(string $txBlob = null): void
+    {
+        $this->txBlob = $txBlob;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTxId(): ?string
+    {
+        return $this->txId;
+    }
+
+    /**
+     * @param string $txId
+     */
+    public function setTxId(string $txId = null): void
+    {
+        $this->txId = $txId;
     }
 }
