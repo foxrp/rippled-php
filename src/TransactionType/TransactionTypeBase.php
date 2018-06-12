@@ -86,14 +86,12 @@ abstract class TransactionTypeBase
 
         $this->addField(new TransactionField([
             'name' => 'SignPubKey',
-            'description' => 'Hex representation of the public key that corresponds to the private key used to sign this transaction.',
-            'autoFillable' => true
+            'description' => 'Hex representation of the public key that corresponds to the private key used to sign this transaction.'
         ]));
 
         $this->addField(new TransactionField([
             'name' => 'TxnSignature',
-            'description' => 'The signature that verifies this transaction as originating from the account it says it is from.',
-            'autoFillable' => true
+            'description' => 'The signature that verifies this transaction as originating from the account it says it is from.'
         ]));
     }
 
@@ -127,6 +125,21 @@ abstract class TransactionTypeBase
         foreach ($this->fields as $key => $field) {
             /** @var TransactionField $field */
             if ($field->isRequired() && !$field->isAutoFillable()) {
+                $fields[$key] = $field;
+            }
+        }
+        return $fields;
+    }
+
+    /**
+     * @return array Aufo-fillable fields.
+     */
+    public function getAutofillableFields(): array
+    {
+        $fields = [];
+        foreach ($this->fields as $key => $field) {
+            /** @var TransactionField $field */
+            if ($field->isAutoFillable()) {
                 $fields[$key] = $field;
             }
         }
