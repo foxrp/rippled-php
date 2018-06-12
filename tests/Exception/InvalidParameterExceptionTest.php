@@ -12,10 +12,4 @@ class InvalidParameterExceptionTest extends TestCase
         $obj = new InvalidParameterException('Foo', 1);
         $this->assertEquals('Foo', $obj->getMessage());
     }
-
-    public function testToString(): void
-    {
-        $obj = new InvalidParameterException('Foo', 1);
-        $this->assertEquals('XRPHP\Exception\InvalidParameterException: [1]: Foo'."\n", $obj->__toString());
-    }
 }

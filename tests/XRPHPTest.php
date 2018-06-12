@@ -2,13 +2,10 @@
 
 namespace XRPHP\Tests;
 
-use XRPHP\Api\Anon\Account\AccountInfoMethod;
 use XRPHP\Client;
 use PHPUnit\Framework\TestCase;
-use XRPHP\Exception\TransactionException;
-use XRPHP\Exception\TransactionTypeException;
 use XRPHP\Transaction;
-use XRPHP\XRP;
+use XRPHP\XRPHP;
 
 /**
 *  Test for Client class
@@ -20,11 +17,45 @@ class XRPHPTest extends TestCase
     */
     public function testIsThereAnySyntaxError(): void
     {
-        $xrphp = new XRP('https://example.com');
-        $this->assertTrue(is_object($xrphp));
-        unset($xrphp);
+        $xrphp = new XRPHP('https://example.com');
+        $this->assertInternalType('object', $xrphp);
     }
 
+    /**
+     * Check that no Client is created when no args are passed in.
+     */
+    public function testNoClientIsCreatedWithConstructor(): void
+    {
+        $xrphp = new XRPHP();
+        $client = $xrphp->getClient();
+        $this->assertNull($client);
+    }
+
+    /**
+     * Check that Client is created when config is passed in.
+     */
+    public function testClientIsCreatedWithConstructor(): void
+    {
+        $xrphp = new XRPHP('https://example.com');
+        $client = $xrphp->getClient();
+
+        $this->assertNotNull($client);
+        $this->assertEquals(\XRPHP\Client::class, \get_class($client));
+    }
+
+    public function testTransactionFactory()
+    {
+        $xrphp = new XRPHP('https://example.com');
+        $txJson = $this->getTx();
+
+        $transaction = $xrphp->transaction($txJson);
+        $this->assertEquals(\XRPHP\Transaction::class, \get_class($transaction));
+
+        $client = $transaction->getClient();
+        $this->assertEquals(\XRPHP\Client::class, \get_class($client));
+    }
+
+    /*
     public function testGetTx()
     {
         $xrp = new Client('https://s.altnet.rippletest.net:51234');
@@ -58,17 +89,17 @@ class XRPHPTest extends TestCase
             'TransactionType' => 'Payment',
             'Account' => 'rQBnNY5w5cALHbMaue2VefSzuBfxafwqp9',
             'Destination' => 'rnQ1WgToG2RL9Fjmofif9ixYVgJTi6BLas',
-            'Amount' => '1000000'
+            'Amount' => '1000000',
+            'Fee' => '0000012',
+            'Sequence' => 4
         ];
 
         $tx = new Transaction($params);
         $tx->sign('saEiBcexrULNPiPn5MD3GPJeiU55U');
-        $data = $tx->getTx();
-        $blob = $data['signedTransaction'];
 
         $xrp = new Client('https://s.altnet.rippletest.net:51234');
 
-        $method = $xrp->method('submit', ['tx_blob' => $blob]);
+        $method = $xrp->method('submit', ['tx_blob' => $tx->getTxBlob()]);
         $res = $method->execute();
 
         print_r($res);
@@ -86,4 +117,15 @@ class XRPHPTest extends TestCase
 
         print_r($res->getResult());
     }
+*/
+    private function getTx()
+    {
+        return [
+            'TransactionType' => 'Payment',
+            'Account' => 'rQBnNY5w5cALHbMaue2VefSzuBfxafwqp9',
+            'Destination' => 'rnQ1WgToG2RL9Fjmofif9ixYVgJTi6BLas',
+            'Amount' => '1000000'
+        ];
+    }
+
 }

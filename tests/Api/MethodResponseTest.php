@@ -46,15 +46,6 @@ class MethodResponseTest extends TestCase
         $this->assertSame($this->jsonSuccess, $obj->getRaw());
     }
 
-    public function testBadHeader(): void
-    {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessageRegExp('/^API response missing header: Content-Type/');
-
-        $badResponse = new Response(200, ['Content-Type' => 'text/html'], $this->jsonError);
-        new MethodResponse($badResponse);
-    }
-
     public function testInvalidJson()
     {
         $this->expectException(\Exception::class);
