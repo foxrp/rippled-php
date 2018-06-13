@@ -29,7 +29,7 @@ composer require php-http/guzzle6-adapter php-http/message
 ## Installation
 
 ```
-composer require mikemilano/xrphp
+composer require foxrp/xrphp
 ```
 
 ## QuickStart
