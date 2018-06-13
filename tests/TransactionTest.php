@@ -2,8 +2,8 @@
 
 namespace XRPHP\Tests;
 
-use XRPHP\Client;
 use PHPUnit\Framework\TestCase;
+use XRPHP\Client;
 use XRPHP\Transaction;
 use XRPHP\XRPHP;
 
@@ -82,20 +82,25 @@ class XRPHPTest extends TestCase
 
 
     }
+    */
 
     public function testSign()
     {
+        $client = new Client('https://s.altnet.rippletest.net:51234');
         $params = [
             'TransactionType' => 'Payment',
             'Account' => 'rQBnNY5w5cALHbMaue2VefSzuBfxafwqp9',
             'Destination' => 'rnQ1WgToG2RL9Fjmofif9ixYVgJTi6BLas',
             'Amount' => '1000000',
-            'Fee' => '0000012',
-            'Sequence' => 4
+            'Fee' => '0000012'
         ];
 
-        $tx = new Transaction($params);
+        $tx = new Transaction($params, $client);
         $tx->sign('saEiBcexrULNPiPn5MD3GPJeiU55U');
+
+        print_r($tx->getTx());
+
+        /*
 
         $xrp = new Client('https://s.altnet.rippletest.net:51234');
 
@@ -103,8 +108,10 @@ class XRPHPTest extends TestCase
         $res = $method->execute();
 
         print_r($res);
+        */
     }
 
+    /*
     public function testGetAccountInfo()
     {
         $xrp = new Client('https://s.altnet.rippletest.net:51234');

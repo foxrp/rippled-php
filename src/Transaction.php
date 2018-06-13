@@ -11,6 +11,9 @@ use XRPHP\TransactionType\TransactionTypeInterface;
 
 class Transaction
 {
+    /** @var Client */
+    private $client;
+
     /** @var string */
     private $json;
 
@@ -32,10 +35,11 @@ class Transaction
     /**
      * Transaction constructor.
      * @param array|string $tx A transaction represented by JSON or an associative array.
+     * @param Client|null $client
      * @throws TransactionException
      * @throws TransactionTypeException
      */
-    public function __construct($tx)
+    public function __construct($tx, Client $client = null)
     {
         // Dynamically set tx & json based on type.
         if (\is_array($tx)) {
@@ -47,16 +51,27 @@ class Transaction
         }
 
         $this->setType();
+
+        if ($client !== null) {
+            $this->setClient($client);
+        }
     }
 
     /**
      * @param string $secret
      * @throws TransactionSignException
      */
-    public function sign(string $secret): void
+    public function signLocal(string $secret): void
     {
         // Auto-fillable fields are required before signing.
         $tx = $this->getTx();
+
+        // Set sequence if it does not exist.
+        if (!isset($tx['Sequence']) || $tx['Sequence'] < 1) {
+            $tx['Sequence'] = $this->getAccountSequence($tx['Account']);
+            $this->setTx($tx);
+        }
+
         $type = $this->getType();
         $autofillableFields = $type->getAutofillableFields();
 
@@ -102,6 +117,30 @@ class Transaction
         } catch(\Exception $e) {
             throw new TransactionSignException('Unable to sign transaction: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * @throws TransactionSignException
+     */
+    public function getAccountSequence(string $account): int
+    {
+        $client = $this->getClient();
+        if ($client === null) {
+            throw new TransactionSignException('Client must be present if Sequence paramter does not exist');
+        }
+
+        $params = [
+            'account' => $account,
+        ];
+
+        $method = $client->method('account_info', $params);
+        $res = $method->execute();
+
+        if (!$res->isSuccess()) {
+            throw new TransactionSignException('Unable to retrieve sequence parameter');
+        }
+
+        return $res->getResult()['account_data']['Sequence'];
     }
 
     /**
@@ -161,7 +200,7 @@ class Transaction
     }
 
     /**
-     * @return TransactionTypeInterface
+     * @return mixed
      */
     public function getType()
     {
@@ -214,5 +253,21 @@ class Transaction
     public function setTxId(string $txId = null): void
     {
         $this->txId = $txId;
+    }
+
+    /**
+     * @return Client
+     */
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function setClient(Client $client = null): void
+    {
+        $this->client = $client;
     }
 }
