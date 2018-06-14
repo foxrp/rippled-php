@@ -1,8 +1,14 @@
 <?php
 
 namespace XRPHP\Transaction;
+use XRPHP\Exception\TransactionTypeFieldException;
 
-class Field
+/**
+ * Transaction type field.
+ *
+ * @package XRPHP\Transaction
+ */
+class TypeField
 {
     /** @var string */
     private $name;
@@ -19,10 +25,15 @@ class Field
     /** @var bool */
     private $autoFillable = false;
 
-    public function __construct(array $params = null)
+    /**
+     * TypeField constructor.
+     * @param array $params
+     * @throws TransactionTypeFieldException
+     */
+    public function __construct(array $params)
     {
-        if ($params === null) {
-            return;
+        if (!isset($params['name'])) {
+            throw new TransactionTypeFieldException(sprintf('Missing parameter: %s', 'name'));
         }
 
         foreach ($params as $key => $val) {
