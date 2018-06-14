@@ -96,5 +96,4 @@ class TransactionTest extends TestCase
             'Fee' => '000012'
         ];
     }
-
 }

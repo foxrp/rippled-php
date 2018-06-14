@@ -220,7 +220,7 @@ class Transaction
 
         $txType = $tx['TransactionType'];
         $class = TypeMap::FindClass($txType);
-        $this->type = new $class($this, $txType, $tx);
+        $this->type = new $class($tx);
     }
 
     /**
