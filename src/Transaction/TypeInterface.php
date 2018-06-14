@@ -1,8 +1,8 @@
 <?php
 
-namespace XRPHP\TransactionType;
+namespace XRPHP\Transaction;
 
-interface TransactionTypeInterface
+interface TypeInterface
 {
     public function addField(): array;
     public function addFields(): array;

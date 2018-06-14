@@ -6,8 +6,8 @@ use Symfony\Component\Process\Process;
 use XRPHP\Exception\TransactionException;
 use XRPHP\Exception\TransactionSignException;
 use XRPHP\Exception\TransactionTypeException;
-use XRPHP\TransactionType\TransactionTypeMap;
-use XRPHP\TransactionType\TransactionTypeInterface;
+use XRPHP\Transaction\TypeInterface;
+use XRPHP\Transaction\TypeMap;
 
 class Transaction
 {
@@ -20,7 +20,7 @@ class Transaction
     /** @var bool */
     private $signed;
 
-    /** @var TransactionTypeInterface */
+    /** @var TypeInterface */
     private $type;
 
     /** @var array */
@@ -208,8 +208,8 @@ class Transaction
     }
 
     /**
-     * @throws Exception\TransactionTypeException
      * @throws TransactionException
+     * @throws TransactionTypeException
      */
     public function setType(): void
     {
@@ -219,7 +219,7 @@ class Transaction
         }
 
         $txType = $tx['TransactionType'];
-        $class = TransactionTypeMap::FindClass($txType);
+        $class = TypeMap::FindClass($txType);
         $this->type = new $class($this, $txType, $tx);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace XRPHP\TransactionType;
+namespace XRPHP\Transaction;
 
 use XRPHP\Exception\TransactionTypeException;
 
@@ -9,7 +9,7 @@ use XRPHP\Exception\TransactionTypeException;
  *
  * @package XRPHP\Transaction
  */
-class TransactionTypeMap
+class TypeMap
 {
     /**
      * @param string $type
@@ -19,7 +19,7 @@ class TransactionTypeMap
     public static function FindClass(string $type): string
     {
         $classes = [
-            'Payment' => \XRPHP\TransactionType\PaymentTransactionType::class
+            'Payment' => \XRPHP\Transaction\Type\Payment::class
         ];
 
         if (!isset($classes[$type])) {

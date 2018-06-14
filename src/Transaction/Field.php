@@ -2,7 +2,7 @@
 
 namespace XRPHP\Transaction;
 
-class TransactionField
+class Field
 {
     /** @var string */
     private $name;

@@ -1,9 +1,9 @@
 <?php
 
-namespace XRPHP\TransactionType;
+namespace XRPHP\Transaction\Type;
 
 use XRPHP\Exception\InvalidParameterException;
-use XRPHP\Transaction\TransactionField;
+use XRPHP\Transaction\Field;
 
 /**
  * Base transaction class which each transaction extends.
@@ -11,7 +11,7 @@ use XRPHP\Transaction\TransactionField;
  * @link https://developers.ripple.com/transaction-common-fields.html Documentation for Transaction common.
  * @package XRPHP\TransactionType
  */
-abstract class TransactionTypeBase
+abstract class AbstractType
 {
     /** @var array */
     private $fields;
@@ -23,73 +23,73 @@ abstract class TransactionTypeBase
 
     public function setFields(): void
     {
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'TransactionType',
             'description' => 'The type of transaction.',
             'required' => true
         ]));
 
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'Account',
             'description' => 'The unique address of the account that initiated the transaction.',
             'required' => true
         ]));
 
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'Fee',
             'description' => 'Integer amount of XRP, in drops, to be destroyed as a cost for distributing this transaction to the network. Some transaction types have different minimum requirements.',
             'required' => true,
             'autoFillable' => true
         ]));
 
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'Sequence',
             'description' => 'The sequence number, relative to the initiating account, of this transaction. ',
             'required' => true,
             'autoFillable' => true
         ]));
 
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'AccountTxnID',
             'description' => 'Hash value identifying another transaction. If provided, this transaction is only valid if the sending account\'s previously-sent transaction matches the provided hash.',
         ]));
 
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'Flags',
             'description' => 'Set of bit-flags for this transaction.',
             'jsonType' => 'Unsigned Integer'
         ]));
 
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'LastLedgerSequence',
             'description' => 'Highest ledger index this transaction can appear in. Specifying this field places a strict upper limit on how long the transaction can wait to be validated or rejected.',
             'jsonType' => 'Number'
         ]));
 
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'Memos',
             'description' => 'Additional arbitrary information used to identify this transaction.',
             'jsonType' => 'Array'
         ]));
 
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'Signers',
             'description' => 'Array of objects that represent a multi-signature which authorizes this transaction.',
             'jsonType' => 'Array'
         ]));
 
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'SourceTag',
             'description' => 'Arbitrary integer used to identify the reason for this payment, or a sender on whose behalf this transaction is made.',
             'jsonType' => 'Unsigned Integer'
         ]));
 
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'SignPubKey',
             'description' => 'Hex representation of the public key that corresponds to the private key used to sign this transaction.'
         ]));
 
-        $this->addField(new TransactionField([
+        $this->addField(new Field([
             'name' => 'TxnSignature',
             'description' => 'The signature that verifies this transaction as originating from the account it says it is from.'
         ]));
@@ -98,9 +98,9 @@ abstract class TransactionTypeBase
     /**
      * Adds a fields to the transaction type.
      *
-     * @param TransactionField $field
+     * @param Field $field
      */
-    public function addField(TransactionField $field): void
+    public function addField(Field $field): void
     {
         $this->fields[$field->getName()] = $field;
     }
@@ -109,9 +109,9 @@ abstract class TransactionTypeBase
      * Retrieves a specific field by field name.
      *
      * @param string $name
-     * @return null|TransactionField
+     * @return null|Field
      */
-    public function getField(string $name): ?TransactionField
+    public function getField(string $name): ?Field
     {
         return $this->fields[$name] ?? null;
     }
@@ -123,7 +123,7 @@ abstract class TransactionTypeBase
     {
         $fields = [];
         foreach ($this->fields as $key => $field) {
-            /** @var TransactionField $field */
+            /** @var Field $field */
             if ($field->isRequired() && !$field->isAutoFillable()) {
                 $fields[$key] = $field;
             }
@@ -138,7 +138,7 @@ abstract class TransactionTypeBase
     {
         $fields = [];
         foreach ($this->fields as $key => $field) {
-            /** @var TransactionField $field */
+            /** @var Field $field */
             if ($field->isAutoFillable()) {
                 $fields[$key] = $field;
             }

@@ -1,10 +1,9 @@
 <?php
 
-namespace XRPHP\Tests;
+namespace XRPHP\Tests\Api\Anon\Transaction;
 
 use PHPUnit\Framework\TestCase;
 use XRPHP\Client;
-use XRPHP\Exception\TransactionSignException;
 use XRPHP\Transaction;
 
 /**
