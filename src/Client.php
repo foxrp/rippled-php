@@ -15,9 +15,6 @@ use XRPHP\TransactionType\TransactionTypeInterface;
  */
 class Client
 {
-    /** @var TransactionManager */
-    private $transactionManager;
-
     /** @var HttpClient */
     private $httpClient;
 
@@ -163,27 +160,6 @@ class Client
     }
 
     /**
-     * Maps Transaction types their related class names.
-     *
-     * @return array Associative array of transaction type classes keyed by transaction type string.
-     */
-    public function getTransactionTypeClassMap(): array
-    {
-        return [
-            'Payment' => \XRPHP\Transaction\PaymentTransactionType::class
-        ];
-    }
-
-    public function transaction(string $transactionType, array $params): ?TransactionTypeInterface
-    {
-        $transactionMap = $this->getTransactionTypeClassMap();
-        if (isset($transactionMap[$transactionType])) {
-            return new $transactionMap[$transactionType]($this, $transactionType, $params);
-        }
-        throw new \BadMethodCallException(sprintf('Invalid transaction type: %s', $method));
-    }
-
-    /**
      * @param string $method The API method string.
      * @param array|null $params Associative array of method parameters.
      * @return string Raw JSON formatted to send in the API body.
@@ -210,19 +186,6 @@ class Client
         );
 
         return $this->httpClient->sendRequest($request);
-    }
-
-    public function getTransactionManager(): TransactionManager
-    {
-        if ($this->transactionManager === null) {
-            $this->setTransactionManager(new TransactionManager($this));
-        }
-        return $this->transactionManager;
-    }
-
-    public function setTransactionManager(TransactionManager $transactionManager)
-    {
-        $this->transactionManager = $transactionManager;
     }
 
     public function getHttpClient(): HttpClient
