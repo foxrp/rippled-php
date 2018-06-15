@@ -3,6 +3,7 @@
 namespace XRPHP;
 
 use Symfony\Component\Process\Process;
+use XRPHP\Api\MethodResponse;
 use XRPHP\Exception\TransactionException;
 use XRPHP\Exception\TransactionSignException;
 use XRPHP\Exception\TransactionTypeException;
@@ -50,8 +51,6 @@ class Transaction
             throw new TransactionException('Invalid tx passed into the constructor; Must be a string or array');
         }
 
-        $this->setType();
-
         if ($client !== null) {
             $this->setClient($client);
         }
@@ -60,6 +59,8 @@ class Transaction
     /**
      * @param string $secret
      * @throws TransactionSignException
+     * @throws TransactionTypeException
+     * @throws TransactionException
      */
     public function signLocal(string $secret): void
     {
@@ -136,11 +137,46 @@ class Transaction
         $method = $client->method('account_info', $params);
         $res = $method->execute();
 
-        if (!$res->isSuccess()) {
-            throw new TransactionSignException('Unable to retrieve sequence parameter');
+        return $res->getResult()['account_data']['Sequence'];
+    }
+
+    /**
+     * Submit this transaction, signed or unsigned.
+     *
+     * @param string $secret Regular key.
+     * @param bool $signLocal Sign locally.
+     * @return MethodResponse|null
+     * @throws TransactionException
+     * @throws \Exception
+     */
+    public function submit(string $secret, bool $signLocal = true)
+    {
+        if ($this->getClient() === null) {
+            throw new TransactionException('Transaction must have a Client to submit');
         }
 
-        return $res->getResult()['account_data']['Sequence'];
+        $res = null;
+        if ($signLocal) {
+
+            $this->signLocal($secret);
+
+            $txBlob = $this->getTxBlob();
+            if ($txBlob === null) {
+                throw new TransactionException('Local sign was unsuccessful.');
+            }
+
+            // Submit signed transaction.
+            $res = $this->getClient()->method('submit', [
+                'tx_blob' => $txBlob
+            ])->execute();
+
+        } else {
+            // Submit unsigned transaction with secret.
+            // TODO: Handle sign-and-submit
+            $res = null;
+        }
+
+        return $res;
     }
 
     /**
@@ -154,6 +190,7 @@ class Transaction
     /**
      * @param string $json
      * @throws TransactionException
+     * @throws TransactionTypeException
      */
     public function setJson(string $json): void
     {
@@ -164,6 +201,7 @@ class Transaction
 
         $this->json = $json;
         $this->tx = $tx;
+        $this->setType();
     }
 
     /**
@@ -192,11 +230,14 @@ class Transaction
 
     /**
      * @param array $tx
+     * @throws TransactionException
+     * @throws TransactionTypeException
      */
     public function setTx(array $tx): void
     {
         $this->tx = $tx;
         $this->json = json_encode($tx);
+        $this->setType();
     }
 
     /**
