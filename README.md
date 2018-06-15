@@ -1,6 +1,6 @@
 # XRPHP
 
-[![Build Status](https://travis-ci.com/foxrp/xrphp.svg?branch=master)](https://travis-ci.com/foxrp/xrphp)
+[![Build Status](https://travis-ci.org/foxrp/xrphp.svg?branch=master)](https://travis-ci.org/foxrp/xrphp)
 [![Coverage Status](https://coveralls.io/repos/github/foxrp/xrphp/badge.svg?branch=master)](https://coveralls.io/github/foxrp/xrphp?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/matthiasnoback/badges/v/stable.png)](https://packagist.org/packages/matthiasnoback/badges)
 [![Latest Unstable Version](https://poser.pugx.org/matthiasnoback/badges/v/unstable.png)](https://packagist.org/packages/matthiasnoback/badges)
