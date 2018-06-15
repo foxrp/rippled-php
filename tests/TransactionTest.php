@@ -3,7 +3,6 @@
 namespace XRPHP\Tests;
 
 use GuzzleHttp\Psr7\Response;
-use XRPHP\Api\Anon\Account\AccountInfoMethod;
 use XRPHP\Client;
 use PHPUnit\Framework\TestCase;
 use XRPHP\Exception\TransactionException;
