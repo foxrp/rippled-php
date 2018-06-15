@@ -102,6 +102,11 @@ abstract class AbstractType
             'name' => 'TxnSignature',
             'description' => 'The signature that verifies this transaction as originating from the account it says it is from.'
         ]));
+
+        $this->addField(new TypeField([
+            'name' => 'SigningPubKey',
+            'description' => 'Public key the signature was signed with.'
+        ]));
     }
 
     /**
