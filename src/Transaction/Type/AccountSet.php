@@ -5,10 +5,9 @@ namespace XRPHP\Transaction\Type;
 use XRPHP\Transaction\TypeField;
 
 /**
- * A Payment transaction represents a transfer of value from one account to another. (Depending on the path taken, this
- * can involve additional exchanges of value, which occur atomically.)
+ * An AccountSet transaction modifies the properties of an account in the XRP Ledger.
  *
- * @link https://developers.ripple.com/payment.html Payment transaction type documentation.
+ * @link https://developers.ripple.com/accountset.html AccountSet transaction type documentation.
  * @package XRPHP\TransactionType
  */
 class AccountSet extends AbstractType
