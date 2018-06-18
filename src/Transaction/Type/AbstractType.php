@@ -18,9 +18,9 @@ abstract class AbstractType
 
     /**
      * AbstractType constructor.
-     *
      * @param array|null $params
      * @throws InvalidParameterException
+     * @throws \XRPHP\Exception\TransactionTypeFieldException
      */
     public function __construct(array $params = null)
     {
@@ -30,8 +30,13 @@ abstract class AbstractType
         }
     }
 
+    /**
+     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     */
     public function setFields(): void
     {
+        // GENERATED CODE FROM bin/generate.php types
+        // BEGIN GENERATED
         $this->addField(new TypeField([
             'name' => 'TransactionType',
             'description' => 'The type of transaction.',
@@ -107,6 +112,7 @@ abstract class AbstractType
             'name' => 'SigningPubKey',
             'description' => 'Public key the signature was signed with.'
         ]));
+        // END GENERATED
     }
 
     /**
