@@ -38,80 +38,77 @@ abstract class AbstractType
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new TypeField([
-            'name' => 'TransactionType',
-            'description' => 'The type of transaction.',
-            'required' => true
+            'name' => 'Account',
+            'required' => true,
+            'autoFillable' => false
         ]));
 
         $this->addField(new TypeField([
-            'name' => 'Account',
-            'description' => 'The unique address of the account that initiated the transaction.',
-            'required' => true
+            'name' => 'TransactionType',
+            'required' => true,
+            'autoFillable' => false
         ]));
 
         $this->addField(new TypeField([
             'name' => 'Fee',
-            'description' => 'Integer amount of XRP, in drops, to be destroyed as a cost for distributing this transaction to the network. Some transaction types have different minimum requirements.',
             'required' => true,
             'autoFillable' => true
         ]));
 
         $this->addField(new TypeField([
             'name' => 'Sequence',
-            'description' => 'The sequence number, relative to the initiating account, of this transaction. ',
             'required' => true,
             'autoFillable' => true
         ]));
 
         $this->addField(new TypeField([
             'name' => 'AccountTxnID',
-            'description' => 'Hash value identifying another transaction. If provided, this transaction is only valid if the sending account\'s previously-sent transaction matches the provided hash.',
+            'required' => false,
+            'autoFillable' => false
         ]));
 
         $this->addField(new TypeField([
             'name' => 'Flags',
-            'description' => 'Set of bit-flags for this transaction.',
-            'jsonType' => 'Unsigned Integer'
+            'required' => false,
+            'autoFillable' => false
         ]));
 
         $this->addField(new TypeField([
             'name' => 'LastLedgerSequence',
-            'description' => 'Highest ledger index this transaction can appear in. Specifying this field places a strict upper limit on how long the transaction can wait to be validated or rejected.',
-            'jsonType' => 'Number'
+            'required' => false,
+            'autoFillable' => false
         ]));
 
         $this->addField(new TypeField([
             'name' => 'Memos',
-            'description' => 'Additional arbitrary information used to identify this transaction.',
-            'jsonType' => 'Array'
+            'required' => false,
+            'autoFillable' => false
         ]));
 
         $this->addField(new TypeField([
             'name' => 'Signers',
-            'description' => 'Array of objects that represent a multi-signature which authorizes this transaction.',
-            'jsonType' => 'Array'
+            'required' => false,
+            'autoFillable' => false
         ]));
 
         $this->addField(new TypeField([
             'name' => 'SourceTag',
-            'description' => 'Arbitrary integer used to identify the reason for this payment, or a sender on whose behalf this transaction is made.',
-            'jsonType' => 'Unsigned Integer'
-        ]));
-
-        $this->addField(new TypeField([
-            'name' => 'SignPubKey',
-            'description' => 'Hex representation of the public key that corresponds to the private key used to sign this transaction.'
-        ]));
-
-        $this->addField(new TypeField([
-            'name' => 'TxnSignature',
-            'description' => 'The signature that verifies this transaction as originating from the account it says it is from.'
+            'required' => false,
+            'autoFillable' => false
         ]));
 
         $this->addField(new TypeField([
             'name' => 'SigningPubKey',
-            'description' => 'Public key the signature was signed with.'
+            'required' => false,
+            'autoFillable' => false
         ]));
+
+        $this->addField(new TypeField([
+            'name' => 'TxnSignature',
+            'required' => false,
+            'autoFillable' => false
+        ]));
+
         // END GENERATED
     }
 
