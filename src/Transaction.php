@@ -73,25 +73,6 @@ class Transaction
             $this->setTx($tx);
         }
 
-        $type = $this->getType();
-        $autofillableFields = $type->getAutofillableFields();
-
-        $missingAutofillableParams = [];
-        foreach ($autofillableFields as $key => $field) {
-            if (!isset($tx[$key])) {
-                $missingAutofillableParams[] = $key;
-            }
-        }
-
-        if (!empty($missingAutofillableParams)) {
-            throw new TransactionSignException(
-                sprintf(
-                    'Auto-fillable parameters must be set before signing: %s',
-                    implode(', ', $missingAutofillableParams)
-                )
-            );
-        }
-
         // Build/run command.
         $cmd = sprintf("xrpsign '%s' '%s'", $this->getJson(), $secret);
 
