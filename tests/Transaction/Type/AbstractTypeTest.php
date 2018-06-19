@@ -47,7 +47,7 @@ class AbstractTypeTest extends TestCase
     {
         $type = $this->tx->getType();
         $fields = $type->getAutofillableFields();
-        $this->assertCount(2, $fields);
+        $this->assertCount(3, $fields);
     }
 
     /**

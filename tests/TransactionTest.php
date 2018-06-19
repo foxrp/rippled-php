@@ -120,21 +120,6 @@ class TransactionTest extends TestCase
     }
 
     /**
-     * Check localSign throws exception when missing autofill param Fee
-     */
-    public function testSignLocalWithMissingFeeThrowsException()
-    {
-        $this->expectException(TransactionSignException::class);
-        $this->expectExceptionMessageRegExp('/Fee/');
-
-        $tx = $this->getTx();
-        unset($tx['Fee']);
-
-        $transaction = new Transaction($tx, $this->client);
-        $transaction->signLocal('saEiBcexrULNPiPn5MD3GPJeiU55U');
-    }
-
-    /**
      * Check account sequence is returned.
      */
     public function testGetAccountSequence()
