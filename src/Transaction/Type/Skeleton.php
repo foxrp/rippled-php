@@ -5,8 +5,7 @@ namespace XRPHP\Transaction\Type;
 use XRPHP\Transaction\TypeField;
 
 /**
- * @link %reference% Skeleton transaction type documentation.
- * @package XRPHP\TransactionType
+ * This will be replaced.
  */
 class Skeleton extends AbstractType
 {
@@ -20,6 +19,7 @@ class Skeleton extends AbstractType
     {
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
+        // This will be replaced
         // END GENERATED
 
         parent::__construct($params);
