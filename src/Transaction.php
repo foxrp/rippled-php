@@ -8,7 +8,6 @@ use XRPHP\Exception\TransactionException;
 use XRPHP\Exception\TransactionSignException;
 use XRPHP\Exception\TransactionTypeException;
 use XRPHP\Transaction\TypeInterface;
-use XRPHP\Transaction\TypeMap;
 
 class Transaction
 {
@@ -54,6 +53,20 @@ class Transaction
         if ($client !== null) {
             $this->setClient($client);
         }
+    }
+
+    /**
+     * @param string $type
+     * @return string
+     * @throws TransactionTypeException
+     */
+    public function findClass(string $type): string
+    {
+        $class = '\\XRPHP\\Transaction\\Type\\' . $type;
+        if (!class_exists($class)) {
+            throw new TransactionTypeException(sprintf('No class found for transaction type %s', $type));
+        }
+        return $class;
     }
 
     /**
@@ -241,7 +254,7 @@ class Transaction
         }
 
         $txType = $tx['TransactionType'];
-        $class = TypeMap::FindClass($txType);
+        $class = $this->findClass($txType);
         $this->type = new $class($tx);
     }
 
