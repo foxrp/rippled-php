@@ -27,7 +27,8 @@
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/message": "^1.6",
         "php-coveralls/php-coveralls": "^2.1",
-        "symfony/console": "^4.1"
+        "symfony/console": "^4.1",
+        "symfony/filesystem": "^4.1"
     },
 	"autoload": {
         "psr-4": {
