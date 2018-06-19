@@ -9,7 +9,6 @@ use XRPHP\Transaction\TypeField;
  * Base transaction class which each transaction extends.
  *
  * @link https://developers.ripple.com/transaction-common-fields.html Documentation for Transaction common.
- * @package XRPHP\TransactionType
  */
 abstract class AbstractType
 {
