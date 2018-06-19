@@ -4,11 +4,11 @@ namespace XRPHP\Transaction;
 
 interface TypeInterface
 {
-    public function addField(): array;
-    public function addFields(): array;
-    public function getField(): array;
+    public function setFields(): void;
+    public function addField(TypeField $field): void;
+    public function getField(string $name): ?TypeField;
+    public function getFields(): ?array;
     public function getRequiredFields(): array;
-    public function validateParams(): void;
-    public function getJson(array $params): string;
-    public function getTx($params): string;
+    public function getAutofillableFields(): array;
+    public function validateParams(array $params): void;
 }

@@ -4,13 +4,14 @@ namespace XRPHP\Transaction\Type;
 
 use XRPHP\Exception\InvalidParameterException;
 use XRPHP\Transaction\TypeField;
+use XRPHP\Transaction\TypeInterface;
 
 /**
  * Base transaction class which each transaction extends.
  *
  * @link https://developers.ripple.com/transaction-common-fields.html Documentation for Transaction common.
  */
-abstract class AbstractType
+abstract class AbstractType implements TypeInterface
 {
     /** @var array */
     private $fields;
@@ -130,6 +131,16 @@ abstract class AbstractType
     public function getField(string $name): ?TypeField
     {
         return $this->fields[$name] ?? null;
+    }
+
+    /**
+     * Retrieves all fields
+     *
+     * @return null|array
+     */
+    public function getFields(): ?array
+    {
+        return $this->fields;
     }
 
     /**
