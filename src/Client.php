@@ -7,8 +7,6 @@ use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
 use XRPHP\Api\Method;
-use XRPHP\Transaction\TransactionManager;
-use XRPHP\TransactionType\TransactionTypeInterface;
 
 /**
  *  A rippled client.
