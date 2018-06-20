@@ -5,6 +5,8 @@
 [![Latest Stable Version](https://poser.pugx.org/matthiasnoback/badges/v/stable.png)](https://packagist.org/packages/matthiasnoback/badges)
 [![Latest Unstable Version](https://poser.pugx.org/matthiasnoback/badges/v/unstable.png)](https://packagist.org/packages/matthiasnoback/badges)
 
+#### Warning: This is under heavy development. It should be usable by early July, 2018.
+
 This is a PHP library for communicating with the XRP Ledger.
 
 In addition wrapping the API, it validates method/transaction parameters normalizes the API responses.
