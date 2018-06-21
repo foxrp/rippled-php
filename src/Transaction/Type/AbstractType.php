@@ -113,34 +113,34 @@ abstract class AbstractType implements TypeInterface
     }
 
     /**
-     * Adds a fields to the transaction type.
-     *
-     * @param TypeField $field
+     * @param array $params
+     * @throws InvalidParameterException
      */
-    public function addField(TypeField $field): void
+    public function validateParams(array $params): void
     {
-        $this->fields[$field->getName()] = $field;
-    }
+        // Check for missing parameters.
+        $reqFields = $this->getRequiredFields();
+        $missingParams = [];
+        foreach ($reqFields as $key => $field) {
+            if (!isset($params[$key])) {
+                $missingParams[] = $key;
+            }
+        }
+        if (!empty($missingParams)) {
+            throw new InvalidParameterException(sprintf('Missing parameters: %s',
+                    implode(', ', $missingParams))
+            );
+        }
 
-    /**
-     * Retrieves a specific field by field name.
-     *
-     * @param string $name
-     * @return null|TypeField
-     */
-    public function getField(string $name): ?TypeField
-    {
-        return $this->fields[$name] ?? null;
-    }
-
-    /**
-     * Retrieves all fields
-     *
-     * @return null|array
-     */
-    public function getFields(): ?array
-    {
-        return $this->fields;
+        // Check for invalid parameters.
+        $paramKeys = array_keys($params);
+        $fieldKeys = array_keys($this->fields);
+        $invalidParams = array_diff($paramKeys, $fieldKeys);
+        if (!empty($invalidParams)) {
+            throw new InvalidParameterException(sprintf('Invalid parameters submitted: %s',
+                    implode(', ', $invalidParams))
+            );
+        }
     }
 
     /**
@@ -174,33 +174,33 @@ abstract class AbstractType implements TypeInterface
     }
 
     /**
-     * @param array $params
-     * @throws InvalidParameterException
+     * Retrieves all fields
+     *
+     * @return null|array
      */
-    public function validateParams(array $params): void
+    public function getFields(): ?array
     {
-        // Check for missing parameters.
-        $reqFields = $this->getRequiredFields();
-        $missingParams = [];
-        foreach ($reqFields as $key => $field) {
-            if (!isset($params[$key])) {
-                $missingParams[] = $key;
-            }
-        }
-        if (!empty($missingParams)) {
-            throw new InvalidParameterException(sprintf('Missing parameters: %s',
-                implode(', ', $missingParams))
-            );
-        }
+        return $this->fields;
+    }
 
-        // Check for invalid parameters.
-        $paramKeys = array_keys($params);
-        $fieldKeys = array_keys($this->fields);
-        $invalidParams = array_diff($paramKeys, $fieldKeys);
-        if (!empty($invalidParams)) {
-            throw new InvalidParameterException(sprintf('Invalid parameters submitted: %s',
-                implode(', ', $invalidParams))
-            );
-        }
+    /**
+     * Adds a fields to the transaction type.
+     *
+     * @param TypeField $field
+     */
+    public function addField(TypeField $field): void
+    {
+        $this->fields[$field->getName()] = $field;
+    }
+
+    /**
+     * Retrieves a specific field by field name.
+     *
+     * @param string $name
+     * @return null|TypeField
+     */
+    public function getField(string $name): ?TypeField
+    {
+        return $this->fields[$name] ?? null;
     }
 }
