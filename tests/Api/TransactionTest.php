@@ -1,13 +1,13 @@
 <?php
 
-namespace XRPHP\Tests;
+namespace XRPHP\Tests\Api;
 
 use GuzzleHttp\Psr7\Response;
 use XRPHP\Client;
 use PHPUnit\Framework\TestCase;
 use XRPHP\Exception\TransactionException;
 use XRPHP\Exception\TransactionSignException;
-use XRPHP\Transaction;
+use XRPHP\Api\Transaction;
 
 /**
 *  Test for Client class
@@ -216,6 +216,6 @@ class TransactionTest extends TestCase
 
     private function getAccountInfoJson()
     {
-        return file_get_contents(__dir__.'/json/account_info_success.json');
+        return file_get_contents(__dir__.'/../json/account_info_success.json');
     }
 }

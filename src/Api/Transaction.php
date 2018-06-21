@@ -1,9 +1,9 @@
 <?php
 
-namespace XRPHP;
+namespace XRPHP\Api;
 
 use Symfony\Component\Process\Process;
-use XRPHP\Api\MethodResponse;
+use XRPHP\Client;
 use XRPHP\Exception\TransactionException;
 use XRPHP\Exception\TransactionSignException;
 use XRPHP\Exception\TransactionTypeException;
@@ -128,9 +128,7 @@ class Transaction
             'account' => $account,
         ];
 
-        $method = $client->method('account_info', $params);
-        $res = $method->execute();
-
+        $res = $client->send('account_info', $params);
         return $res->getResult()['account_data']['Sequence'];
     }
 
@@ -139,7 +137,7 @@ class Transaction
      *
      * @param string $secret Regular key.
      * @param bool $signLocal Sign locally.
-     * @return MethodResponse|null
+     * @return Response|null
      * @throws TransactionException
      * @throws \Exception
      */

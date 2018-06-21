@@ -5,7 +5,7 @@ namespace XRPHP\Tests\Api;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use XRPHP\Api\Method;
-use XRPHP\Api\MethodResponse;
+use XRPHP\Api\Response;
 use XRPHP\Client;
 
 class MethodResponseTest extends TestCase
@@ -36,13 +36,13 @@ class MethodResponseTest extends TestCase
      */
     public function testIsThereAnySyntaxError(): void
     {
-        $obj = new MethodResponse($this->responseSuccess);
+        $obj = new Response($this->responseSuccess);
         $this->assertTrue(is_object($obj));
     }
 
     public function testSetRaw(): void
     {
-        $obj = new MethodResponse($this->responseSuccess);
+        $obj = new Response($this->responseSuccess);
         $this->assertSame($this->jsonSuccess, $obj->getRaw());
     }
 
@@ -52,7 +52,7 @@ class MethodResponseTest extends TestCase
         $this->expectExceptionMessageRegExp('/^Unable to parse/');
 
         $badResponse = new Response(200, ['Content-Type' => 'application/json'], "{");
-        new MethodResponse($badResponse);
+        new Response($badResponse);
     }
 
     public function testNoResult()
@@ -61,7 +61,7 @@ class MethodResponseTest extends TestCase
         $this->expectExceptionMessageRegExp('/missing result data/');
 
         $badResponse = new Response(200, ['Content-Type' => 'application/json'], "{}");
-        $obj = new MethodResponse($badResponse);
+        $obj = new Response($badResponse);
 
         $this->assertTrue(is_object($obj));
     }
@@ -71,13 +71,13 @@ class MethodResponseTest extends TestCase
         $data = json_decode($this->jsonSuccess, true);
         $expectedResult = $data['result'];
 
-        $obj = new MethodResponse($this->responseSuccess);
+        $obj = new Response($this->responseSuccess);
         $this->assertSame($expectedResult, $obj->getResult());
     }
 
     public function testHasError(): void
     {
-        $obj = new MethodResponse($this->responseError);
+        $obj = new Response($this->responseError);
         $this->assertTrue($obj->hasError());
         $this->assertEquals(19, $obj->getErrorCode());
         $this->assertEquals('Account not found.', $obj->getErrorMessage());
