@@ -26,45 +26,75 @@ $client = new \XRPHP\Client([
 ]);
 ```
 
-## Calling API Methods
+## Sending Requests
 
-The [API documentation](https://developers.ripple.com/rippled-api.html)
-clearly defines `method` and `params` for each method, along with `JSON-RPC` examples 
-and an explanation for each parameter.
+The [API documentation](https://developers.ripple.com/rippled-api.html) clearly defines method name and supported 
+parameters, along with `JSON-RPC` examples for request and responses.
 
-Simply pass the `method`, followed by an associative array of 
-`params` into the client.
+Use the documentation to craft your parameters and pass them in as an associative array.
 
 ```php
-$res = $client->method('account_info', [
+$response = $client->send('account_info', [
     'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
-])->execute();
+]);
 
-if ($res->isSuccess()) {
-    $data = $res->getResult();
-    // do something with $data
+if ($response->isSuccess()) {
+    // getResult() returns the associative array defined as the result in the API documentation.
+    $data = $response->getResult();
 }
 ```
+
+## Other Ways to Send Requests
+
+If you need more control, you may create requests separately.
+
+```php
+// Using request() on the client object
+$request = $client->request('account_info', [
+    'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
+]);
+
+// Or instantiating Request manually
+$request = new Request('account_info', [
+   'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
+], $client);
+
+
+// Then send it for a response.
+$response = $request->send();
+```
+
+## Exception Handling
 
 Catch `InvalidParameterException` for messages specific to missing or invalid parameters.
 ```php
 use XRPHP\Exception\InvalidParameterException;
 ...
 try {
-    $res = $client->method('account_info', [
+    $response = $client->send('account_info', [
         'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
-    ])->execute();
+    ]);
 } catch (InvalidParameterException $e) {
-    $param_error = $e->getMessage();
+    // Catch validation errors that occur before the request is sent.
+    // i.e. missing required params, unrecognized params, etc.
+    $error = $e->getMessage();
+} catch (ResponseErrorException $e) {
+    // Catch errors sent back from the API.
+    $error = $e->getMessage();
 }
 ```
 
-Exceptions will be thrown when calling a method with invalid, or missing
-parameters are included in a request, at the time the method
-is instantiated.
+`InvalidParameterException` is thrown when the library detects an issue with the parameters, before sending the request
+to the server. This includes errors such as:
+- Require parameters that are missing
+- Unrecognized parameters
+- Range issues such as when a value exceeds the maximum allowed
 
+`ResponseErrorException` is thrown after the request is sent, as part of the response from the server. These errors may
+include [Universal Errors](https://developers.ripple.com/error-formatting.html#universal-errors) or errors which are
+method specific.
 
-## Response Object
+## The Response Object
 
 The API provides responses in a JSON format. The `result` property
 of the of the JSON object contains the data you are looking for.
