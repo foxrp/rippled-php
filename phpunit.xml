@@ -13,7 +13,8 @@
 		<whitelist>
 			<directory>./src/</directory>
 			<exclude>
-				<file>src/Command</file>
+				<file>src/Command/GenerateMethodsCommand.php</file>
+				<file>src/Command/GenerateTypesCommand.php</file>
 			</exclude>
 		</whitelist>
 	</filter>
