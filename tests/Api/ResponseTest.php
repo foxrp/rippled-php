@@ -34,13 +34,13 @@ class ResponseTest extends TestCase
      */
     public function testIsThereAnySyntaxError(): void
     {
-        $obj = new GuzzleResponse($this->responseSuccess);
+        $obj = new Response($this->responseSuccess);
         $this->assertTrue(is_object($obj));
     }
 
     public function testSetRaw(): void
     {
-        $obj = new GuzzleResponse($this->responseSuccess);
+        $obj = new Response($this->responseSuccess);
         $this->assertSame($this->jsonSuccess, $obj->getRaw());
     }
 

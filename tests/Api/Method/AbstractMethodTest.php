@@ -9,5 +9,9 @@ use PHPUnit\Framework\TestCase;
 */
 class AbstractMethodTest extends TestCase
 {
+    public function testSomething()
+    {
+        $this->assertTrue(true);
+    }
 
 }

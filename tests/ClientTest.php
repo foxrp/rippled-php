@@ -126,22 +126,6 @@ class ClientTest extends TestCase
         unset($client);
     }
 
-    public function testMethodSuccess()
-    {
-        $client = new Client('https://example.com');
-        $method = $client->method('account_info', ['account' => '123']);
-
-        $this->assertEquals(AccountInfoMethod::class, \get_class($method));
-    }
-
-    public function testMethodInvalidMethod()
-    {
-        $this->expectException(\BadMethodCallException::class);
-
-        $client = new Client('https://example.com');
-        $client->method('invalid_method', ['account' => '123']);
-    }
-
     public function testPrepareJsonWithParams()
     {
         $expected = json_encode([
