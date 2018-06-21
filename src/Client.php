@@ -7,6 +7,8 @@ use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
 use XRPHP\Api\Method;
+use XRPHP\Api\MethodResponse;
+use XRPHP\Api\Request;
 
 /**
  *  A rippled client.
@@ -103,58 +105,45 @@ class Client
     }
 
     /**
-     * Maps API method names to their related class names in this package.
-     *
-     * @return array Associative array of method classes keyed by API method names.
+     * @param string $methodName
+     * @param array $params
+     * @return Request
+     * @throws \Exception
      */
-    private function getMethodClassMap()
+    public function request(string $methodName, array $params): Request
     {
-        return [
-            'account_channels' => \XRPHP\Api\Anon\Account\AccountChannelsMethod::class,
-            'account_currencies' => \XRPHP\Api\Anon\Account\AccountCurrenciesMethod::class,
-            'account_info' => \XRPHP\Api\Anon\Account\AccountInfoMethod::class,
-            'account_lines' => \XRPHP\Api\Anon\Account\AccountLinesMethod::class,
-            'account_objects' => \XRPHP\Api\Anon\Account\AccountObjectsMethod::class,
-            'account_offers' => \XRPHP\Api\Anon\Account\AccountOffersMethod::class,
-            'account_tx' => \XRPHP\Api\Anon\Account\AccountTxMethod::class,
-            'gateway_balances' => \XRPHP\Api\Anon\Account\GatewayBalancesMethod::class,
-            'noripple_check' => \XRPHP\Api\Anon\Account\NorippleCheckMethod::class,
-            'ledger' => \XRPHP\Api\Anon\Ledger\LedgerMethod::class,
-            'ledger_closed' => \XRPHP\Api\Anon\Ledger\LedgerClosedMethod::class,
-            'ledger_current' => \XRPHP\Api\Anon\Ledger\LedgerCurrentMethod::class,
-            'ledger_data' => \XRPHP\Api\Anon\Ledger\LedgerDataMethod::class,
-            'ledger_entry' => \XRPHP\Api\Anon\Ledger\LedgerEntryMethod::class,
-            'sign' => \XRPHP\Api\Anon\Transaction\SignMethod::class,
-            'sign_for' => \XRPHP\Api\Anon\Transaction\SignForMethod::class,
-            'submit' => \XRPHP\Api\Anon\Transaction\SubmitMethod::class,
-            'submit_multisigned' => \XRPHP\Api\Anon\Transaction\SubmitMultisignedMethod::class,
-            'transaction_entry' => \XRPHP\Api\Anon\Transaction\TransactionEntryMethod::class,
-            'tx' => \XRPHP\Api\Anon\Transaction\TxMethod::class,
-            'book_offers' => \XRPHP\Api\Anon\PathOrderBook\BookOffersMethod::class,
-            'ripple_path_find' => \XRPHP\Api\Anon\PathOrderBook\RipplePathFindMethod::class,
-            'channel_authorize' => \XRPHP\Api\Anon\PaymentChannel\ChannelAuthorizeMethod::class,
-            'channel_verify' => \XRPHP\Api\Anon\PaymentChannel\ChannelVerifyMethod::class,
-            'fee' => \XRPHP\Api\Anon\ServerInfo\FeeMethod::class,
-            'server_info' => \XRPHP\Api\Anon\ServerInfo\ServerInfoMethod::class,
-            'server_state' => \XRPHP\Api\Anon\ServerInfo\ServerStateMethod::class,
-            'ping' => \XRPHP\Api\Anon\Utility\PingMethod::class,
-            'random' => \XRPHP\Api\Anon\Utility\RandomMethod::class
-        ];
+        return new Request($methodName, $params, $this);
     }
 
     /**
-     * @param string $method The API method string.
-     * @param array|null $params Associative array of method parameters.
-     * @return null|Method
-     * @throws \BadMethodCallException
+     * @param string $methodName
+     * @param array $params
+     * @return MethodResponse
+     * @throws \Exception
      */
-    public function method(string $method, array $params = null): ?Method
+    public function send(string $methodName, array $params): MethodResponse
     {
-        $methodMap = $this->getMethodClassMap();
-        if (isset($methodMap[$method])) {
-            return new $methodMap[$method]($this, $method, $params);
-        }
-        throw new \BadMethodCallException(sprintf('Invalid method: %s', $method));
+        return $this->request($methodName, $params)->send();
+    }
+
+    /**
+     * @param string $method
+     * @param array|null $params
+     * @return \Psr\Http\Message\ResponseInterface
+     * @throws \Http\Client\Exception
+     */
+    public function post(string $method, array $params = null)
+    {
+        $json = $this->prepareJson($method, $params);
+
+        $request = $this->getMessageFactory()->createRequest(
+            'POST',
+            $this->endpoint,
+            ['Content-Type' => 'application/json'],
+            $json
+        );
+
+        return $this->httpClient->sendRequest($request);
     }
 
     /**
@@ -170,20 +159,6 @@ class Client
         $request = ['method' => $method, 'params' => []];
         $request['params'][] = $params;
         return json_encode($request);
-    }
-
-    public function post(string $method, array $params = null)
-    {
-        $json = $this->prepareJson($method, $params);
-
-        $request = $this->getMessageFactory()->createRequest(
-            'POST',
-            $this->endpoint,
-            ['Content-Type' => 'application/json'],
-            $json
-        );
-
-        return $this->httpClient->sendRequest($request);
     }
 
     public function getHttpClient(): HttpClient
