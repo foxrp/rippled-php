@@ -29,7 +29,7 @@ class GenerateTypesCommand extends Command
 
     private function updateTypes(): void
     {
-        $dir = __DIR__.'/../Transaction/Type/';
+        $dir = __DIR__.'/../Api/TransactionType/';
         $skel = $dir . 'Skeleton.php';
         $fs = new Filesystem();
 
@@ -61,7 +61,7 @@ class GenerateTypesCommand extends Command
 
     private function updateAbstract(): void
     {
-        $this->generateFields($this->data['common_fields']['fields'], __DIR__.'/../Transaction/Type/AbstractType.php');
+        $this->generateFields($this->data['common_fields']['fields'], __DIR__.'/../Api/TransactionType/AbstractTransactionType.php');
     }
 
     private function replaceClassComment(array $type, string $file): void
@@ -96,7 +96,7 @@ EOF;
             $req = isset($field['required']) && $field['required'] === true ? 'true' : 'false';
             $af = isset($field['auto_fillable']) && $field['auto_fillable'] === true ? 'true' : 'false';
 
-            $code .= '        $this->addField(new TypeField([
+            $code .= '        $this->addField(new Field([
             \'name\' => \'' . $type . '\',
             \'required\' => ' . $req . ',
             \'autoFillable\' => ' . $af . '
