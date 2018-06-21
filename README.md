@@ -41,13 +41,15 @@ composer require foxrp/xrphp
 $client = new \XRPHP\Client('https://s1.ripple.com:51234');
 
 // Retrieve account info.
-$response = $client->method('account_info', ['account' => ''])->execute();
+$response = $client->send('account_info', [
+    'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
+]);
 
 // Extract the result into its own associative array variable.
 $result = $response->getResult();
 
 // Do something with the account sequence.
-$sequence = $result['account_data']['Sequence'];
+$balance = $result['account_data']['Balance'];
 
 ...
 
@@ -58,8 +60,8 @@ $sequence = $result['account_data']['Sequence'];
 Please see the documentation for information and examples on accessing the API, building transactions, and handling
 exceptions.
 
-- [Using the API Client](docs/API.md)
-- [Building, Signing, and Submitting Transactions](docs/Transactions.md)
+- [API Requests](docs/API.md)
+- [Transactions](docs/Transactions.md)
 - [Handling Exceptions](docs/Exceptions.md)
 
 ## Unit Testing
