@@ -37,7 +37,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "XRPHP\\Tests\\": "tests/"
+            "XRPHP\\Tests\\": "tests/unit",
+            "XRPHP\\FunctionalTests\\": "tests/functional"
         }
     }
 }

@@ -216,6 +216,6 @@ class TransactionTest extends TestCase
 
     private function getAccountInfoJson()
     {
-        return file_get_contents(__dir__.'/../json/account_info_success.json');
+        return file_get_contents(__dir__.'/../../json/account_info_success.json');
     }
 }

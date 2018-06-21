@@ -78,6 +78,6 @@ class MethodTestCase extends TestCase
      */
     protected function getJsonFromFile(string $file)
     {
-        return file_get_contents(__dir__.'../../json/'.$file.'.json');
+        return file_get_contents(__dir__.'../../../json/'.$file.'.json');
     }
 }

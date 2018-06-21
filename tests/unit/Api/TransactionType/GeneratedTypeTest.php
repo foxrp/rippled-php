@@ -10,7 +10,7 @@ class GeneratedTypeTest extends TestCase
 {
     public function testFieldsInSyncWithSpec()
     {
-        $spec = json_decode(file_get_contents(__DIR__ . '/../../../rippled-spec/transactions.json'), true);
+        $spec = json_decode(file_get_contents(__DIR__ . '/../../../../rippled-spec/transactions.json'), true);
         foreach ($spec['types'] as $specType) {
 
             $typeClass = '\\XRPHP\\Api\\TransactionType\\' . $specType['name'];

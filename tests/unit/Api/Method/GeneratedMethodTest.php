@@ -12,7 +12,7 @@ class GeneratedMethodTest extends TestCase
 {
     public function testFieldsInSyncWithSpec()
     {
-        $spec = json_decode(file_get_contents(__DIR__ . '/../../../rippled-spec/api.json'), true);
+        $spec = json_decode(file_get_contents(__DIR__ . '/../../../../rippled-spec/api.json'), true);
         foreach ($spec['methods'] as $item) {
 
             $typeClass = '\\XRPHP\\Api\\Method\\' . Util::CaseFromSnake($item['name']);
