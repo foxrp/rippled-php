@@ -5,7 +5,7 @@ You will want to work closely with the
 Each [Transaction Type](https://developers.ripple.com/transaction-types.html) is defined there along with `required` and
 auto-fillable` fields.
 
-Transactions can be submitted as any other [API](API.md) method, however the [Transaction](../src/Transaction.php) class
+Transactions can be submitted as any other [API](API.md) method, however the [Transaction](../src/Api/Transaction.php) class
 provides additional utility for building and submitting transactions including:
 
 - Validation of required Transaction parameters

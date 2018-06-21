@@ -3,7 +3,7 @@
 This document covers using the [Client](../src/Client.php) class to communicate with the remote API.
 
 Technically you can use the `Transaction` API methods, however this library provides a 
-[Transaction](../src/Transaction.php) class to make them much easier to work with.
+[Transaction](../src/Api/Transaction.php) class to make them much easier to work with.
 
 See the [Transactions Documentation](Transactions.md) for more on Transactions.
 
