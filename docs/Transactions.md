@@ -55,7 +55,7 @@ $txParams = [
     'Fee' => '000012'
 ];
 
-$transaction = new \XRPHP\Transaction($txParams, $client);
+$transaction = new \XRPHP\Api\Transaction($txParams, $client);
 ```
 
 ## Signing Transactions before Submitting (Optional)
