@@ -42,7 +42,7 @@
         "name": "Fee",
         "json_type": "String",
         "internal_type": "Amount",
-        "required": true,
+        "required": false,
         "auto_fillable": true,
         "description": "Integer amount of XRP, in drops, to be destroyed as a cost for distributing this transaction to the network. Some transaction types have different minimum requirements."
       },
@@ -50,7 +50,7 @@
         "name": "Sequence",
         "json_type": "Unsigned Integer",
         "internal_type": "UInt32",
-        "required": true,
+        "required": false,
         "auto_fillable": true,
         "description": "The sequence number, relative to the initiating account, of this transaction. A transaction is only valid if the Sequence number is exactly 1 greater than the previous transaction from the same account."
       },

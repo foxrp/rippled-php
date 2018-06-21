@@ -1,11 +1,12 @@
 <?php
 
-namespace XRPHP\Tests\Transaction\Type;
+namespace XRPHP\Tests\Api\TransactionType;
 
 use PHPUnit\Framework\TestCase;
+use XRPHP\Api\Field;
 use XRPHP\Exception\InvalidParameterException;
-use XRPHP\Transaction;
-use XRPHP\Transaction\Type\Payment;
+use XRPHP\Api\Transaction;
+use XRPHP\Api\TransactionType\Payment;
 
 /**
 *  Test for Client class
@@ -25,9 +26,10 @@ class AbstractTypeTest extends TestCase
     */
     public function testGetField(): void
     {
+        /** @var Payment $type */
         $type = $this->tx->getType();
         $field = $type->getField('TransactionType');
-        $this->assertEquals(Transaction\TypeField::class, get_class($field));
+        $this->assertEquals(Field::class, get_class($field));
     }
 
     /**
@@ -38,16 +40,6 @@ class AbstractTypeTest extends TestCase
         $type = $this->tx->getType();
         $fields = $type->getRequiredFields();
         $this->assertCount(4, $fields);
-    }
-
-    /**
-     * Check that we can get auto-fillable fields.
-     */
-    public function testGetAutofillableFields(): void
-    {
-        $type = $this->tx->getType();
-        $fields = $type->getAutofillableFields();
-        $this->assertCount(3, $fields);
     }
 
     /**

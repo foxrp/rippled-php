@@ -3,7 +3,7 @@
 namespace XRPHP\Tests\Transaction\Type;
 
 use PHPUnit\Framework\TestCase;
-use XRPHP\Transaction\Type\Skeleton;
+use XRPHP\Api\TransactionType\Skeleton;
 
 class SkeletonTest extends TestCase
 {

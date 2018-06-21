@@ -62,7 +62,7 @@ class Transaction
      */
     public function findClass(string $type): string
     {
-        $class = '\\XRPHP\\Transaction\\Type\\' . $type;
+        $class = '\\XRPHP\\Api\\TransactionType\\' . $type;
         if (!class_exists($class)) {
             throw new TransactionTypeException(sprintf('No class found for transaction type %s', $type));
         }

@@ -10,7 +10,6 @@ use XRPHP\Api\Field;
  */
 abstract class AbstractTransactionType extends AbstractFieldable
 {
-
     public function setFields(): void
     {
         // GENERATED CODE FROM bin/generate.php types
@@ -29,13 +28,13 @@ abstract class AbstractTransactionType extends AbstractFieldable
 
         $this->addField(new Field([
             'name' => 'Fee',
-            'required' => true,
+            'required' => false,
             'autoFillable' => true
         ]));
 
         $this->addField(new Field([
             'name' => 'Sequence',
-            'required' => true,
+            'required' => false,
             'autoFillable' => true
         ]));
 
@@ -89,5 +88,4 @@ abstract class AbstractTransactionType extends AbstractFieldable
 
         // END GENERATED
     }
-
 }

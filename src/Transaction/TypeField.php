@@ -1,6 +1,6 @@
 <?php
 
-namespace XRPHP\Transaction;
+namespace XRPHP\Transactiona;
 use XRPHP\Exception\TransactionTypeFieldException;
 
 /**
