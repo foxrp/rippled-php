@@ -49,18 +49,18 @@ if ($response->isSuccess()) {
 If you need more control, you may create requests separately.
 
 ```php
-// Using request() on the client object
+// Retrieve a request object from the Client.
 $request = $client->request('account_info', [
     'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
 ]);
 
-// Or instantiating Request manually
+// Or instantiate Request directly.
 $request = new Request('account_info', [
    'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
 ], $client);
 
 
-// Then send it for a response.
+// Now send the request to retrieve a response.
 $response = $request->send();
 ```
 
