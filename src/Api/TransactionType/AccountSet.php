@@ -2,92 +2,84 @@
 
 namespace XRPHP\Api\TransactionType;
 
-use XRPHP\Api\AbstractFieldable;
 use XRPHP\Api\Field;
 
 /**
- * Class AbstractTransactionType is extended with classes for each individual Transaction Type.
+ * AccountSet Transaction Type Class
+ *
+ * An AccountSet transaction modifies the properties of an account in the XRP Ledger.
+ *
+ * https://developers.ripple.com/accountset.html AccountSet transaction type documentation.
  */
-abstract class AbstractTransactionType extends AbstractFieldable
+class AccountSet extends AbstractTransactionType
 {
-
-    public function setFields(): void
+    /**
+     * Constructor
+     *
+     * @param array|null $params Array of parameters to validate.
+     * @throws \XRPHP\Exception\InvalidParameterException
+     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     */
+    public function __construct(array $params = null)
     {
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
-            'name' => 'Account',
-            'required' => true,
-            'autoFillable' => false
-        ]));
-
-        $this->addField(new Field([
-            'name' => 'TransactionType',
-            'required' => true,
-            'autoFillable' => false
-        ]));
-
-        $this->addField(new Field([
-            'name' => 'Fee',
-            'required' => true,
-            'autoFillable' => true
-        ]));
-
-        $this->addField(new Field([
-            'name' => 'Sequence',
-            'required' => true,
-            'autoFillable' => true
-        ]));
-
-        $this->addField(new Field([
-            'name' => 'AccountTxnID',
+            'name' => 'ClearFlag',
             'required' => false,
             'autoFillable' => false
         ]));
 
         $this->addField(new Field([
-            'name' => 'Flags',
+            'name' => 'Domain',
             'required' => false,
             'autoFillable' => false
         ]));
 
         $this->addField(new Field([
-            'name' => 'LastLedgerSequence',
+            'name' => 'EmailHash',
             'required' => false,
             'autoFillable' => false
         ]));
 
         $this->addField(new Field([
-            'name' => 'Memos',
+            'name' => 'MessageKey',
             'required' => false,
             'autoFillable' => false
         ]));
 
         $this->addField(new Field([
-            'name' => 'Signers',
+            'name' => 'SetFlag',
             'required' => false,
             'autoFillable' => false
         ]));
 
         $this->addField(new Field([
-            'name' => 'SourceTag',
+            'name' => 'TransferRate',
             'required' => false,
             'autoFillable' => false
         ]));
 
         $this->addField(new Field([
-            'name' => 'SigningPubKey',
+            'name' => 'TickSize',
             'required' => false,
             'autoFillable' => false
         ]));
 
         $this->addField(new Field([
-            'name' => 'TxnSignature',
+            'name' => 'WalletLocator',
+            'required' => false,
+            'autoFillable' => false
+        ]));
+
+        $this->addField(new Field([
+            'name' => 'TickSize',
             'required' => false,
             'autoFillable' => false
         ]));
 
         // END GENERATED
-    }
 
+        parent::__construct($params);
+    }
 }
