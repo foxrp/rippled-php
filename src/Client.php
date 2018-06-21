@@ -7,7 +7,7 @@ use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
 use XRPHP\Api\Method;
-use XRPHP\Api\MethodResponse;
+use XRPHP\Api\Response;
 use XRPHP\Api\Request;
 
 /**
@@ -118,10 +118,10 @@ class Client
     /**
      * @param string $methodName
      * @param array $params
-     * @return MethodResponse
+     * @return Response
      * @throws \Exception
      */
-    public function send(string $methodName, array $params): MethodResponse
+    public function send(string $methodName, array $params): Response
     {
         return $this->request($methodName, $params)->send();
     }

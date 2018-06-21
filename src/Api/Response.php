@@ -4,7 +4,7 @@ namespace XRPHP\Api;
 
 use Psr\Http\Message\ResponseInterface;
 
-class MethodResponse
+class Response
 {
     /** @var string The raw response body returned from the API */
     private $raw;

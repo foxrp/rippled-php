@@ -35,12 +35,12 @@ class Request
     }
 
     /**
-     * @return MethodResponse
+     * @return Response
      * @throws \Exception
      */
     public function send()
     {
-        return new MethodResponse($this->client->post($this->methodName, $this->params));
+        return new Response($this->client->post($this->methodName, $this->params));
     }
 
     /**

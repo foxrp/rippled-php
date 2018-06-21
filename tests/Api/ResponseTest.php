@@ -2,13 +2,11 @@
 
 namespace XRPHP\Tests\Api;
 
-use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use PHPUnit\Framework\TestCase;
-use XRPHP\Api\Method;
 use XRPHP\Api\Response;
-use XRPHP\Client;
 
-class MethodResponseTest extends TestCase
+class ResponseTest extends TestCase
 {
     /** @var string */
     private $jsonSuccess;
@@ -25,10 +23,10 @@ class MethodResponseTest extends TestCase
     protected function setUp()
     {
         $this->jsonSuccess = $this->getJsonFromFile('res_account_info_success');
-        $this->responseSuccess = new Response(200, ['Content-Type' => 'application/json'], $this->jsonSuccess);
+        $this->responseSuccess = new GuzzleResponse(200, ['Content-Type' => 'application/json'], $this->jsonSuccess);
 
         $this->jsonError = $this->getJsonFromFile('res_account_info_error');
-        $this->responseError = new Response(200, ['Content-Type' => 'application/json'], $this->jsonError);
+        $this->responseError = new GuzzleResponse(200, ['Content-Type' => 'application/json'], $this->jsonError);
     }
 
     /**
@@ -36,13 +34,13 @@ class MethodResponseTest extends TestCase
      */
     public function testIsThereAnySyntaxError(): void
     {
-        $obj = new Response($this->responseSuccess);
+        $obj = new GuzzleResponse($this->responseSuccess);
         $this->assertTrue(is_object($obj));
     }
 
     public function testSetRaw(): void
     {
-        $obj = new Response($this->responseSuccess);
+        $obj = new GuzzleResponse($this->responseSuccess);
         $this->assertSame($this->jsonSuccess, $obj->getRaw());
     }
 
@@ -51,7 +49,7 @@ class MethodResponseTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessageRegExp('/^Unable to parse/');
 
-        $badResponse = new Response(200, ['Content-Type' => 'application/json'], "{");
+        $badResponse = new GuzzleResponse(200, ['Content-Type' => 'application/json'], "{");
         new Response($badResponse);
     }
 
@@ -60,7 +58,7 @@ class MethodResponseTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessageRegExp('/missing result data/');
 
-        $badResponse = new Response(200, ['Content-Type' => 'application/json'], "{}");
+        $badResponse = new GuzzleResponse(200, ['Content-Type' => 'application/json'], "{}");
         $obj = new Response($badResponse);
 
         $this->assertTrue(is_object($obj));

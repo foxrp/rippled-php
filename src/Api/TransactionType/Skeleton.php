@@ -7,7 +7,7 @@ use XRPHP\Api\Field;
 /**
  * This class is used by the generator as a template for new transaction types.
  */
-class TransactionTypeSkeleton extends AbstractTransactionType
+class Skeleton extends AbstractTransactionType
 {
     /**
      * Constructor
