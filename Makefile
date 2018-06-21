@@ -1,3 +1,4 @@
+# Bash is required so `source` can load env vars in targets.
 SHELL := /bin/bash
 
 # Filter either by calling phpunit directly, or
@@ -10,7 +11,7 @@ testf:
 	source .env.test && vendor/bin/phpunit -c phpunit_functional.xml ${args}
 
 cov:
-	./vendor/bin/phpunit --coverage-html tests/coverage
+	./vendor/bin/phpunit --coverage-html tests/unit/coverage
 
 fix:
 	php-cs-fixer fix ./src/
