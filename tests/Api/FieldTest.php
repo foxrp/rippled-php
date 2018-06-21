@@ -1,22 +1,22 @@
 <?php
 
-namespace XRPHP\Tests\Transaction;
+namespace XRPHP\Tests\Api;
 
 use PHPUnit\Framework\TestCase;
-use XRPHP\Exception\TransactionTypeFieldException;
-use XRPHP\Transaction\TypeField;
+use XRPHP\Exception\FieldException;
+use XRPHP\Api\Field;
 
 /**
 *  Test for Client class
 */
-class TypeFieldTest extends TestCase
+class FieldTest extends TestCase
 {
     /**
     * Check for syntax errors
     */
     public function testIsThereAnySyntaxError(): void
     {
-        $field = new TypeField(['name' => 'Foo']);
+        $field = new Field(['name' => 'Foo']);
         $this->assertInternalType('object', $field);
     }
 
@@ -25,21 +25,20 @@ class TypeFieldTest extends TestCase
      */
     public function testMissingNameInConstructorThrowsException(): void
     {
-        $this->expectException(TransactionTypeFieldException::class);
+        $this->expectException(FieldException::class);
         $this->expectExceptionMessageRegExp('/name/');
 
-        $field = new TypeField([]);
+        $field = new Field([]);
     }
 
     public function testPropsSetInConstructor()
     {
-        $field = new TypeField(
+        $field = new Field(
             [
                 'name' => 'a',
                 'description' => 'b',
                 'jsonType' => 'c',
-                'required' => true,
-                'autoFillable' => true
+                'required' => true
             ]
         );
 
@@ -47,6 +46,5 @@ class TypeFieldTest extends TestCase
         $this->assertEquals('b', $field->getDescription());
         $this->assertEquals('c', $field->getJsonType());
         $this->assertTrue($field->isRequired());
-        $this->assertTrue($field->isAutoFillable());
     }
 }

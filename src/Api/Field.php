@@ -2,7 +2,7 @@
 
 namespace XRPHP\Api;
 
-use XRPHP\Exception\TransactionTypeFieldException;
+use XRPHP\Exception\FieldException;
 
 /**
  * Field.
@@ -25,14 +25,14 @@ class Field
     private $required = false;
 
     /**
-     * TypeField constructor.
+     * Field constructor.
      * @param array $params
-     * @throws TransactionTypeFieldException
+     * @throws FieldException
      */
     public function __construct(array $params)
     {
         if (!isset($params['name'])) {
-            throw new TransactionTypeFieldException(sprintf('Missing parameter: %s', 'name'));
+            throw new FieldException(sprintf('Missing parameter: %s', 'name'));
         }
 
         foreach ($params as $key => $val) {
@@ -47,7 +47,7 @@ class Field
                     $this->setJsonType($val);
                     break;
                 case 'internalType':
-                    $this->internalType($val);
+                    $this->setInternalType($val);
                     break;
                 case 'required':
                     $this->setRequired($val);
