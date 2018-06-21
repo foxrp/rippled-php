@@ -1,0 +1,21 @@
+<phpunit 	bootstrap="vendor/autoload.php"
+            colors="true"
+            convertErrorsToExceptions="true"
+            convertNoticesToExceptions="true"
+            convertWarningsToExceptions="true"
+            stopOnFailure="true">
+    <testsuites>
+        <testsuite name="Functional Tests">
+            <directory>tests/functional</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>./src/</directory>
+            <exclude>
+                <file>src/Command/GenerateMethodsCommand.php</file>
+                <file>src/Command/GenerateTypesCommand.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
