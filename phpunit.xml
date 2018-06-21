@@ -13,7 +13,7 @@
 		<whitelist>
 			<directory>./src/</directory>
 			<exclude>
-				<file>src/Model</file>
+				<file>src/Command</file>
 			</exclude>
 		</whitelist>
 	</filter>
