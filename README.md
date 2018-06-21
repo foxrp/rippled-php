@@ -62,11 +62,9 @@ exceptions.
 - [Building, Signing, and Submitting Transactions](docs/Transactions.md)
 - [Handling Exceptions](docs/Exceptions.md)
 
-## Testing
+## Unit Testing
 
-As of now, only unit tests exists which mock the API so requests are not actually made.
-
-Run the test suite:
+Run the unit test suite:
 
 ```
 make test
@@ -79,6 +77,26 @@ make cov
 ```
 
 Once you run the coverage command, open `tests/coverage/index.html` to view the report.
+
+## Functional Testing
+
+Functional tests run code against a live server. Of course this should be run against a test server.
+
+If you don't already have test accounts, create 2 and note the account id and secret for each.
+
+https://developers.ripple.com/xrp-test-net-faucet.html
+
+The functional test suite loads endpoint and account info from `.env.test`.
+
+If you haven't already, copy `.env.test.dist` to `.env.test` and add your account info.
+
+`FOXRP_ACCT_1_ID` requires `100` XRP for the tests.
+
+Use the following command to run the functional test suite.
+
+```
+make testf
+```
 
 ## Contribute
 
