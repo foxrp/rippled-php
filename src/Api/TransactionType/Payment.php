@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\TransactionType;
 
@@ -10,19 +10,19 @@ use XRPHP\Api\Field;
  * A Payment transaction represents a transfer of value from one account to another. (Depending on the path taken, this
  * can involve additional exchanges of value, which occur atomically.)
  *
- * https://developers.ripple.com/payment.html Payment transaction type documentation.
+ * @link https://developers.ripple.com/payment.html Payment transaction type documentation.
  */
 class Payment extends AbstractTransactionType
 {
     /**
-     * Constructor
+     * {@inheritDoc}
      *
-     * @param array|null $params Array of parameters to validate.
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -69,6 +69,5 @@ class Payment extends AbstractTransactionType
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

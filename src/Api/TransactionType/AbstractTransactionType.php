@@ -1,15 +1,19 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\TransactionType;
 
 use XRPHP\Api\AbstractFieldable;
 use XRPHP\Api\Field;
+use XRPHP\Api\FieldableInterface;
 
 /**
- * Class AbstractTransactionType is extended with classes for each individual Transaction Type.
+ * Provides an abstract for defining and transaction types and validating its fields.
  */
-abstract class AbstractTransactionType extends AbstractFieldable
+abstract class AbstractTransactionType extends AbstractFieldable implements FieldableInterface
 {
+    /**
+     * @throws \XRPHP\Exception\FieldException
+     */
     public function setFields(): void
     {
         // GENERATED CODE FROM bin/generate.php types

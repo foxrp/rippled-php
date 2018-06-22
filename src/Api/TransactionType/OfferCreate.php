@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\TransactionType;
 
@@ -10,19 +10,19 @@ use XRPHP\Api\Field;
  * An OfferCreate transaction is effectively a limit order. It defines an intent to exchange currencies, and creates an
  * Offer object if not completely fulfilled when placed. Offers can be partially fulfilled.
  *
- * https://developers.ripple.com/offercreate.html OfferCreate transaction type documentation.
+ * @link https://developers.ripple.com/offercreate.html OfferCreate transaction type documentation.
  */
 class OfferCreate extends AbstractTransactionType
 {
     /**
-     * Constructor
+     * {@inheritDoc}
      *
-     * @param array|null $params Array of parameters to validate.
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -51,6 +51,5 @@ class OfferCreate extends AbstractTransactionType
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

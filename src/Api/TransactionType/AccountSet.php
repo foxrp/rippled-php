@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\TransactionType;
 
@@ -9,19 +9,19 @@ use XRPHP\Api\Field;
  *
  * An AccountSet transaction modifies the properties of an account in the XRP Ledger.
  *
- * https://developers.ripple.com/accountset.html AccountSet transaction type documentation.
+ * @link https://developers.ripple.com/accountset.html AccountSet transaction type documentation.
  */
 class AccountSet extends AbstractTransactionType
 {
     /**
-     * Constructor
+     * {@inheritDoc}
      *
-     * @param array|null $params Array of parameters to validate.
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -80,6 +80,5 @@ class AccountSet extends AbstractTransactionType
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

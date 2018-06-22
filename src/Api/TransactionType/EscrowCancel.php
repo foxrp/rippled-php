@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\TransactionType;
 
@@ -9,19 +9,19 @@ use XRPHP\Api\Field;
  *
  * Return escrowed XRP to the sender.
  *
- * https://developers.ripple.com/escrowcancel.html EscrowCancel transaction type documentation.
+ * @link https://developers.ripple.com/escrowcancel.html EscrowCancel transaction type documentation.
  */
 class EscrowCancel extends AbstractTransactionType
 {
     /**
-     * Constructor
+     * {@inheritDoc}
      *
-     * @param array|null $params Array of parameters to validate.
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -38,6 +38,5 @@ class EscrowCancel extends AbstractTransactionType
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

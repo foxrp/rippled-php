@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\TransactionType;
 
@@ -11,19 +11,19 @@ use XRPHP\Api\Field;
  * address of the channel can use this transaction. (Transactions from other addresses fail with the error
  * tecNO_PERMISSION.)
  *
- * https://developers.ripple.com/paymentchannelfund.html PaymentChannelFund transaction type documentation.
+ * @link https://developers.ripple.com/paymentchannelfund.html PaymentChannelFund transaction type documentation.
  */
 class PaymentChannelFund extends AbstractTransactionType
 {
     /**
-     * Constructor
+     * {@inheritDoc}
      *
-     * @param array|null $params Array of parameters to validate.
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -46,6 +46,5 @@ class PaymentChannelFund extends AbstractTransactionType
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\TransactionType;
 
@@ -9,19 +9,19 @@ use XRPHP\Api\Field;
  *
  * Create or modify a trust line linking two accounts.
  *
- * https://developers.ripple.com/trustset.html TrustSet transaction type documentation.
+ * @link https://developers.ripple.com/trustset.html TrustSet transaction type documentation.
  */
 class TrustSet extends AbstractTransactionType
 {
     /**
-     * Constructor
+     * {@inheritDoc}
      *
-     * @param array|null $params Array of parameters to validate.
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -62,6 +62,5 @@ class TrustSet extends AbstractTransactionType
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }
