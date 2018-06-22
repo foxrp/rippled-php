@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -10,19 +10,19 @@ use XRPHP\Api\Field;
  * The transaction_entry method retrieves information on a single transaction from a specific ledger version. (The tx
  * method, by contrast, searches all ledgers for the specified transaction. We recommend using that method instead.)
  *
- * https://developers.ripple.com/transaction_entry.html TransactionEntry method documentation.
+ * @link https://developers.ripple.com/transaction_entry.html TransactionEntry method documentation.
  */
 class TransactionEntry extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -42,6 +42,5 @@ class TransactionEntry extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -11,19 +11,19 @@ use XRPHP\Exception\InvalidParameterException;
  * The ledger_entry method returns a single ledger object from the XRP Ledger in its raw format. See ledger format for
  * information on the different types of objects you can retrieve.
  *
- * https://developers.ripple.com/ledger_entry.html LedgerEntry method documentation.
+ * @link https://developers.ripple.com/ledger_entry.html LedgerEntry method documentation.
  */
 class LedgerEntry extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -128,7 +128,6 @@ class LedgerEntry extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 
     public function validateParams(array $params): void

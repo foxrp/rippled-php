@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -11,19 +11,19 @@ use XRPHP\Api\Field;
  * results are very large, a partial result is returned with a marker so that later requests can resume from where the
  * previous one left off.
  *
- * https://developers.ripple.com/book_offers.html BookOffers method documentation.
+ * @link https://developers.ripple.com/book_offers.html BookOffers method documentation.
  */
 class BookOffers extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -58,6 +58,5 @@ class BookOffers extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

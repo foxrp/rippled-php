@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -10,19 +10,19 @@ use XRPHP\Api\Field;
  * The channel_verify method checks the validity of a signature that can be used to redeem a specific amount of XRP from
  * a payment channel.
  *
- * https://developers.ripple.com/channel_verify.html ChannelVerify method documentation.
+ * @link https://developers.ripple.com/channel_verify.html ChannelVerify method documentation.
  */
 class ChannelVerify extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -47,6 +47,5 @@ class ChannelVerify extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -9,19 +9,19 @@ use XRPHP\Api\Field;
  *
  * The address which is providing the signature.
  *
- * https://developers.ripple.com/sign_for.html SignFor method documentation.
+ * @link https://developers.ripple.com/sign_for.html SignFor method documentation.
  */
 class SignFor extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -61,6 +61,5 @@ class SignFor extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

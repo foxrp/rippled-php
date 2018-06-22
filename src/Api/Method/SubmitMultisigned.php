@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -11,19 +11,19 @@ use XRPHP\Api\Field;
  * future ledgers. (You can also submit multi-signed transactions in binary form using the submit command in submit-only
  * mode.)
  *
- * https://developers.ripple.com/submit_multisigned.html SubmitMultisigned method documentation.
+ * @link https://developers.ripple.com/submit_multisigned.html SubmitMultisigned method documentation.
  */
 class SubmitMultisigned extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -38,6 +38,5 @@ class SubmitMultisigned extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

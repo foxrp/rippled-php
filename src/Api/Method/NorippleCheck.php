@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -10,19 +10,19 @@ use XRPHP\Api\Field;
  * The noripple_check command provides a quick way to check the status of the DefaultRipple field for an account and the
  * NoRipple flag of its trust lines, compared with the recommended settings.
  *
- * https://developers.ripple.com/noripple_check.html NorippleCheck method documentation.
+ * @link https://developers.ripple.com/noripple_check.html NorippleCheck method documentation.
  */
 class NorippleCheck extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -52,6 +52,5 @@ class NorippleCheck extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

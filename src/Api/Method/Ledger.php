@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -9,19 +9,19 @@ use XRPHP\Api\Field;
  *
  * Retrieve information about the public ledger.
  *
- * https://developers.ripple.com/ledger.html Ledger method documentation.
+ * @link https://developers.ripple.com/ledger.html Ledger method documentation.
  */
 class Ledger extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -71,6 +71,5 @@ class Ledger extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

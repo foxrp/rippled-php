@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -10,19 +10,19 @@ use XRPHP\Exception\InvalidParameterException;
  *
  * The account_tx method retrieves a list of transactions that involved the specified account.
  *
- * https://developers.ripple.com/account_offers.html AccountTx method documentation.
+ * @link https://developers.ripple.com/account_offers.html AccountTx method documentation.
  */
 class AccountTx extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -72,7 +72,6 @@ class AccountTx extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 
     /**

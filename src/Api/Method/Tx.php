@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -9,19 +9,19 @@ use XRPHP\Api\Field;
  *
  * The tx method retrieves information on a single transaction.
  *
- * https://developers.ripple.com/tx.html Tx method documentation.
+ * @link https://developers.ripple.com/tx.html Tx method documentation.
  */
 class Tx extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -36,6 +36,5 @@ class Tx extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

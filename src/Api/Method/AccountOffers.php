@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -10,19 +10,19 @@ use XRPHP\Api\Field;
  * The account_offers method retrieves a list of offers made by a given account that are outstanding as of a particular
  * ledger version.
  *
- * https://developers.ripple.com/account_offers.html AccountOffers method documentation.
+ * @link https://developers.ripple.com/account_offers.html AccountOffers method documentation.
  */
 class AccountOffers extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -52,6 +52,5 @@ class AccountOffers extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

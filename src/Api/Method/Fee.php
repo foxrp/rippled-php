@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -10,23 +10,22 @@ use XRPHP\Api\Field;
  * The fee command reports the current state of the open-ledger requirements for the transaction cost. This requires the
  * FeeEscalation amendment to be enabled.
  *
- * https://developers.ripple.com/fee.html Fee method documentation.
+ * @link https://developers.ripple.com/fee.html Fee method documentation.
  */
 class Fee extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

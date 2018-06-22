@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -10,19 +10,19 @@ use XRPHP\Api\Field;
  * The ledger_data method retrieves contents of the specified ledger. You can iterate through several calls to retrieve
  * the entire contents of a single ledger version.
  *
- * https://developers.ripple.com/ledger_data.html LedgerData method documentation.
+ * @link https://developers.ripple.com/ledger_data.html LedgerData method documentation.
  */
 class LedgerData extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -57,6 +57,5 @@ class LedgerData extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

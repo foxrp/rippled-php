@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -10,19 +10,19 @@ use XRPHP\Api\Field;
  * The gateway_balances command calculates the total balances issued by a given account, optionally excluding amounts
  * held by operational addresses.
  *
- * https://developers.ripple.com/gateway_balances.html GatewayBalances method documentation.
+ * @link https://developers.ripple.com/gateway_balances.html GatewayBalances method documentation.
  */
 class GatewayBalances extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -52,6 +52,5 @@ class GatewayBalances extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

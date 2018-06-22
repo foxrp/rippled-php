@@ -1,10 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
 use XRPHP\Api\AbstractFieldable;
 use XRPHP\Exception\InvalidParameterException;
 
+/**
+ * Provides an abstract for defining methods and validating their fields.
+ */
 abstract class AbstractMethod extends AbstractFieldable
 {
     /**

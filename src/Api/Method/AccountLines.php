@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -10,19 +10,19 @@ use XRPHP\Api\Field;
  * The account_lines method returns information about an account's trust lines, including balances in all non-XRP
  * currencies and assets. All information retrieved is relative to a particular version of the ledger.
  *
- * https://developers.ripple.com/account_lines.html AccountLines method documentation.
+ * @link https://developers.ripple.com/account_lines.html AccountLines method documentation.
  */
 class AccountLines extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -57,6 +57,5 @@ class AccountLines extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

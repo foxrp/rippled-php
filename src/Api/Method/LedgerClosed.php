@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -10,19 +10,19 @@ use XRPHP\Api\Field;
  * The ledger_closed method returns the unique identifiers of the most recently closed ledger. (This ledger is not
  * necessarily validated and immutable yet.)
  *
- * https://developers.ripple.com/ledger_closed.html LedgerClosed method documentation.
+ * @link https://developers.ripple.com/ledger_closed.html LedgerClosed method documentation.
  */
 class LedgerClosed extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -37,6 +37,5 @@ class LedgerClosed extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -10,23 +10,22 @@ use XRPHP\Api\Field;
  * The random command provides a random number to be used as a source of entropy for random number generation by
  * clients.
  *
- * https://developers.ripple.com/random.html Random method documentation.
+ * @link https://developers.ripple.com/random.html Random method documentation.
  */
 class Random extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

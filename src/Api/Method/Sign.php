@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -11,19 +11,19 @@ use XRPHP\Api\Field;
  * the transaction. The result is always different, even when you provide the same transaction JSON and secret key. To
  * contribute one signature to a multi-signed transaction, use the sign_for method instead.
  *
- * https://developers.ripple.com/sign.html Sign method documentation.
+ * @link https://developers.ripple.com/sign.html Sign method documentation.
  */
 class Sign extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -78,6 +78,5 @@ class Sign extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

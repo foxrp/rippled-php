@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -12,19 +12,19 @@ use XRPHP\Api\Field;
  * tend to become outdated as time passes. Instead of making multiple calls to stay updated, you should instead use the
  * path_find method to subscribe to continued updates where possible.
  *
- * https://developers.ripple.com/ripple_path_find.html RipplePathFind method documentation.
+ * @link https://developers.ripple.com/ripple_path_find.html RipplePathFind method documentation.
  */
 class RipplePathFind extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -64,6 +64,5 @@ class RipplePathFind extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

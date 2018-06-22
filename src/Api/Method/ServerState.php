@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -12,23 +12,22 @@ use XRPHP\Api\Field;
  * of easier to read. (For example, XRP values are given in integer drops instead of scientific notation or decimal
  * values, and time is given in milliseconds instead of seconds.)
  *
- * https://developers.ripple.com/server_state.html ServerState method documentation.
+ * @link https://developers.ripple.com/server_state.html ServerState method documentation.
  */
 class ServerState extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         // END GENERATED
 
-        parent::__construct($params);
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api\Method;
 
@@ -9,19 +9,19 @@ use XRPHP\Api\Field;
  *
  * The submit method applies a transaction and sends it to the network to be confirmed and included in future ledgers.
  *
- * https://developers.ripple.com/submit.html Submit method documentation.
+ * @link https://developers.ripple.com/submit.html Submit method documentation.
  */
 class Submit extends AbstractMethod
 {
     /**
-     * Constructor.
+     * {@inheritDoc}
      *
-     * @param array|null $params
-     * @throws \XRPHP\Exception\InvalidParameterException
-     * @throws \XRPHP\Exception\TransactionTypeFieldException
+     * @throws \XRPHP\Exception\FieldException
      */
-    public function __construct(array $params = null)
+    public function setFields(): void
     {
+        parent::setFields();
+
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         $this->addField(new Field([
@@ -86,6 +86,5 @@ class Submit extends AbstractMethod
 
         // END GENERATED
 
-        parent::__construct($params);
     }
 }
