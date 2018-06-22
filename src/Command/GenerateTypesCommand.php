@@ -80,7 +80,7 @@ class GenerateTypesCommand extends Command
  * {$type['name']} Transaction Type Class
  *{$desc}
  *
- * {$type['reference']} {$type['name']} transaction type documentation.
+ * @link {$type['reference']} {$type['name']} transaction type documentation.
  */
 EOF;
 

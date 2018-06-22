@@ -75,7 +75,7 @@ class GenerateMethodsCommand extends Command
  * {$item['nameCased']} Method Class
  *{$desc}
  *
- * {$item['reference']} {$item['nameCased']} method documentation.
+ * @link {$item['reference']} {$item['nameCased']} method documentation.
  */
 EOF;
 
