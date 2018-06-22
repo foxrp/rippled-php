@@ -2,6 +2,7 @@
 
 namespace XRPHP\Api;
 
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Process\Process;
 use XRPHP\Client;
 use XRPHP\Exception\TransactionException;
@@ -138,10 +139,11 @@ class Transaction
      * Submit this transaction, signed or unsigned.
      *
      * @param string $secret Regular key.
-     * @param bool $signLocal Sign locally.
+     * @param bool   $signLocal Sign locally.
      * @return Response|null
      * @throws TransactionException
      * @throws \Exception
+     * @throws \Http\Client\Exception
      */
     public function submit(string $secret, bool $signLocal = true)
     {
@@ -159,9 +161,9 @@ class Transaction
             }
 
             // Submit signed transaction.
-            $res = $this->getClient()->method('submit', [
+            $res = $this->getClient()->post('submit', [
                 'tx_blob' => $txBlob
-            ])->execute();
+            ]);
         } else {
             // Submit unsigned transaction with secret.
             // TODO: Handle sign-and-submit
