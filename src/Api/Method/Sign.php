@@ -3,6 +3,7 @@
 namespace XRPHP\Api\Method;
 
 use XRPHP\Api\Field;
+use XRPHP\Exception\InvalidParameterException;
 
 /**
  * Sign Method Class
@@ -77,5 +78,16 @@ class Sign extends AbstractMethod
         ]));
 
         // END GENERATED
+    }
+
+    /**
+     * @param array $params
+     * @throws InvalidParameterException
+     */
+    public function validateParams(array $params): void
+    {
+        parent::validateParams($params);
+
+        $this->validateSignParameters($params);
     }
 }

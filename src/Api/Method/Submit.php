@@ -3,6 +3,7 @@
 namespace XRPHP\Api\Method;
 
 use XRPHP\Api\Field;
+use XRPHP\Exception\InvalidParameterException;
 
 /**
  * Submit Method Class
@@ -85,5 +86,21 @@ class Submit extends AbstractMethod
         ]));
 
         // END GENERATED
+    }
+
+    /**
+     * @param array|null $params
+     * @throws InvalidParameterException
+     */
+    public function validateParameters(array $params = null): void
+    {
+        if (!isset($params['tx_json']) && !isset($params['tx_blob'])) {
+            throw new InvalidParameterException('Missing parameter: tx_blob or tx_json');
+        }
+
+        // When using sign-and-submit mode, validate signing params.
+        if (isset($params['tx_json'])) {
+            $this->validateSignParameters($params);
+        }
     }
 }
