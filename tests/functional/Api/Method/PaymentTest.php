@@ -7,7 +7,10 @@ use XRPHP\FunctionalTests\FunctionalTestCase;
 
 class PaymentTest extends FunctionalTestCase
 {
-    public function testPaymentWithLocalSign()
+    /**
+     * Check that payments signed locally (via xrp-sign-cli) submit and pay correctly.
+     */
+    public function testPaymentWithLocalSign(): void
     {
         $balances = [
             [
@@ -28,7 +31,10 @@ class PaymentTest extends FunctionalTestCase
         $this->assertGreaterThan($balances[1]['pre'], $balances[1]['post']);
     }
 
-    public function testPaymentWithRemoteSign()
+    /**
+     * Check that remote signing works with the submit & sign method.
+     */
+    public function testPaymentWithRemoteSign(): void
     {
         $balances = [
             [
@@ -49,7 +55,7 @@ class PaymentTest extends FunctionalTestCase
         $this->assertGreaterThan($balances[1]['pre'], $balances[1]['post']);
     }
 
-    private function getTx()
+    private function getTx(): array
     {
         return [
             'TransactionType' => 'Payment',
@@ -59,5 +65,4 @@ class PaymentTest extends FunctionalTestCase
             'Fee' => '12'
         ];
     }
-
 }
