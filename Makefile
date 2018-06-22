@@ -15,3 +15,11 @@ cov:
 
 fix:
 	php-cs-fixer fix ./src/
+
+generate-types:
+	php bin/generate.php types
+
+generate-methods:
+	php bin/generate.php methods
+
+
