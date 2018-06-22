@@ -9,7 +9,7 @@ class _SanityCheckTest extends FunctionalTestCase
         $this->assertNotEmpty($this->endpoint);
         $this->assertNotEmpty($this->acct1Id);
         $this->assertNotEmpty($this->acct1Secret);
-        $this->assertNotEmpty($this->acc2Id);
+        $this->assertNotEmpty($this->acct2Id);
     }
 
     public function testAccountHasSufficientFundsForTestSuite()
