@@ -7,7 +7,7 @@ use XRPHP\Api\Field;
 use XRPHP\Api\FieldableInterface;
 
 /**
- * Provides an abstract for defining and transaction types and validating its fields.
+ * Provides an abstract for defining transaction types and validating their fields.
  */
 abstract class AbstractTransactionType extends AbstractFieldable implements FieldableInterface
 {
