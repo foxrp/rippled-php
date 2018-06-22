@@ -70,6 +70,5 @@ class Ledger extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

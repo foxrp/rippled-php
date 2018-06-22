@@ -71,7 +71,6 @@ class AccountTx extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 
     /**

@@ -56,6 +56,5 @@ class AccountInfo extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

@@ -35,6 +35,5 @@ class Tx extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

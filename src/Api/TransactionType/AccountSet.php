@@ -79,6 +79,5 @@ class AccountSet extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

@@ -57,6 +57,5 @@ class BookOffers extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

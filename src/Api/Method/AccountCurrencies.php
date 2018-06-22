@@ -46,6 +46,5 @@ class AccountCurrencies extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

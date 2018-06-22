@@ -56,6 +56,5 @@ class AccountObjects extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

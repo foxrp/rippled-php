@@ -26,6 +26,5 @@ class ServerInfo extends AbstractMethod
         // GENERATED CODE FROM bin/generate.php types
         // BEGIN GENERATED
         // END GENERATED
-
     }
 }

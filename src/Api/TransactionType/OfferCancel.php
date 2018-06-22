@@ -31,6 +31,5 @@ class OfferCancel extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

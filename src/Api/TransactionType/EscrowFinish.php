@@ -49,6 +49,5 @@ class EscrowFinish extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

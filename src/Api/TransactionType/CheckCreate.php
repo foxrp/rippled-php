@@ -56,6 +56,5 @@ class CheckCreate extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

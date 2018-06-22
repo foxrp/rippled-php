@@ -34,12 +34,10 @@ class GenerateTypesCommand extends Command
         $fs = new Filesystem();
 
         foreach ($this->data['types'] as $type) {
-
             $file = $dir . $type['name'] .'.php';
 
             // Create class file if it doesn't exist.
             if (!$fs->exists($file)) {
-
                 $content = file_get_contents($skel);
 
                 // Replace Skeleton class strings with values from this transaction type.
@@ -116,5 +114,4 @@ EOF;
         $newContent = preg_replace($search, $replace, $content);
         file_put_contents($file, $newContent);
     }
-
 }

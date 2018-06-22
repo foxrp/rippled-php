@@ -127,7 +127,6 @@ class LedgerEntry extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 
     public function validateParams(array $params): void

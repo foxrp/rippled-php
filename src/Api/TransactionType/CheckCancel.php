@@ -33,6 +33,5 @@ class CheckCancel extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

@@ -34,6 +34,5 @@ class SetRegularKey extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

@@ -61,6 +61,5 @@ class TrustSet extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

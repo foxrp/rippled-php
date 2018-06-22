@@ -14,5 +14,4 @@ class Util
     {
         return str_replace('_', '', ucwords($key, '_'));
     }
-
 }

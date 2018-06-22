@@ -61,6 +61,5 @@ class EscrowCreate extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

@@ -56,6 +56,5 @@ class LedgerData extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

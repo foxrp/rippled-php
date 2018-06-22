@@ -37,6 +37,5 @@ class SubmitMultisigned extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

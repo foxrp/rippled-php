@@ -68,6 +68,5 @@ class Payment extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

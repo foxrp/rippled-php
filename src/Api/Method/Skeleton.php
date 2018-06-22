@@ -22,6 +22,5 @@ class Skeleton extends AbstractMethod
         // BEGIN GENERATED
         // ***************
         // END GENERATED
-
     }
 }

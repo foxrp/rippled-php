@@ -56,6 +56,5 @@ class AccountLines extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

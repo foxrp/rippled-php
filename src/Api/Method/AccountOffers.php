@@ -51,6 +51,5 @@ class AccountOffers extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

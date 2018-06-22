@@ -51,6 +51,5 @@ class NorippleCheck extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

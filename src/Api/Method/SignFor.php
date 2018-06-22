@@ -60,6 +60,5 @@ class SignFor extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

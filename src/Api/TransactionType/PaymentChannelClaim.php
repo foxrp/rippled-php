@@ -56,6 +56,5 @@ class PaymentChannelClaim extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

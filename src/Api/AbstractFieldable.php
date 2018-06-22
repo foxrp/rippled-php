@@ -51,8 +51,11 @@ abstract class AbstractFieldable
             }
         }
         if (!empty($missingParams)) {
-            throw new InvalidParameterException(sprintf('Missing parameters: %s',
-                    implode(', ', $missingParams))
+            throw new InvalidParameterException(
+                sprintf(
+                'Missing parameters: %s',
+                    implode(', ', $missingParams)
+            )
             );
         }
 
@@ -61,8 +64,11 @@ abstract class AbstractFieldable
         $fieldKeys = array_keys($this->fields);
         $invalidParams = array_diff($paramKeys, $fieldKeys);
         if (!empty($invalidParams)) {
-            throw new InvalidParameterException(sprintf('Invalid parameters submitted: %s',
-                    implode(', ', $invalidParams))
+            throw new InvalidParameterException(
+                sprintf(
+                'Invalid parameters submitted: %s',
+                    implode(', ', $invalidParams)
+            )
             );
         }
     }

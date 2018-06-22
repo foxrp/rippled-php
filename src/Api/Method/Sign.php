@@ -77,6 +77,5 @@ class Sign extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

@@ -51,6 +51,5 @@ class GatewayBalances extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

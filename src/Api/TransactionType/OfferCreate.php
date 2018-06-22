@@ -50,6 +50,5 @@ class OfferCreate extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

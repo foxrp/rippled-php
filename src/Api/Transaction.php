@@ -107,8 +107,7 @@ class Transaction
             $this->setTxBlob($data['tx_blob']);
             $this->setTxId($data['tx_id']);
             $this->setSigned(true);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw new TransactionSignException('Unable to sign transaction: ' . $e->getMessage());
         }
     }
@@ -152,7 +151,6 @@ class Transaction
 
         $res = null;
         if ($signLocal) {
-
             $this->signLocal($secret);
 
             $txBlob = $this->getTxBlob();
@@ -164,7 +162,6 @@ class Transaction
             $res = $this->getClient()->method('submit', [
                 'tx_blob' => $txBlob
             ])->execute();
-
         } else {
             // Submit unsigned transaction with secret.
             // TODO: Handle sign-and-submit

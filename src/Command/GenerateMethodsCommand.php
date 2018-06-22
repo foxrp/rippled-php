@@ -39,7 +39,6 @@ class GenerateMethodsCommand extends Command
 
             // Create class file if it doesn't exist.
             if (!$fs->exists($file)) {
-
                 $content = file_get_contents($skel);
 
                 // Replace Skeleton class strings with values from this transaction type.
@@ -109,5 +108,4 @@ EOF;
         $newContent = preg_replace($search, $replace, $content);
         file_put_contents($file, $newContent);
     }
-
 }

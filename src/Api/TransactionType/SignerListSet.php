@@ -38,6 +38,5 @@ class SignerListSet extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

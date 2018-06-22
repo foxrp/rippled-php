@@ -85,6 +85,5 @@ class Submit extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

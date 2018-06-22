@@ -41,6 +41,5 @@ class TransactionEntry extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

@@ -46,6 +46,5 @@ class ChannelVerify extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

@@ -62,6 +62,5 @@ class PaymentChannelCreate extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

@@ -63,6 +63,5 @@ class RipplePathFind extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

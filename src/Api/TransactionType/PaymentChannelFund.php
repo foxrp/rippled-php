@@ -45,6 +45,5 @@ class PaymentChannelFund extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

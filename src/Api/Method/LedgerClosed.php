@@ -36,6 +36,5 @@ class LedgerClosed extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

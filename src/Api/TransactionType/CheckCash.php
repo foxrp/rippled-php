@@ -48,6 +48,5 @@ class CheckCash extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }

@@ -41,6 +41,5 @@ class ChannelAuthorize extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

@@ -57,6 +57,5 @@ class AccountChannels extends AbstractMethod
         ]));
 
         // END GENERATED
-
     }
 }

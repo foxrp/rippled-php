@@ -37,6 +37,5 @@ class EscrowCancel extends AbstractTransactionType
         ]));
 
         // END GENERATED
-
     }
 }
