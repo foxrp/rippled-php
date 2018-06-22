@@ -11,7 +11,7 @@ use XRPHP\Api\Field;
  * where the specified account is the channel's source, not the destination. (A channel's "source" and "owner" are the
  * same.) All information retrieved is relative to a particular version of the ledger.
  *
- * https://developers.ripple.com/account_channels.html AccountChannels method documentation.
+ * @link https://developers.ripple.com/account_channels.html AccountChannels method documentation.
  */
 class AccountChannels extends AbstractMethod
 {

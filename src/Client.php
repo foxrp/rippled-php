@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP;
 
@@ -6,7 +6,6 @@ use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
-use XRPHP\Api\Method;
 use XRPHP\Api\Response;
 use XRPHP\Api\Request;
 

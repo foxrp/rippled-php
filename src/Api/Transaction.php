@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api;
 
@@ -7,7 +7,6 @@ use XRPHP\Client;
 use XRPHP\Exception\TransactionException;
 use XRPHP\Exception\TransactionSignException;
 use XRPHP\Exception\TransactionTypeException;
-use XRPHP\Transaction\TypeInterface;
 
 class Transaction
 {
@@ -20,7 +19,7 @@ class Transaction
     /** @var bool */
     private $signed;
 
-    /** @var TypeInterface */
+    /** @var FieldableInterface */
     private $type;
 
     /** @var array */
@@ -115,6 +114,10 @@ class Transaction
     }
 
     /**
+     * Retrieves the current account sequence.
+     *
+     * @param string $account Account id.
+     * @return int Account sequence.
      * @throws TransactionSignException
      */
     public function getAccountSequence(string $account): int
