@@ -161,13 +161,15 @@ class Transaction
             }
 
             // Submit signed transaction.
-            $res = $this->getClient()->post('submit', [
+            $res = $this->getClient()->send('submit', [
                 'tx_blob' => $txBlob
             ]);
         } else {
             // Submit unsigned transaction with secret.
-            // TODO: Handle sign-and-submit
-            $res = null;
+            $res = $this->getClient()->send('submit', [
+                'tx_json' => $this->getTx(),
+                'secret' => $secret
+            ]);
         }
 
         return $res;
