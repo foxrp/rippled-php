@@ -9,7 +9,7 @@ class Request
     /** @var Client */
     private $client;
 
-    /** @var MethodInterface */
+    /** @var FieldableInterface */
     private $method;
 
     /** @var string */
@@ -76,9 +76,9 @@ class Request
     }
 
     /**
-     * @return MethodInterface
+     * @return FieldableInterface
      */
-    public function getMethod(): MethodInterface
+    public function getMethod(): FieldableInterface
     {
         return $this->method;
     }
