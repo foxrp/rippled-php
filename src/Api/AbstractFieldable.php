@@ -1,9 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XRPHP\Api;
 
 use XRPHP\Exception\InvalidParameterException;
 
+/**
+ * {@inheritDoc}
+ */
 abstract class AbstractFieldable
 {
     /** @var */
