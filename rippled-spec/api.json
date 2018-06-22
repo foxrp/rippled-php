@@ -685,6 +685,477 @@
           "description": "The sequence number of the ledger to use, or a shortcut string to choose a ledger automatically."
         }
       ]
+    },
+    {
+      "name": "sign",
+      "description": "The sign method takes a transaction in JSON format and a secret key, and returns a signed binary representation of the transaction. The result is always different, even when you provide the same transaction JSON and secret key. To contribute one signature to a multi-signed transaction, use the sign_for method instead.",
+      "reference": "https://developers.ripple.com/sign.html",
+      "group": "Transaction",
+      "public": true,
+      "fields": [
+        {
+          "name": "tx_json",
+          "json_type": "Object",
+          "required": true,
+          "description": "Transaction definition in JSON format."
+        },
+        {
+          "name": "secret",
+          "json_type": "String",
+          "required": false,
+          "description": "Secret key of the account supplying the transaction, used to sign it. Do not send your secret to untrusted servers or through unsecured network connections. Cannot be used with key_type, seed, seed_hex, or passphrase."
+        },
+        {
+          "name": "seed",
+          "json_type": "String",
+          "required": false,
+          "description": "Secret key of the account supplying the transaction, used to sign it. Must be in base58 format. If provided, you must also specify the key_type. Cannot be used with secret, seed_hex, or passphrase."
+        },
+        {
+          "name": "seed_hex",
+          "json_type": "String",
+          "required": false,
+          "description": "Secret key of the account supplying the transaction, used to sign it. Must be in hexadecimal format. If provided, you must also specify the key_type. Cannot be used with secret, seed, or passphrase."
+        },
+        {
+          "name": "passphrase",
+          "json_type": "String",
+          "required": false,
+          "description": "Secret key of the account supplying the transaction, used to sign it, as a string passphrase. If provided, you must also specify the key_type. Cannot be used with secret, seed, or seed_hex."
+        },
+        {
+          "name": "key_type",
+          "json_type": "String",
+          "required": false,
+          "description": "Type of cryptographic key provided in this request. Valid types are secp256k1 or ed25519. Defaults to secp256k1. Cannot be used with secret. Caution: Ed25519 support is experimental."
+        },
+        {
+          "name": "offline",
+          "json_type": "Boolean",
+          "required": false,
+          "description": "If true, when constructing the transaction, do not try to automatically fill in or validate values. Defaults to false."
+        },
+        {
+          "name": "build_path",
+          "json_type": "Boolean",
+          "required": false,
+          "description": "If provided for a Payment-type transaction, automatically fill in the Paths field before signing. Caution: The server looks for the presence or absence of this field, not its value. This behavior may change."
+        },
+        {
+          "name": "fee_mult_max",
+          "json_type": "Integer",
+          "required": false,
+          "description": "Limits how high the automatically-provided Fee field can be. Signing fails with the error rpcHIGH_FEE if the current load multiplier on the transaction cost is greater than (fee_mult_max ÷ fee_div_max). Ignored if you specify the Fee field of the transaction (transaction cost). Defaults to 10; Recommended value 1000."
+        },
+        {
+          "name": "fee_div_max",
+          "json_type": "Integer",
+          "required": false,
+          "description": "Signing fails with the error rpcHIGH_FEE if the current load multiplier on the transaction cost is greater than (fee_mult_max ÷ fee_div_max). Ignored if you specify the Fee field of the transaction (transaction cost). Defaults to 1."
+        }
+      ]
+    },
+    {
+      "name": "sign_for",
+      "description": "The address which is providing the signature.",
+      "reference": "https://developers.ripple.com/sign_for.html",
+      "group": "Transaction",
+      "public": true,
+      "fields": [
+        {
+          "name": "account",
+          "json_type": "String",
+          "required": true,
+          "description": "The address which is providing the signature."
+        },
+        {
+          "name": "tx_json",
+          "json_type": "Object",
+          "required": true,
+          "description": "The Transaction to sign. Unlike using the sign method, all fields of the transaction must be provided, including Fee and Sequence. The transaction must include the field SigningPubKey with an empty string as the value. The object may optionally contain a Signers array with previously-collected signatures."
+        },
+        {
+          "name": "secret",
+          "json_type": "String",
+          "required": false,
+          "description": "The secret key to sign with. (Cannot be used with key_type.)"
+        },
+        {
+          "name": "passphrase",
+          "json_type": "String",
+          "required": false,
+          "description": "A passphrase to use as the secret key to sign with."
+        },
+        {
+          "name": "seed",
+          "json_type": "String",
+          "required": false,
+          "description": " base58-encoded secret key to sign with."
+        },
+        {
+          "name": "seed_hex",
+          "json_type": "String",
+          "required": false,
+          "description": "A hexadecimal secret key to sign with."
+        },
+        {
+          "name": "key_type",
+          "json_type": "String",
+          "required": false,
+          "description": "The type of key to use for signing. This can be secp256k1 or ed25519. (Ed25519 support is experimental.)"
+        }
+      ]
+    },
+    {
+      "name": "submit",
+      "description": "The submit method applies a transaction and sends it to the network to be confirmed and included in future ledgers.",
+      "reference": "https://developers.ripple.com/submit.html",
+      "group": "Transaction",
+      "public": true,
+      "fields": [
+        {
+          "name": "tx_blob",
+          "json_type": "String",
+          "required": false,
+          "description": "Hex representation of the signed transaction to submit. This can be a multi-signed transaction."
+        },
+        {
+          "name": "tx_json",
+          "json_type": "Object",
+          "required": false,
+          "description": "Transaction definition in JSON format, optionally omitting any auto-fillable fields."
+        },
+        {
+          "name": "secret",
+          "json_type": "String",
+          "required": false,
+          "description": "The secret key to sign with. (Cannot be used with key_type.)"
+        },
+        {
+          "name": "passphrase",
+          "json_type": "String",
+          "required": false,
+          "description": "A passphrase to use as the secret key to sign with."
+        },
+        {
+          "name": "seed",
+          "json_type": "String",
+          "required": false,
+          "description": " base58-encoded secret key to sign with."
+        },
+        {
+          "name": "seed_hex",
+          "json_type": "String",
+          "required": false,
+          "description": "A hexadecimal secret key to sign with."
+        },
+        {
+          "name": "key_type",
+          "json_type": "String",
+          "required": false,
+          "description": "The type of key to use for signing. This can be secp256k1 or ed25519. (Ed25519 support is experimental.)"
+        },
+        {
+          "name": "fail_hard",
+          "json_type": "Boolean",
+          "required": false,
+          "description": " If true, and the transaction fails locally, do not retry or relay the transaction to other servers. Defaults to false."
+        },
+        {
+          "name": "offline",
+          "json_type": "Boolean",
+          "required": false,
+          "description": "If true, when constructing the transaction, do not try to automatically fill in or validate values. Defaults to false."
+        },
+        {
+          "name": "build_path",
+          "json_type": "Boolean",
+          "required": false,
+          "description": "If provided for a Payment-type transaction, automatically fill in the Paths field before signing. Caution: The server looks for the presence or absence of this field, not its value. This behavior may change."
+        },
+        {
+          "name": "fee_mult_max",
+          "json_type": "Integer",
+          "required": false,
+          "description": "Limits how high the automatically-provided Fee field can be. Signing fails with the error rpcHIGH_FEE if the current load multiplier on the transaction cost is greater than (fee_mult_max ÷ fee_div_max). Ignored if you specify the Fee field of the transaction (transaction cost). Defaults to 10; Recommended value 1000."
+        },
+        {
+          "name": "fee_div_max",
+          "json_type": "Integer",
+          "required": false,
+          "description": "Signing fails with the error rpcHIGH_FEE if the current load multiplier on the transaction cost is greater than (fee_mult_max ÷ fee_div_max). Ignored if you specify the Fee field of the transaction (transaction cost). Defaults to 1."
+        }
+      ]
+    },
+    {
+      "name": "submit_multisigned",
+      "description": "The submit_multisigned command applies a multi-signed transaction and sends it to the network to be included in future ledgers. (You can also submit multi-signed transactions in binary form using the submit command in submit-only mode.)",
+      "reference": "https://developers.ripple.com/submit_multisigned.html",
+      "group": "Transaction",
+      "public": true,
+      "fields": [
+        {
+          "name": "tx_json",
+          "json_type": "String",
+          "required": true,
+          "description": "Transaction in JSON format with an array of Signers. To be successful, the weights of the signatures must be equal or higher than the quorum of the SignerList."
+        },
+        {
+          "name": "fail_hard",
+          "json_type": "String",
+          "required": false,
+          "description": "If true, and the transaction fails locally, do not retry or relay the transaction to other servers. Defaults to false."
+        }
+      ]
+    },
+    {
+      "name": "transaction_entry",
+      "description": "The transaction_entry method retrieves information on a single transaction from a specific ledger version. (The tx method, by contrast, searches all ledgers for the specified transaction. We recommend using that method instead.)",
+      "reference": "https://developers.ripple.com/transaction_entry.html",
+      "group": "Transaction",
+      "public": true,
+      "fields": [
+        {
+          "name": "tx_hash",
+          "json_type": "String",
+          "required": false,
+          "description": "Unique hash of the transaction you are looking up."
+        },
+        {
+          "name": "ledger_hash",
+          "json_type": "String",
+          "required": false,
+          "description": "A 20-byte hex string for the ledger version to use."
+        },
+        {
+          "name": "ledger_index",
+          "json_type": "String",
+          "required": false,
+          "description": "The sequence number of the ledger to use, or a shortcut string to choose a ledger automatically."
+        }
+      ]
+    },
+    {
+      "name": "tx",
+      "description": "The tx method retrieves information on a single transaction.",
+      "reference": "https://developers.ripple.com/tx.html",
+      "group": "Transaction",
+      "public": true,
+      "fields": [
+        {
+          "name": "transaction",
+          "json_type": "String",
+          "required": true,
+          "description": "The 256-bit hash of the transaction, as hex."
+        },
+        {
+          "name": "binary",
+          "json_type": "Boolean",
+          "required": false,
+          "description": "If true, return transaction data and metadata as hex strings instead of JSON."
+        }
+      ]
+    },
+    {
+      "name": "book_offers",
+      "description": "The book_offers method retrieves a list of offers, also known as the order book, between two currencies. If the results are very large, a partial result is returned with a marker so that later requests can resume from where the previous one left off.",
+      "reference": "https://developers.ripple.com/book_offers.html",
+      "group": "Book",
+      "public": true,
+      "fields": [
+        {
+          "name": "taker_gets",
+          "json_type": "Object",
+          "required": true,
+          "description": "Specification of which currency the account taking the offer would receive, as an object with currency and issuer fields (omit issuer for XRP), like currency amounts."
+        },
+        {
+          "name": "taker_pays",
+          "json_type": "Object",
+          "required": true,
+          "description": "Specification of which currency the account taking the offer would pay, as an object with currency and issuer fields (omit issuer for XRP), like currency amounts."
+        },
+        {
+          "name": "taker",
+          "json_type": "String",
+          "required": false,
+          "description": "The Address of an account to use as a perspective. Unfunded offers placed by this account are always included in the response. (You can use this to look up your own orders to cancel them.)"
+        },
+        {
+          "name": "ledger_hash",
+          "json_type": "String",
+          "required": false,
+          "description": "A 20-byte hex string for the ledger version to use."
+        },
+        {
+          "name": "ledger_index",
+          "json_type": "String",
+          "required": false,
+          "description": "The sequence number of the ledger to use, or a shortcut string to choose a ledger automatically."
+        },
+        {
+          "name": "marker",
+          "json_type": "Marker",
+          "required": false,
+          "description": "Value from a previous paginated response. Resume retrieving data where that response left off."
+        }
+      ]
+    },
+    {
+      "name": "ripple_path_find",
+      "description": "The ripple_path_find method is a simplified version of the path_find method that provides a single response with a payment path you can use right away. It is available in both the WebSocket and JSON-RPC APIs. However, the results tend to become outdated as time passes. Instead of making multiple calls to stay updated, you should instead use the path_find method to subscribe to continued updates where possible.",
+      "reference": "https://developers.ripple.com/ripple_path_find.html",
+      "group": "Book",
+      "public": true,
+      "fields": [
+        {
+          "name": "source_account",
+          "json_type": "String",
+          "required": true,
+          "description": "Unique address of the account that would send funds in a transaction."
+        },
+        {
+          "name": "destination_account",
+          "json_type": "String",
+          "required": true,
+          "description": "Unique address of the account that would receive funds in a transaction."
+        },
+        {
+          "name": "destination_amount",
+          "json_type": "String or Object",
+          "required": true,
+          "description": "Currency Amount that the destination account would receive in a transaction. Special case: New in: rippled 0.30.0 You can specify \"-1\" (for XRP) or provide -1 as the contents of the value field (for non-XRP currencies). This requests a path to deliver as much as possible, while spending no more than the amount specified in send_max (if provided)."
+        },
+        {
+          "name": "send_max",
+          "json_type": "String or Object",
+          "required": false,
+          "description": "Currency Amount that would be spent in the transaction. Cannot be used with source_currencies."
+        },
+        {
+          "name": "source_currencies",
+          "json_type": "Array",
+          "required": false,
+          "description": "Array of currencies that the source account might want to spend. Each entry in the array should be a JSON object with a mandatory currency field and optional issuer field, like how currency amounts are specified. Cannot contain more than 18 source currencies. By default, uses all source currencies available up to a maximum of 88 different currency/issuer pairs."
+        },
+        {
+          "name": "ledger_hash",
+          "json_type": "String",
+          "required": false,
+          "description": "A 20-byte hex string for the ledger version to use."
+        },
+        {
+          "name": "ledger_index",
+          "json_type": "String",
+          "required": false,
+          "description": "The sequence number of the ledger to use, or a shortcut string to choose a ledger automatically."
+        }
+      ]
+    },
+    {
+      "name": "channel_authorize",
+      "description": "The channel_authorize method creates a signature that can be used to redeem a specific amount of XRP from a payment channel.",
+      "reference": "https://developers.ripple.com/channel_authorize.html",
+      "group": "Channels",
+      "public": true,
+      "fields": [
+        {
+          "name": "channel_id",
+          "json_type": "String",
+          "required": true,
+          "description": "The unique ID of the payment channel to use."
+        },
+        {
+          "name": "secret",
+          "json_type": "String",
+          "required": true,
+          "description": "The secret key to use to sign the claim. This must be the same key pair as the public key specified in the channel."
+        },
+        {
+          "name": "amount",
+          "json_type": "String",
+          "required": true,
+          "description": "Cumulative amount of XRP, in drops, to authorize. If the destination has already received a lesser amount of XRP from this channel, the signature created by this method can be redeemed for the difference."
+        }
+      ]
+    },
+    {
+      "name": "channel_verify",
+      "description": "The channel_verify method checks the validity of a signature that can be used to redeem a specific amount of XRP from a payment channel.",
+      "reference": "https://developers.ripple.com/channel_verify.html",
+      "group": "Channels",
+      "public": true,
+      "fields": [
+        {
+          "name": "amount",
+          "json_type": "String",
+          "required": true,
+          "description": "The amount of XRP, in drops, the provided signature authorizes."
+        },
+        {
+          "name": "channel_id",
+          "json_type": "String",
+          "required": true,
+          "description": "The Channel ID of the channel that provides the XRP. This is a 64-character hexadecimal string."
+        },
+        {
+          "name": "public_key",
+          "json_type": "String",
+          "required": true,
+          "description": "The public key of the channel and the key pair that was used to create the signature, in hexadecimal or base58 format."
+        },
+        {
+          "name": "signature",
+          "json_type": "String",
+          "required": true,
+          "description": "The signature to verify, in hexadecimal."
+        }
+      ]
+    },
+    {
+      "name": "fee",
+      "description": "The fee command reports the current state of the open-ledger requirements for the transaction cost. This requires the FeeEscalation amendment to be enabled.",
+      "reference": "https://developers.ripple.com/fee.html",
+      "group": "Server",
+      "public": true,
+      "fields": [
+      ]
+    },
+    {
+      "name": "server_info",
+      "description": "The server_info command asks the server for a human-readable version of various information about the rippled server being queried.",
+      "reference": "https://developers.ripple.com/server_info.html",
+      "group": "Server",
+      "public": true,
+      "fields": [
+      ]
+    },
+    {
+      "name": "server_state",
+      "description": "The server_state command asks the server for various machine-readable information about the rippled server's current state. The response is almost the same as the server_info method, but uses units that are easier to process instead of easier to read. (For example, XRP values are given in integer drops instead of scientific notation or decimal values, and time is given in milliseconds instead of seconds.)",
+      "reference": "https://developers.ripple.com/server_state.html",
+      "group": "Server",
+      "public": true,
+      "fields": [
+      ]
+    },
+    {
+      "name": "ping",
+      "description": "The ping command returns an acknowledgement, so that clients can test the connection status and latency.",
+      "reference": "https://developers.ripple.com/ping.html",
+      "group": "Utility",
+      "public": true,
+      "fields": [
+      ]
+    },
+    {
+      "name": "random",
+      "description": "The random command provides a random number to be used as a source of entropy for random number generation by clients.",
+      "reference": "https://developers.ripple.com/random.html",
+      "group": "Utility",
+      "public": true,
+      "fields": [
+      ]
     }
   ]
 }
