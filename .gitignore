@@ -4,6 +4,6 @@
 .php_cs.cache
 backup
 composer.lock
-tests/coverage
+coverage
 tests/logs
 vendor/
