@@ -1,7 +1,7 @@
-# XRPHP
+# rippled-php
 
-[![Build Status](https://travis-ci.org/foxrp/xrphp.svg?branch=master)](https://travis-ci.org/foxrp/xrphp)
-[![Coverage Status](https://coveralls.io/repos/github/foxrp/xrphp/badge.svg?branch=master)](https://coveralls.io/github/foxrp/xrphp?branch=master)
+[![Build Status](https://travis-ci.org/foxrp/rippled-php.svg?branch=master)](https://travis-ci.org/foxrp/rippled-php)
+[![Coverage Status](https://coveralls.io/repos/github/foxrp/rippled-php/badge.svg?branch=master)](https://coveralls.io/github/foxrp/rippled-php?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/matthiasnoback/badges/v/stable.png)](https://packagist.org/packages/matthiasnoback/badges)
 [![Latest Unstable Version](https://poser.pugx.org/matthiasnoback/badges/v/unstable.png)](https://packagist.org/packages/matthiasnoback/badges)
 
@@ -31,7 +31,7 @@ composer require php-http/guzzle6-adapter php-http/message
 ## Installation
 
 ```
-composer require foxrp/xrphp
+composer require foxrp/rippled-php
 ```
 
 ## QuickStart
