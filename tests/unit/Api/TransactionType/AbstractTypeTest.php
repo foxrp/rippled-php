@@ -1,12 +1,12 @@
 <?php
 
-namespace XRPHP\Tests\Api\TransactionType;
+namespace FOXRP\Rippled\Tests\Api\TransactionType;
 
 use PHPUnit\Framework\TestCase;
-use XRPHP\Api\Field;
-use XRPHP\Exception\InvalidParameterException;
-use XRPHP\Api\Transaction;
-use XRPHP\Api\TransactionType\Payment;
+use FOXRP\Rippled\Api\Field;
+use FOXRP\Rippled\Exception\InvalidParameterException;
+use FOXRP\Rippled\Api\Transaction;
+use FOXRP\Rippled\Api\TransactionType\Payment;
 
 /**
 *  Test for Client class

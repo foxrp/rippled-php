@@ -14,12 +14,12 @@ You can either instantiate the client with a string, or an array.
 
 Create a `Client` object with a uri:
 ```php
-$client = new \XRPHP\Client('https://s1.ripple.com:51234');
+$client = new \FOXRP\Rippled\Client('https://s1.ripple.com:51234');
 ```
 
 Create a `Client` object with an array:
 ```php
-$client = new \XRPHP\Client([
+$client = new \FOXRP\Rippled\Client([
     'scheme' => 'https',
     'host' => 's1.ripple.com',
     'port' => 51234
@@ -68,7 +68,7 @@ $response = $request->send();
 
 Catch `InvalidParameterException` for messages specific to missing or invalid parameters.
 ```php
-use XRPHP\Exception\InvalidParameterException;
+use FOXRP\Rippled\Exception\InvalidParameterException;
 ...
 try {
     $response = $client->send('account_info', [
@@ -127,7 +127,7 @@ parameters or normalizing the response.
 
 ```php
 // Instantiate the client.
-$client = new \XRPHP\Client('https://s1.ripple.com:51234');
+$client = new \FOXRP\Rippled\Client('https://s1.ripple.com:51234');
 
 // Retrieve the info.
 $res = $client->post('account_info', ['account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn']);

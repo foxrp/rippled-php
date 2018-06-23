@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP\Api;
+namespace FOXRP\Rippled\Api;
 
 use Psr\Http\Message\ResponseInterface;
 

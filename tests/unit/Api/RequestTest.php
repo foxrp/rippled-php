@@ -1,10 +1,10 @@
 <?php
 
-namespace XRPHP\Tests\Api;
+namespace FOXRP\Rippled\Tests\Api;
 
 use PHPUnit\Framework\TestCase;
-use XRPHP\Api\Request;
-use XRPHP\Client;
+use FOXRP\Rippled\Api\Request;
+use FOXRP\Rippled\Client;
 
 class RequestTest extends TestCase
 {

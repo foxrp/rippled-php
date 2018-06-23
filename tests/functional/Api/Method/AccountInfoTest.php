@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP\FunctionalTests\Api\Method;
+namespace FOXRP\Rippled\FunctionalTests\Api\Method;
 
-use XRPHP\FunctionalTests\FunctionalTestCase;
+use FOXRP\Rippled\FunctionalTests\FunctionalTestCase;
 
 class AccountInfoTest extends FunctionalTestCase
 {

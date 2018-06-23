@@ -1,10 +1,10 @@
 <?php
 
-namespace XRPHP\Tests\Api;
+namespace FOXRP\Rippled\Tests\Api;
 
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use PHPUnit\Framework\TestCase;
-use XRPHP\Api\Response;
+use FOXRP\Rippled\Api\Response;
 
 class ResponseTest extends TestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace XRPHP\Tests\Transaction\Type;
+namespace FOXRP\Rippled\Tests\Transaction\Type;
 
 use PHPUnit\Framework\TestCase;
-use XRPHP\Api\Field;
-use XRPHP\Transaction\TypeInterface;
+use FOXRP\Rippled\Api\Field;
+use FOXRP\Rippled\Transaction\TypeInterface;
 
 class GeneratedTypeTest extends TestCase
 {
@@ -13,7 +13,7 @@ class GeneratedTypeTest extends TestCase
         $spec = json_decode(file_get_contents(__DIR__ . '/../../../../rippled-spec/transactions.json'), true);
         foreach ($spec['types'] as $specType) {
 
-            $typeClass = '\\XRPHP\\Api\\TransactionType\\' . $specType['name'];
+            $typeClass = '\\FOXRP\Rippled\\Api\\TransactionType\\' . $specType['name'];
             /** @var TypeInterface $type */
             $type = new $typeClass();
             $typeFields = $type->getFields();

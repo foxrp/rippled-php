@@ -1,8 +1,8 @@
 <?php
 
-namespace XRPHP\Tests\Api;
+namespace FOXRP\Rippled\Tests\Api;
 
-use XRPHP\Exception\InvalidParameterException;
+use FOXRP\Rippled\Exception\InvalidParameterException;
 
 class SignMethodTestCase extends MethodTestCase
 {

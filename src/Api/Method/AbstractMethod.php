@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP\Api\Method;
+namespace FOXRP\Rippled\Api\Method;
 
-use XRPHP\Api\AbstractFieldable;
-use XRPHP\Exception\InvalidParameterException;
+use FOXRP\Rippled\Api\AbstractFieldable;
+use FOXRP\Rippled\Exception\InvalidParameterException;
 
 /**
  * Provides an abstract for defining methods and validating their fields.

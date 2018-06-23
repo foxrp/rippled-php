@@ -1,9 +1,9 @@
 <?php
 
-namespace XRPHP\Tests\Exception;
+namespace FOXRP\Rippled\Tests\Exception;
 
 use PHPUnit\Framework\TestCase;
-use XRPHP\Exception\InvalidParameterException;
+use FOXRP\Rippled\Exception\InvalidParameterException;
 
 class InvalidParameterExceptionTest extends TestCase
 {

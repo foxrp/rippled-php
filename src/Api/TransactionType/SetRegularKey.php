@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP\Api\TransactionType;
+namespace FOXRP\Rippled\Api\TransactionType;
 
-use XRPHP\Api\Field;
+use FOXRP\Rippled\Api\Field;
 
 /**
  * SetRegularKey Transaction Type Class
@@ -19,7 +19,7 @@ class SetRegularKey extends AbstractTransactionType
     /**
      * {@inheritDoc}
      *
-     * @throws \XRPHP\Exception\FieldException
+     * @throws \FOXRP\Rippled\Exception\FieldException
      */
     public function setFields(): void
     {

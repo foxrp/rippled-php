@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP;
+namespace FOXRP\Rippled;
 
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
-use XRPHP\Api\Response;
-use XRPHP\Api\Request;
+use FOXRP\Rippled\Api\Response;
+use FOXRP\Rippled\Api\Request;
 
 /**
  *  A rippled client.

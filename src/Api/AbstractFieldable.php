@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP\Api;
+namespace FOXRP\Rippled\Api;
 
-use XRPHP\Exception\InvalidParameterException;
+use FOXRP\Rippled\Exception\InvalidParameterException;
 
 /**
  * {@inheritDoc}

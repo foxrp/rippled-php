@@ -1,13 +1,13 @@
 <?php
 
-namespace XRPHP\Tests\Api;
+namespace FOXRP\Rippled\Tests\Api;
 
 use GuzzleHttp\Psr7\Response;
-use XRPHP\Client;
+use FOXRP\Rippled\Client;
 use PHPUnit\Framework\TestCase;
-use XRPHP\Exception\TransactionException;
-use XRPHP\Exception\TransactionSignException;
-use XRPHP\Api\Transaction;
+use FOXRP\Rippled\Exception\TransactionException;
+use FOXRP\Rippled\Exception\TransactionSignException;
+use FOXRP\Rippled\Api\Transaction;
 
 /**
 *  Test for Client class
@@ -23,7 +23,7 @@ class TransactionTest extends TestCase
     protected function setUp()
     {
         $this->httpMockClient = new \Http\Mock\Client ();
-        $this->client = new \XRPHP\Client('https://s1.ripple.com:51234', $this->httpMockClient);
+        $this->client = new \FOXRP\Rippled\Client('https://s1.ripple.com:51234', $this->httpMockClient);
 
         // Set default response for when no response is set in a test.
         $response = new Response(
@@ -94,7 +94,7 @@ class TransactionTest extends TestCase
         $client = $transaction->getClient();
 
         $this->assertNotNull($client);
-        $this->assertEquals(\XRPHP\Client::class, \get_class($client));
+        $this->assertEquals(\FOXRP\Rippled\Client::class, \get_class($client));
     }
 
     /**

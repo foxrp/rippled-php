@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP\Api\TransactionType;
+namespace FOXRP\Rippled\Api\TransactionType;
 
-use XRPHP\Api\Field;
+use FOXRP\Rippled\Api\Field;
 
 /**
  * This class is used by the generator as a template for new transaction types.
@@ -12,7 +12,7 @@ class Skeleton extends AbstractTransactionType
     /**
      * {@inheritDoc}
      *
-     * @throws \XRPHP\Exception\FieldException
+     * @throws \FOXRP\Rippled\Exception\FieldException
      */
     public function setFields(): void
     {

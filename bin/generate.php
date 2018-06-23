@@ -8,7 +8,7 @@ use Symfony\Component\Console\Application;
 
 $application = new Application();
 
-$application->add(new \XRPHP\Command\GenerateTypesCommand());
-$application->add(new \XRPHP\Command\GenerateMethodsCommand());
+$application->add(new \FOXRP\Rippled\Command\GenerateTypesCommand());
+$application->add(new \FOXRP\Rippled\Command\GenerateMethodsCommand());
 
 $application->run();

@@ -1,15 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace XRPHP\Exception;
+namespace FOXRP\Rippled\Exception;
 
 use Exception;
 
 /**
- * A base exception for XRPHP.
- *
- * @package XRPHP\Exception
+ * Base exception for Rippled.
  */
-class XRPHPException extends Exception
+class RippledException extends Exception
 {
     // Require a message in the constructor.
     public function __construct($message, $code = 0, Exception $previous = null)

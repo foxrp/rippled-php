@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP\Api;
+namespace FOXRP\Rippled\Api;
 
-use XRPHP\Client;
+use FOXRP\Rippled\Client;
 
 class Request
 {
@@ -52,7 +52,7 @@ class Request
      */
     private function findClass(string $methodName): string
     {
-        $class = '\\XRPHP\\Api\\Method\\' . \XRPHP\Util::CaseFromSnake($methodName);
+        $class = '\\FOXRP\Rippled\\Api\\Method\\' . \FOXRP\Rippled\Util::CaseFromSnake($methodName);
         if (!class_exists($class)) {
             throw new \Exception(sprintf('No class found for method: %s', $methodName));
         }

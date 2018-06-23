@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP\Api;
+namespace FOXRP\Rippled\Api;
 
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Process\Process;
-use XRPHP\Client;
-use XRPHP\Exception\TransactionException;
-use XRPHP\Exception\TransactionSignException;
-use XRPHP\Exception\TransactionTypeException;
+use FOXRP\Rippled\Client;
+use FOXRP\Rippled\Exception\TransactionException;
+use FOXRP\Rippled\Exception\TransactionSignException;
+use FOXRP\Rippled\Exception\TransactionTypeException;
 
 class Transaction
 {
@@ -62,7 +62,7 @@ class Transaction
      */
     public function findClass(string $type): string
     {
-        $class = '\\XRPHP\\Api\\TransactionType\\' . $type;
+        $class = '\\FOXRP\Rippled\\Api\\TransactionType\\' . $type;
         if (!class_exists($class)) {
             throw new TransactionTypeException(sprintf('No class found for transaction type %s', $type));
         }

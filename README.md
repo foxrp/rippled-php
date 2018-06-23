@@ -38,7 +38,7 @@ composer require foxrp/xrphp
 
 ```php
 // Instantiate the API Client.
-$client = new \XRPHP\Client('https://s1.ripple.com:51234');
+$client = new \FOXRP\Rippled\Client('https://s1.ripple.com:51234');
 
 // Retrieve account info.
 $response = $client->send('account_info', [

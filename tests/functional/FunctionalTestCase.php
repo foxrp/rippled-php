@@ -1,9 +1,9 @@
 <?php
 
-namespace XRPHP\FunctionalTests;
+namespace FOXRP\Rippled\FunctionalTests;
 
 use PHPUnit\Framework\TestCase;
-use XRPHP\Client;
+use FOXRP\Rippled\Client;
 
 class FunctionalTestCase extends TestCase
 {

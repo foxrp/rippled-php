@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP\Tests\Exception;
+namespace FOXRP\Rippled\Tests\Exception;
 
 use PHPUnit\Framework\TestCase;
-use XRPHP\Exception\XRPHPException;
+use FOXRP\Rippled\Exception\RippledException;
 
-class XRPHPExceptionTest extends TestCase
+class RippledExceptionTest extends TestCase
 {
     public function testToString(): void
     {
-        $obj = new XRPHPException('Foo', 1);
-        $this->assertEquals('XRPHP\Exception\XRPHPException: [1]: Foo'."\n", $obj->__toString());
+        $obj = new RippledException('Foo', 1);
+        $this->assertEquals('FOXRP\Rippled\Exception\RippledException: [1]: Foo'."\n", $obj->__toString());
     }
 }

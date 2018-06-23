@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP\Api\Method;
+namespace FOXRP\Rippled\Api\Method;
 
-use XRPHP\Api\Field;
-use XRPHP\Exception\InvalidParameterException;
+use FOXRP\Rippled\Api\Field;
+use FOXRP\Rippled\Exception\InvalidParameterException;
 
 /**
  * LedgerEntry Method Class
@@ -18,7 +18,7 @@ class LedgerEntry extends AbstractMethod
     /**
      * {@inheritDoc}
      *
-     * @throws \XRPHP\Exception\FieldException
+     * @throws \FOXRP\Rippled\Exception\FieldException
      */
     public function setFields(): void
     {

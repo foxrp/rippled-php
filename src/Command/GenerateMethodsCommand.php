@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace XRPHP\Command;
+namespace FOXRP\Rippled\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use XRPHP\Util;
+use FOXRP\Rippled\Util;
 
 class GenerateMethodsCommand extends Command
 {

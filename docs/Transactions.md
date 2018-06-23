@@ -45,7 +45,7 @@ addition to the parameters. The `Client` object however is not required if you a
 a transaction.
 
 ```php
-$client = new \XRPHP\Client('https://s1.ripple.com:51234');
+$client = new \FOXRP\Rippled\Client('https://s1.ripple.com:51234');
 
 $txParams = [
     'TransactionType' => 'Payment',
@@ -55,7 +55,7 @@ $txParams = [
     'Fee' => '000012'
 ];
 
-$transaction = new \XRPHP\Api\Transaction($txParams, $client);
+$transaction = new \FOXRP\Rippled\Api\Transaction($txParams, $client);
 ```
 
 ## Signing Transactions before Submitting (Optional)

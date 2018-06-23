@@ -1,9 +1,9 @@
 <?php
 
-namespace XRPHP\Tests;
+namespace FOXRP\Rippled\Tests;
 
-use XRPHP\Api\Anon\Account\AccountInfoMethod;
-use XRPHP\Client;
+use FOXRP\Rippled\Api\Anon\Account\AccountInfoMethod;
+use FOXRP\Rippled\Client;
 use PHPUnit\Framework\TestCase;
 
 /**

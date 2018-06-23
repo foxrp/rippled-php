@@ -32,13 +32,13 @@
     },
 	"autoload": {
         "psr-4": {
-            "XRPHP\\": "src/"
+            "FOXRP\\Rippled\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "XRPHP\\Tests\\": "tests/unit",
-            "XRPHP\\FunctionalTests\\": "tests/functional"
+            "FOXRP\\Rippled\\Tests\\": "tests/unit",
+            "FOXRP\\Rippled\\FunctionalTests\\": "tests/functional"
         }
     }
 }
