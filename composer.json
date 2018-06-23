@@ -1,6 +1,6 @@
 {
-    "name": "mikemilano/xrphp",
-    "description": "A PHP library for communication with the XRP Ledger.",
+    "name": "foxrp/rippled-php",
+    "description": "A PHP library for communication with rippled. (The XRP Ledger)",
     "keywords": ["library", "composer", "package"],
     "minimum-stability": "stable",
     "license": "MIT",
@@ -28,7 +28,8 @@
         "php-http/message": "^1.6",
         "php-coveralls/php-coveralls": "^2.1",
         "symfony/console": "^4.1",
-        "symfony/filesystem": "^4.1"
+        "symfony/filesystem": "^4.1",
+        "roave/security-advisories": "dev-master"
     },
 	"autoload": {
         "psr-4": {
