@@ -2,6 +2,8 @@
 
 namespace FOXRP\Rippled\Tests\Api;
 
+use FOXRP\Rippled\Exception\ResponseErrorException;
+use FOXRP\Rippled\Exception\RippledException;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use PHPUnit\Framework\TestCase;
 use FOXRP\Rippled\Api\Response;
@@ -55,7 +57,7 @@ class ResponseTest extends TestCase
 
     public function testNoResult()
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(RippledException::class);
         $this->expectExceptionMessageRegExp('/missing result data/');
 
         $badResponse = new GuzzleResponse(200, ['Content-Type' => 'application/json'], "{}");
@@ -75,6 +77,8 @@ class ResponseTest extends TestCase
 
     public function testHasError(): void
     {
+        $this->expectException(ResponseErrorException::class);
+
         $obj = new Response($this->responseError);
         $this->assertTrue($obj->hasError());
         $this->assertEquals(19, $obj->getErrorCode());

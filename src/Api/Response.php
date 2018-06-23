@@ -2,6 +2,8 @@
 
 namespace FOXRP\Rippled\Api;
 
+use FOXRP\Rippled\Exception\ResponseErrorException;
+use FOXRP\Rippled\Exception\RippledException;
 use Psr\Http\Message\ResponseInterface;
 
 class Response
@@ -51,11 +53,11 @@ class Response
 
         $data = json_decode($this->getRaw(), true);
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new \Exception('Unable to parse JSON in API response');
+            throw new RippledException('Unable to parse JSON in API response');
         }
 
         if (!\is_array($data) || !isset($data['result'])) {
-            throw new \Exception('API response missing result data');
+            throw new RippledException('API response missing result data');
         }
 
         $this->setResult($data['result']);
@@ -68,6 +70,8 @@ class Response
             $this->setError(true);
             $this->setErrorCode($data['result']['error_code']);
             $this->setErrorMessage($data['result']['error_message']);
+
+            throw new ResponseErrorException($this->getErrorMessage(), $this->getErrorCode());
         }
     }
 
