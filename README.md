@@ -40,42 +40,29 @@ composer require foxrp/rippled-php
 <?php
 
 use FOXRP\Rippled\Client;
-use FOXRP\Rippled\Exception\InvalidParameterException;
-use FOXRP\Rippled\Exception\ResponseErrorException;
 
 $client = new Client('https://s1.ripple.com:51234');
 
 $balance = null;
 
-try {
-    $response = $client->send('account_info', [
-        'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
-    ]);
-    
-    // Set balance if successful.
-    if ($response->isSuccess()) {
-        $data = $response->getResult();
-        $balance = $data['account_data']['Balance'];
-    }
-    
-} catch (InvalidParameterException $e) {
-    // Catch validation errors that occur before the request is sent.
-    // i.e. missing required params, unrecognized params, etc.
-    $error = $e->getMessage();
-} catch (ResponseErrorException $e) {
-    // Catch errors sent back from the API.
-    $error = $e->getMessage();
+$response = $client->send('account_info', [
+    'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
+]);
+
+// Set balance if successful.
+if ($response->isSuccess()) {
+    $data = $response->getResult();
+    $balance = $data['account_data']['Balance'];
 }
 ```
 
-## Documentation
+See [Exception Handling](docs/Exceptions.md) for more control over handling errors.
 
-Please see the documentation for information and examples on accessing the API, building transactions, and handling
-exceptions.
+## Documentation
 
 - [API Requests](docs/API.md)
 - [Transactions](docs/Transactions.md)
-- [Handling Exceptions](docs/Exceptions.md)
+- [Exception Handling](docs/Exceptions.md)
 
 ## Unit Testing
 
@@ -115,6 +102,6 @@ make testf
 
 ## Contribute
 
-PRs, New Issues, and Tips are all welcome!
+PRs & New Issues are welcome!
 
-XRP address: `rwSZu5vAgPEdoDpYx9qZtqtHRDcFwCooqw`
+XRP Tip Jar: `rwSZu5vAgPEdoDpYx9qZtqtHRDcFwCooqw`
