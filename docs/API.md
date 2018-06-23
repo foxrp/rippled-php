@@ -14,12 +14,20 @@ You can either instantiate the client with a string, or an array.
 
 Create a `Client` object with a uri:
 ```php
-$client = new \FOXRP\Rippled\Client('https://s1.ripple.com:51234');
+<?php
+
+use FOXRP\Rippled\Client;
+
+$client = new Client('https://s1.ripple.com:51234');
 ```
 
 Create a `Client` object with an array:
 ```php
-$client = new \FOXRP\Rippled\Client([
+<?php
+
+use FOXRP\Rippled\Client;
+
+$client = new Client([
     'scheme' => 'https',
     'host' => 's1.ripple.com',
     'port' => 51234
@@ -34,6 +42,11 @@ parameters, along with `JSON-RPC` examples for request and responses.
 Use the documentation to craft your parameters and pass them in as an associative array.
 
 ```php
+<?php
+use FOXRP\Rippled\Client;
+
+$client = new Client('https://s1.ripple.com:51234');
+
 $response = $client->send('account_info', [
     'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
 ]);
@@ -48,17 +61,35 @@ if ($response->isSuccess()) {
 
 If you need more control, you may create requests separately.
 
+
+Example: Retrieve a request object from the Client.
 ```php
-// Retrieve a request object from the Client.
+<?php
+
+use FOXRP\Rippled\Client;
+
+$client = new Client('https://s1.ripple.com:51234');
+
 $request = $client->request('account_info', [
     'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
 ]);
+
+// Now send the request to retrieve a response.
+$response = $request->send();
+```
+
+```php
+<?php
+
+use FOXRP\Rippled\Api\Request;
+use FOXRP\Rippled\Client;
+
+$client = new Client('https://s1.ripple.com:51234');
 
 // Or instantiate Request directly.
 $request = new Request('account_info', [
    'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
 ], $client);
-
 
 // Now send the request to retrieve a response.
 $response = $request->send();
@@ -68,12 +99,27 @@ $response = $request->send();
 
 Catch `InvalidParameterException` for messages specific to missing or invalid parameters.
 ```php
+<?php
+
+use FOXRP\Rippled\Client;
 use FOXRP\Rippled\Exception\InvalidParameterException;
-...
+use FOXRP\Rippled\Exception\ResponseErrorException;
+
+$client = new Client('https://s1.ripple.com:51234');
+
+$balance = null;
+
 try {
     $response = $client->send('account_info', [
         'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
     ]);
+    
+    // Set balance if successful.
+    if ($response->isSuccess()) {
+        $data = $response->getResult();
+        $balance = $data['account_data']['Balance'];
+    }
+    
 } catch (InvalidParameterException $e) {
     // Catch validation errors that occur before the request is sent.
     // i.e. missing required params, unrecognized params, etc.
@@ -96,29 +142,19 @@ method specific.
 
 ## The Response Object
 
-The API provides responses in a JSON format. The `result` property
-of the of the JSON object contains the data you are looking for.
+The library converts the raw response into a `FOXRP/Rippled/Api/Response` object with the following process.
 
-XRPHP takes care of the mundane by validating the response received
- from the API, decoding the JSON, and arranging the data in a friendlier
- format.
- 
-It does this with the `MethodResponse` object, which is returned
-when you call `->execute()` on a client method.
+- Parses JSON
+- Sets the `success` property. i.e. `$response->isSuccess()`
+- Adds error info and throws exception when the API call is not successful
+- Adds the successful result to the `result` property. i.e. `$response->getResult()`
 
-### $res->getResult(): 
+```php
+<?php
 
-The `result` property of a response contains the data returned
-in in the `result` property of the JSON.
 
-### $res->isSuccess():
 
-The API provides a `status` property which indicates a successful
-call when the value is `success`. While it is accessible in
-`$res->result['status']`, XRPHP makes this available as a property.
-
-You can check if the response was successful with: `$res->isSuccess()`.
-
+```
 
 ## Direct Posting to the API
 

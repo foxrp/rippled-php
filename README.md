@@ -36,23 +36,38 @@ composer require foxrp/xrphp
 
 ## QuickStart
 
+### Retrieve Balance
+
 ```php
-// Instantiate the API Client.
-$client = new \FOXRP\Rippled\Client('https://s1.ripple.com:51234');
+<?php
 
-// Retrieve account info.
-$response = $client->send('account_info', [
-    'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
-]);
+use FOXRP\Rippled\Client;
+use FOXRP\Rippled\Exception\InvalidParameterException;
+use FOXRP\Rippled\Exception\ResponseErrorException;
 
-// Extract the result into its own associative array variable.
-$result = $response->getResult();
+$client = new Client('https://s1.ripple.com:51234');
 
-// Do something with the account sequence.
-$balance = $result['account_data']['Balance'];
+$balance = null;
 
-...
-
+try {
+    $response = $client->send('account_info', [
+        'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn'
+    ]);
+    
+    // Set balance if successful.
+    if ($response->isSuccess()) {
+        $data = $response->getResult();
+        $balance = $data['account_data']['Balance'];
+    }
+    
+} catch (InvalidParameterException $e) {
+    // Catch validation errors that occur before the request is sent.
+    // i.e. missing required params, unrecognized params, etc.
+    $error = $e->getMessage();
+} catch (ResponseErrorException $e) {
+    // Catch errors sent back from the API.
+    $error = $e->getMessage();
+}
 ```
 
 ## Documentation
