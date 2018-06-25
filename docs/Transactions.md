@@ -108,20 +108,9 @@ If successful, `$response->getResult()` will contain something similar to the ou
 )
 ```
 
-## Signing Transactions before Submitting (Optional)
+## Signing Transactions without Submission
 
-As a precaution to avoid unintentional remote signing, local signing must be performed in this separate step.
-
-Remote signing can be achieved either separately, or along with the `submit` method.
- 
-Taking the above section as a starting point, locally signing a transaction is done with one more call.
-
-### Locally Signing
-
-This is just an example in case you needed to sign in a separate step.
- 
-You typically won't need this step as it will be attempted with the `submit()` method. See "Submitting a Transaction"
-above.
+Sometimes there is a need to sign a transaction without sending it.
 
 ```php
 $secret = 'sxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
@@ -142,16 +131,3 @@ be required to set the `Fee` for now.
 
 See the [transaction costs](https://developers.ripple.com/transaction-cost.html) documentation for how to calculate
 minimum fees.
-
-### Remote Signing
-
-```php
-$secret = 'sxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-$transaction->signRemote($secret);
-
-// Access the signed transaction data if needed.
-$txData = $transaction->getTx();
-```
-
-As mentioned above, remote signing can be done in the next step via the `submit` method. You may only want to use the 
-`signRemote` method if you need access to the signed transaction before submitting it.
