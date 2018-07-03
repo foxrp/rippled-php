@@ -7,7 +7,7 @@
 
 This is a PHP library for communicating with the XRP Ledger.
 
-In addition wrapping the API, it validates method/transaction parameters normalizes the API responses.
+In addition to wrapping the `rippled` API, it validates method/transaction parameters and normalizes responses.
 
 Refer to the [API Documentation](https://developers.ripple.com/rippled-api.html)
 in the [Ripple Developer Portal](https://developers.ripple.com/) for methods, parameters, and expected responses.
