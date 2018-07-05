@@ -59,17 +59,19 @@ abstract class AbstractFieldable
             );
         }
 
-        // Check for invalid parameters.
-        $paramKeys = array_keys($params);
-        $fieldKeys = array_keys($this->fields);
-        $invalidParams = array_diff($paramKeys, $fieldKeys);
-        if (!empty($invalidParams)) {
-            throw new InvalidParameterException(
-                sprintf(
-                'Invalid parameters submitted: %s',
-                    implode(', ', $invalidParams)
-            )
-            );
+        if ($this->fields !== null) {
+            // Check for invalid parameters.
+            $paramKeys = array_keys($params);
+            $fieldKeys = array_keys($this->fields);
+            $invalidParams = array_diff($paramKeys, $fieldKeys);
+            if (!empty($invalidParams)) {
+                throw new InvalidParameterException(
+                    sprintf(
+                        'Invalid parameters submitted: %s',
+                        implode(', ', $invalidParams)
+                    )
+                );
+            }
         }
     }
 
@@ -79,6 +81,9 @@ abstract class AbstractFieldable
     public function getRequiredFields(): array
     {
         $fields = [];
+        if ($this->fields === null) {
+            return $fields;
+        }
         foreach ($this->fields as $key => $field) {
             /** @var Field $field */
             if ($field->isRequired()) {

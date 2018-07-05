@@ -36,7 +36,7 @@ class MethodTestCase extends TestCase
         $response = new Response(
             200,
             ['Content-Type' => 'application/json'],
-            '{"result"{"status":1}}'
+            '{"result":{"status":1}}'
         );
         $this->httpMockClient->setDefaultResponse($response);
     }

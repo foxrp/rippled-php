@@ -120,7 +120,7 @@ class Client
      * @return Response
      * @throws \Exception
      */
-    public function send(string $methodName, array $params): Response
+    public function send(string $methodName, array $params = []): Response
     {
         return $this->request($methodName, $params)->send();
     }

@@ -5,7 +5,6 @@ namespace FOXRP\Rippled\Tests\Api\Method;
 use PHPUnit\Framework\TestCase;
 use FOXRP\Rippled\Api\Field;
 use FOXRP\Rippled\Api\MethodInterface;
-use FOXRP\Rippled\Transaction\TypeInterface;
 use FOXRP\Rippled\Util;
 
 class GeneratedMethodTest extends TestCase
