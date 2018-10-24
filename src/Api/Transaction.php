@@ -86,10 +86,7 @@ class Transaction
             $this->setTx($tx);
         }
 
-        // Build/run command.
-        $cmd = sprintf("xrpsign '%s' '%s'", $this->getJson(), $secret);
-
-        $process = new Process($cmd);
+        $process = new Process(['xrpsign', $this->getJson(), $secret]);
 
         try {
             $process->run();
