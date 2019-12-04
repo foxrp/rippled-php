@@ -1156,6 +1156,39 @@
       "public": true,
       "fields": [
       ]
+    },
+    {
+      "name": "wallet_propose",
+      "description": "Use the wallet_propose method to generate a key pair and XRP Ledger address.",
+      "reference": "https://xrpl.org/wallet_propose.html",
+      "group": "Admin",
+      "public": false,
+      "fields": [
+        {
+          "name": "key_type",
+          "json_type": "String",
+          "required": true,
+          "description": "Which signing algorithm to use to derive this key pair. Valid values are ed25519 and secp256k1 (all lower case). The default is secp256k1."
+        },
+        {
+          "name": "passphrase",
+          "json_type": "String",
+          "required": false,
+          "description": "Generate a key pair and address from this seed value. This value can be formatted in hexadecimal , the XRP Ledger's base58 format, RFC-1751 , or as an arbitrary string. Cannot be used with seed or seed_hex."
+        },
+        {
+          "name": "seed",
+          "json_type": "String",
+          "required": false,
+          "description": "Generate the key pair and address from this seed value in the XRP Ledger's base58-encoded format. Cannot be used with passphrase or seed_hex."
+        },
+        {
+          "name": "seed_hex",
+          "json_type": "String",
+          "required": false,
+          "description": "Generate the key pair and address from this seed value in hexadecimal format. Cannot be used with passphrase or seed."
+        }
+      ]
     }
   ]
 }
